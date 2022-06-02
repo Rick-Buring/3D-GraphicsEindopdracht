@@ -91,7 +91,7 @@ public:
 struct MaterialInfo {
 public:
 	std::string name;
-	Texture* texture = nullptr;
+	Texture* texture;
 };
 
 std::vector<glm::vec3>	vertices;

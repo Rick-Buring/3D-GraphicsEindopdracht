@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Maze\lib\glm;$(SolutionDir)Maze\lib\glew-2.1.0\include;$(SolutionDir)Maze\lib\glfw-3.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Maze\lib\glm;$(SolutionDir)Maze\lib\glew-2.1.0\include;$(SolutionDir)Maze\lib\glfw-3.3.2\include;imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +132,13 @@
   <ItemGroup>
     <ClCompile Include="DrawObjectComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -142,6 +149,15 @@
   <ItemGroup>
     <ClInclude Include="DrawObjectComponent.hpp" />
     <ClInclude Include="GameObject.hpp" />
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\imstb_rectpack.h" />
+    <ClInclude Include="imgui\imstb_textedit.h" />
+    <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="ObjectLoader.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Scene.hpp" />

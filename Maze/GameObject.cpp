@@ -9,6 +9,11 @@ GameObject::GameObject(std::shared_ptr<std::vector<Model3D_t>> model) : _model(m
 {
 }
 
+void GameObject::update(float deltaTime)
+{
+
+}
+
 void GameObject::draw()
 {
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
@@ -22,7 +27,9 @@ void GameObject::draw()
 	tigl::shader->setModelMatrix(modelMatrix);
 
 	for (auto model : *_model) {
-		model.texture->bind();
+		if (model.texture) {
+			model.texture->bind();
+		}
 		tigl::drawVertices(GL_TRIANGLES, model.vbo);
 	}
 }
