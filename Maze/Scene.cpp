@@ -33,7 +33,6 @@ void Scene::draw()
 	ImGui::End();
 	
 	tigl::shader->setProjectionMatrix(projection);
-	//tigl::shader->setViewMatrix(glm::lookAt(glm::vec3(lookX, lookY, lookZ), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)));
 	tigl::shader->setModelMatrix(glm::mat4(1.0f));
 
 	for (auto gameObject : _gameObjects) {
@@ -46,6 +45,8 @@ void Scene::update()
 	//calculate time passed since last frame
 	double currentFrameTime = glfwGetTime();
 	double deltaTime = currentFrameTime - Scene::_lastFrameTime;
+
+	//todo update scene time and sun location
 
 	//update logic
 	for (auto gameObject : Scene::_gameObjects) {
