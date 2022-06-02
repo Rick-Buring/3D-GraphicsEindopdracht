@@ -1,13 +1,21 @@
 #pragma once
+#include <memory>
+
 #include <glm/glm.hpp>
+#include "ObjectLoader.hpp"
 
 class GameObject {
 private:
+	//model for drawing
+	std::shared_ptr<std::vector<Model3D_t>> _model;
+
 	glm::vec3 position = glm::vec3(0);
 	glm::vec3 rotation = glm::vec3(0);
 	glm::vec3 scale = glm::vec3(1);
 
 public:
+	GameObject(std::shared_ptr<std::vector<Model3D_t>>);
+
 	/// <summary>
 	/// update called once every frame
 	/// </summary>

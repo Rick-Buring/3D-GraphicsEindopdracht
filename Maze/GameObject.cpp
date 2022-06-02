@@ -1,6 +1,13 @@
-#include "GameObject.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #include "tigl.h"
+
+#include "GameObject.hpp"
+#include "Texture.hpp"
+
+
+GameObject::GameObject(std::shared_ptr<std::vector<Model3D_t>> model) : _model(model)
+{
+}
 
 void GameObject::draw()
 {
@@ -13,4 +20,9 @@ void GameObject::draw()
 	modelMatrix = glm::scale(modelMatrix, GameObject::scale);
 
 	tigl::shader->setModelMatrix(modelMatrix);
+
+	for (auto model : *_model) {
+		model.texture->bind();
+		tigl::drawVertices(GL_TRIANGLES, model.vbo);
+	}
 }

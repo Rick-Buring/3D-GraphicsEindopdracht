@@ -37,7 +37,7 @@ void Scene::update()
 
 	//update logic
 	for (auto gameObject : Scene::_gameObjects) {
-		gameObject->update(deltaTime);
+		gameObject->update((float) deltaTime);
 	}
 
 	//redraw scene
@@ -51,7 +51,7 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 
 void Scene::initBaseScene()
 {
-	std::vector<Model3D_t> steve = loadObject("models/steve/steve.obj");
+	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("models/steve/steve.obj");
 
 	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);
 	addGameObject(player);

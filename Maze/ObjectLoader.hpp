@@ -13,5 +13,5 @@ typedef struct {
 	Texture* texture;
 } Model3D_t;
 
-std::vector<Model3D_t> loadObject(const std::string& filename);
+std::shared_ptr<std::vector<Model3D_t>> loadObject(const std::string& filename);
 

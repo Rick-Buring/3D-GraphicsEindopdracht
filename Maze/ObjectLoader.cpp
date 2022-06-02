@@ -91,7 +91,7 @@ public:
 struct MaterialInfo {
 public:
 	std::string name;
-	Texture* texture;
+	Texture* texture = nullptr;
 };
 
 std::vector<glm::vec3>	vertices;
@@ -100,7 +100,7 @@ std::vector<glm::vec2>	texcoords;
 std::vector<ObjGroup*> groups;
 std::vector<MaterialInfo*> materials;
 
-std::vector<Model3D_t> generateVBO(std::vector<Model3D_t>& returnValue)
+std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<Model3D_t>>& returnValue)
 {
 	//foreach group in groups
 	//  set material texture, if available
@@ -132,7 +132,7 @@ std::vector<Model3D_t> generateVBO(std::vector<Model3D_t>& returnValue)
 		Model3D_t temp;
 		temp.texture = t;
 		temp.vbo = vbo;
-		returnValue.push_back(temp);
+		returnValue->push_back(temp);
 
 	}
 	return returnValue;
@@ -141,7 +141,7 @@ std::vector<Model3D_t> generateVBO(std::vector<Model3D_t>& returnValue)
 /**
 * Loads an object model
 */
-std::vector<Model3D_t> loadObject(const std::string& fileName)
+std::shared_ptr<std::vector<Model3D_t>> loadObject(const std::string& fileName)
 {
 	vertices = std::vector<glm::vec3>();
 	normals = std::vector<glm::vec3>();
@@ -149,7 +149,7 @@ std::vector<Model3D_t> loadObject(const std::string& fileName)
 	groups = std::vector<ObjGroup*>();
 	materials = std::vector<MaterialInfo*>();
 
-	std::vector<Model3D_t> returnValue;
+	std::shared_ptr<std::vector<Model3D_t>> returnValue = std::make_shared<std::vector<Model3D_t>>();
 	std::cout << "Loading " << fileName << std::endl;
 	std::string dirName = fileName;
 	if (dirName.rfind("/") != std::string::npos)

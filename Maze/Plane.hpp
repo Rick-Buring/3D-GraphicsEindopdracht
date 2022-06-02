@@ -1,11 +1,15 @@
 #pragma once
-#include "GameObject.hpp"
 
-class Player : public GameObject {
+#include "GameObject.hpp"
+#include "tigl.h"
+
+class Plane : public GameObject {
+
 private:
+	tigl::VBO shape;
 
 public:
-	Player(std::shared_ptr<std::vector<Model3D_t>>);
+	Plane(float height, float width);
 
 	// Inherited via GameObject
 	virtual void update(float deltaTime) override;
