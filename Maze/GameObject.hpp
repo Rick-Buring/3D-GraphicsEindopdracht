@@ -5,6 +5,9 @@
 #include "ObjectLoader.hpp"
 
 class GameObject {
+protected:
+	glm::mat4 _modelMatrix = glm::mat4(1.0f);
+
 private:
 	//model for drawing
 	std::shared_ptr<std::vector<Model3D_t>> _model;

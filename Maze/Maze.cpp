@@ -39,7 +39,6 @@ int main()
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-
         scene->update();
 
         ImGui::Render();
@@ -61,7 +60,17 @@ int main()
 void init()
 {
     tigl::init();
-    tigl::shader->enableTexture(true);
+
+
+
+    tigl::shader->enableLighting(true);
+    tigl::shader->setLightCount(1);
+    tigl::shader->setLightDirectional(0, true);
+    tigl::shader->setLightAmbient(0, glm::vec3(0.5f, 0.5f, 0.5f));
+    tigl::shader->setLightDiffuse(0, glm::vec3(0.5f, 0.5f, 0.5f));
+    tigl::shader->setLightSpecular(0, glm::vec3(1, 1, 1));
+    tigl::shader->setShinyness(0);
+
 
     //keyboard callback usefull for quick actions, ingame actions should use pull request instead
     glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)

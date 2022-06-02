@@ -28,8 +28,11 @@ void GameObject::draw()
 
 	for (auto model : *_model) {
 		if (model.texture) {
-			model.texture->bind();
+			tigl::shader->enableTexture(true);
+			model.texture->bind(); 
+			tigl::drawVertices(GL_TRIANGLES, model.vbo);
+			tigl::shader->enableTexture(false);
 		}
-		tigl::drawVertices(GL_TRIANGLES, model.vbo);
+		tigl::drawVertices(GL_TRIANGLES, model.vbo);		
 	}
 }

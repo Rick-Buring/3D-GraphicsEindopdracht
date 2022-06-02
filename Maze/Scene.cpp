@@ -23,51 +23,18 @@ void Scene::draw()
 	glm::mat4 projection = glm::perspective(glm::radians(75.0f), viewport[2] / (float)viewport[3], 0.01f, 1000.0f);
 
 	glEnable(GL_DEPTH_TEST);
-	//tigl::shader->enableLighting(true); 
-	//tigl::shader->enableColorMult(true);
-
-	//static float dirX = 0, dirY = 0, dirZ = 0;
-
-	//tigl::shader->setLightCount(1);
-	//tigl::shader->setLightDirectional(0, true);
-	//tigl::shader->setLightPosition(0, glm::vec3(dirX, dirY, dirZ));
-	//tigl::shader->setLightAmbient(0, glm::vec3(1, 1, 1));
 
 	static float lookX = -3, lookY = 4, lookZ = 0;
-
-
-
 
 	ImGui::Begin("DebugWindow");
 	ImGui::SliderFloat("lookX", &lookX, -12, 12.0f);
 	ImGui::SliderFloat("lookY", &lookY, -12, 12.0f);
 	ImGui::SliderFloat("lookZ", &lookZ, -12, 12.0f);
-
-	//ImGui::SliderFloat("dirX", &dirX, -12, 12.0f);
-	//ImGui::SliderFloat("dirY", &dirY, -12, 12.0f);
-	//ImGui::SliderFloat("dirZ", &dirZ, -12, 12.0f);
 	ImGui::End();
 	
 	tigl::shader->setProjectionMatrix(projection);
-	tigl::shader->setViewMatrix(glm::lookAt(glm::vec3(lookX, lookY, lookZ), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)));
+	//tigl::shader->setViewMatrix(glm::lookAt(glm::vec3(lookX, lookY, lookZ), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0)));
 	tigl::shader->setModelMatrix(glm::mat4(1.0f));
-	
-	tigl::shader->enableColor(true);
-
-	tigl::begin(GL_TRIANGLES);
-
-	glm::vec4 col = glm::vec4(1, 1, 1, 1);
-
-	tigl::addVertex(tigl::Vertex::PCN(glm::vec3(-1, 0, -1), col, glm::vec3(0, 1, 0)));
-	tigl::addVertex(tigl::Vertex::PCN(glm::vec3(-1, 0, 1), col, glm::vec3(0, 1, 0)));
-	tigl::addVertex(tigl::Vertex::PCN(glm::vec3(1, 0, -1), col, glm::vec3(0, 1, 0)));
-
-
-	tigl::addVertex(tigl::Vertex::PCN(glm::vec3(1, 0, -1), col, glm::vec3(0, 1, 0)));
-	tigl::addVertex(tigl::Vertex::PCN(glm::vec3(1, 0, 1), col, glm::vec3(0, 1, 0)));
-	tigl::addVertex(tigl::Vertex::PCN(glm::vec3(-1, 0, 1), col, glm::vec3(0, 1, 0)));
-
-	tigl::end();
 
 	for (auto gameObject : _gameObjects) {
 		gameObject->draw();
@@ -123,6 +90,7 @@ void Scene::initBaseScene()
 {
 	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("models/steve/steve.obj");
 	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);
+	player->scale = glm::vec3(0.2);
 
 	std::shared_ptr<std::vector<Model3D_t>> plane = createPlane(1, 1);
 	
@@ -134,7 +102,7 @@ void Scene::initBaseScene()
 	leftWall->position.y = 1;
 
 	std::shared_ptr<GameObject> rightWall = std::make_shared<GameObject>(plane);
-	rightWall->rotation.x = M_PI / 2.0f;
+	rightWall->rotation.z = M_PI / 2.0f;
 	rightWall->position.x = -1;
 	rightWall->position.y = 1;
 
@@ -144,16 +112,17 @@ void Scene::initBaseScene()
 	behindWall->position.y = 1;
 
 	std::shared_ptr<GameObject> frontWall = std::make_shared<GameObject>(plane);
-	frontWall->rotation.z = M_PI / 2.0f;
+	frontWall->rotation.x = M_PI / 2.0f;
 	frontWall->position.z = 1;
 	frontWall->position.y = 1;
 
 
-	//addGameObject(ground);
-	//addGameObject(leftWall);
-	//addGameObject(rightWall);
-	//addGameObject(behindWall);
-	//addGameObject(frontWall);
+	addGameObject(player);
+	addGameObject(ground);
+	addGameObject(leftWall);
+	addGameObject(rightWall);
+	addGameObject(behindWall);
+	addGameObject(frontWall);
 
 	//Todo create player
 	//Todo create basic scene
