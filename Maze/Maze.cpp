@@ -5,8 +5,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "tigl.h"
+#include "Scene.hpp"
 
 GLFWwindow* window;
+Scene* scene;
 
 void init();
 
@@ -15,7 +17,7 @@ int main()
     if (!glfwInit())
         throw "Could not initialize glwf";
 
-    window = glfwCreateWindow(600, 600, "hello World", NULL, NULL);
+    window = glfwCreateWindow(1280, 720, "hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -25,8 +27,12 @@ int main()
 
     init();
 
+    scene = new Scene();
+    scene->initBaseScene();
+
     while (!glfwWindowShouldClose(window))
     {
+        scene->update();
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
