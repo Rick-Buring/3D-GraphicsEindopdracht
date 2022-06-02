@@ -18,6 +18,8 @@ void init();
 
 int main()
 {
+
+
     if (!glfwInit())
         throw "Could not initialize glwf";
 
@@ -60,8 +62,6 @@ int main()
 void init()
 {
     tigl::init();
-
-
 
     tigl::shader->enableLighting(true);
     tigl::shader->setLightCount(1);

@@ -88,44 +88,38 @@ std::shared_ptr<std::vector<Model3D_t>> createPlane(float width, float height) {
 
 void Scene::initBaseScene()
 {
+	//todo create json file with all file locations for models aswel as the maze image
+	//todo load all models 
+
+	std::shared_ptr<std::vector<Model3D_t>> plane = createPlane(1, 1);
+
+	//load maze image
+	int width, height, bpp;
+	unsigned char* image = stbi_load("resouces\\mazes\\Maze.png", &width, &height, &bpp, 4);
+
+	for (size_t z = 0; z < height; z++)
+	{
+		for (size_t x = 0; x < width * 4; x += 4)
+		{
+			//objects position is x y z
+			//x is encoded in width of image
+			//z is encoded in height of image
+			//y is encoded in color channel of image
+			//value in chanel is the index of the object to render
+			int r = image[z * height * 4 + x + 0];
+			int g = image[z * height * 4 + x + 1];
+			int b = image[z * height * 4 + x + 2];
+			int a = image[z * height * 4 + x + 3];
+
+			//todo create 3d objects based off decoded values
+		}
+	}
+	
+	//Todo create player need to decide if third person or first person view
+
 	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("models/steve/steve.obj");
 	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);
 	player->scale = glm::vec3(0.2);
-
-	std::shared_ptr<std::vector<Model3D_t>> plane = createPlane(1, 1);
-	
-	std::shared_ptr<GameObject> ground = std::make_shared<GameObject>(plane);
-
-	std::shared_ptr<GameObject> leftWall = std::make_shared<GameObject>(plane);
-	leftWall->rotation.z = M_PI / 2.0f;
-	leftWall->position.x = 1;
-	leftWall->position.y = 1;
-
-	std::shared_ptr<GameObject> rightWall = std::make_shared<GameObject>(plane);
-	rightWall->rotation.z = M_PI / 2.0f;
-	rightWall->position.x = -1;
-	rightWall->position.y = 1;
-
-	std::shared_ptr<GameObject> behindWall = std::make_shared<GameObject>(plane);
-	behindWall->rotation.x = M_PI / 2.0f;
-	behindWall->position.z = -1;
-	behindWall->position.y = 1;
-
-	std::shared_ptr<GameObject> frontWall = std::make_shared<GameObject>(plane);
-	frontWall->rotation.x = M_PI / 2.0f;
-	frontWall->position.z = 1;
-	frontWall->position.y = 1;
-
-
-	addGameObject(player);
-	addGameObject(ground);
-	addGameObject(leftWall);
-	addGameObject(rightWall);
-	addGameObject(behindWall);
-	addGameObject(frontWall);
-
-	//Todo create player
-	//Todo create basic scene
 }
 
 
