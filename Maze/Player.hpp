@@ -5,10 +5,10 @@
 
 class Player : public GameObject {
 private:
-	std::shared_ptr<Model3D_t> _model;
+	std::vector<Model3D_t> _model;
 
 public:
-	Player(std::shared_ptr<Model3D_t>);
+	Player(std::vector<Model3D_t>);
 
 	// Inherited via GameObject
 	virtual void update(float deltaTime) override;

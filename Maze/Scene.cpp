@@ -5,6 +5,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "tigl.h"
 
+#include "ObjectLoader.hpp"
+#include "Player.hpp"
+
 void Scene::draw()
 {
 	glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
@@ -48,6 +51,11 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 
 void Scene::initBaseScene()
 {
+	std::vector<Model3D_t> steve = loadObject("models/steve/steve.obj");
+
+	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);
+	addGameObject(player);
+
 	//Todo create player
 	//Todo create basic scene
 }

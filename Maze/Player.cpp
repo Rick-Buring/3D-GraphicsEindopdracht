@@ -1,7 +1,8 @@
 #include "Player.hpp"
 #include "Texture.hpp"
+#include "ObjectLoader.hpp"
 
-Player::Player(std::shared_ptr<Model3D_t> model) : _model(model)
+Player::Player(std::vector<Model3D_t> model) : _model(model)
 {
 }
 
@@ -14,6 +15,8 @@ void Player::draw()
 {
 	GameObject::draw();
 
-	_model->texture->bind();
-	tigl::drawVertices(GL_TRIANGLES, _model->vbo);
+	for (auto model : _model) {
+		model.texture->bind();
+		tigl::drawVertices(GL_TRIANGLES, model.vbo);
+	}
 }
