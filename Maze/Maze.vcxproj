@@ -146,6 +146,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tigl.cpp" />
+    <ClCompile Include="utills.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawObjectComponent.hpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.hpp" />
     <ClInclude Include="tigl.h" />
+    <ClInclude Include="utills.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

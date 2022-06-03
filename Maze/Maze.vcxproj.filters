@@ -69,6 +69,9 @@
     <ClCompile Include="glfwManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="utills.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawObjectComponent.hpp">
@@ -123,6 +126,9 @@
       <Filter>Header Files\imgui</Filter>
     </ClInclude>
     <ClInclude Include="glfwManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utills.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

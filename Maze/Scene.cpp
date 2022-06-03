@@ -8,6 +8,7 @@
 #include "ObjectLoader.hpp"
 #include "Player.hpp"
 #include "imgui.h"
+#include "utills.hpp"
 
 #define _USE_MATH_DEFINES
 
@@ -64,35 +65,12 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 	this->_gameObjects.push_back(gameObject);
 }
 
-std::shared_ptr<std::vector<Model3D_t>> createPlane(float width, float height) {
-	std::shared_ptr<std::vector<Model3D_t>> returnValue = std::make_shared<std::vector<Model3D_t>>();
-
-	std::vector<tigl::Vertex> tempVertexes;
-
-	glm::vec4 col = glm::vec4(1, 1, 1, 1);
-
-	tempVertexes.push_back(tigl::Vertex::PCN(glm::vec3(-width, 0, -height), col, glm::vec3(0, 1, 0)));
-	tempVertexes.push_back(tigl::Vertex::PCN(glm::vec3(-width, 0, height), col, glm::vec3(0, 1, 0)));
-	tempVertexes.push_back(tigl::Vertex::PCN(glm::vec3(width, 0, -height), col, glm::vec3(0, 1, 0)));
-
-
-	tempVertexes.push_back(tigl::Vertex::PCN(glm::vec3(width, 0, -height), col, glm::vec3(0, 1, 0)));
-	tempVertexes.push_back(tigl::Vertex::PCN(glm::vec3(width, 0, height), col, glm::vec3(0, 1, 0)));
-	tempVertexes.push_back(tigl::Vertex::PCN(glm::vec3(-width, 0, height), col, glm::vec3(0, 1, 0)));
-	
-	Model3D_t tempModel;
-	tempModel.texture = nullptr;
-	tempModel.vbo = tigl::createVbo(tempVertexes);
-	
-	returnValue->push_back(tempModel);
-
-	return returnValue;
-}
-
 void Scene::initBaseScene()
 {
 	//todo create json file with all file locations for models aswel as the maze image
 	//todo load all models 
+	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
+	std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
 
 	//load maze image
 	int width, height, bpp;
@@ -113,6 +91,35 @@ void Scene::initBaseScene()
 			int a = image[z * height * 4 + x + 3];
 
 			//todo create 3d objects based off decoded values
+			if (r) {
+				std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
+				c->position.x = (x /4);
+				c->position.z = z;
+				c->position.y = 0;
+				addGameObject(c);
+			}
+			if (g) {
+
+				std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
+				c->position.x = (x / 4);
+				c->position.z = z;
+				c->position.y = 1;
+				addGameObject(c);
+			}
+			if (b) {
+				std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
+				c->position.x = (x / 4);
+				c->position.z = z;
+				c->position.y = 2;
+				addGameObject(c);
+			}
+			if (a) {
+				std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
+				c->position.x = (x / 4);
+				c->position.z = z;
+				c->position.y = 3;
+				addGameObject(c);
+			}
 		}
 	}
 	
@@ -122,37 +129,7 @@ void Scene::initBaseScene()
 	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);
 	player->scale = glm::vec3(0.2f);
 
-	std::shared_ptr<std::vector<Model3D_t>> plane = createPlane(1, 1);
-
-	std::shared_ptr<GameObject> ground = std::make_shared<GameObject>(plane);
-
-	std::shared_ptr<GameObject> leftWall = std::make_shared<GameObject>(plane);
-	leftWall->rotation.z = M_PI / 2.0f;
-	leftWall->position.x = 1;
-	leftWall->position.y = 1;
-
-	std::shared_ptr<GameObject> rightWall = std::make_shared<GameObject>(plane);
-	rightWall->rotation.z = M_PI / 2.0f;
-	rightWall->position.x = -1;
-	rightWall->position.y = 1;
-
-	std::shared_ptr<GameObject> behindWall = std::make_shared<GameObject>(plane);
-	behindWall->rotation.x = M_PI / 2.0f;
-	behindWall->position.z = -1;
-	behindWall->position.y = 1;
-
-	std::shared_ptr<GameObject> frontWall = std::make_shared<GameObject>(plane);
-	frontWall->rotation.x = M_PI / 2.0f;
-	frontWall->position.z = 1;
-	frontWall->position.y = 1;
-
-
 	addGameObject(player);
-	addGameObject(ground);
-	//addGameObject(leftWall);
-	//addGameObject(rightWall);
-	//addGameObject(behindWall);
-	//addGameObject(frontWall);
 }
 
 
