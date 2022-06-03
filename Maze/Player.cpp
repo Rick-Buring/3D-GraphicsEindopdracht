@@ -11,7 +11,7 @@ const float walkSpeed = 30;
 
 Player::Player(std::shared_ptr<std::vector<Model3D_t>> model) : GameObject(model)
 {
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 Player::~Player()
@@ -22,6 +22,14 @@ Player::~Player()
 
 void Player::update(float deltaTime)
 {
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
+	{
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		return;
+	}
+
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	static double xPosOld = 0, yPosOld = 0;
 	static double xPos = 0, yPos = 0;
 	glfwGetCursorPos(window, &xPos, &yPos);

@@ -29,6 +29,16 @@ int main()
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        static float lookX = -3, lookY = 4, lookZ = 0;
+
+        ImGui::Begin("DebugWindow");
+        ImGui::SliderFloat("lightDirx", &lookX, -1, 1);
+        ImGui::SliderFloat("lightDiry", &lookY, -1, 1);
+        ImGui::SliderFloat("lightDirz", &lookZ, -1, 1);
+        ImGui::End();
+
+        tigl::shader->setLightPosition(0, glm::vec3(lookX, lookY, lookZ));
+
         scene->update();
 
         ImGui::Render();

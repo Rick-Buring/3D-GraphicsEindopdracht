@@ -25,14 +25,6 @@ void Scene::draw()
 	glm::mat4 projection = glm::perspective(glm::radians(75.0f), viewport[2] / (float)viewport[3], 0.01f, 1000.0f);
 
 	glEnable(GL_DEPTH_TEST);
-
-	static float lookX = -3, lookY = 4, lookZ = 0;
-
-	ImGui::Begin("DebugWindow");
-	ImGui::SliderFloat("lookX", &lookX, -12, 12.0f);
-	ImGui::SliderFloat("lookY", &lookY, -12, 12.0f);
-	ImGui::SliderFloat("lookZ", &lookZ, -12, 12.0f);
-	ImGui::End();
 	
 	tigl::shader->setProjectionMatrix(projection);
 	tigl::shader->setModelMatrix(glm::mat4(1.0f));
@@ -88,6 +80,8 @@ void Scene::initBaseScene()
 			int r = image[z * height * 4 + x + 0];
 			int g = image[z * height * 4 + x + 1];
 			int b = image[z * height * 4 + x + 2];
+
+			//alpha not usefull image cant create image with r,b,g value x and alpha 0
 			int a = image[z * height * 4 + x + 3];
 
 			//todo create 3d objects based off decoded values
@@ -111,13 +105,6 @@ void Scene::initBaseScene()
 				c->position.x = (x / 4);
 				c->position.z = z;
 				c->position.y = 2;
-				addGameObject(c);
-			}
-			if (a) {
-				std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
-				c->position.x = (x / 4);
-				c->position.z = z;
-				c->position.y = 3;
 				addGameObject(c);
 			}
 		}
