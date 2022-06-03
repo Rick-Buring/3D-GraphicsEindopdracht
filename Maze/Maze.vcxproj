@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="DrawObjectComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="glfwManager.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="DrawObjectComponent.hpp" />
     <ClInclude Include="GameObject.hpp" />
+    <ClInclude Include="glfwManager.hpp" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_glfw.h" />

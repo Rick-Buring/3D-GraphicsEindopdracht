@@ -10,27 +10,15 @@
 
 #include "tigl.h"
 #include "Scene.hpp"
+#include "glfwManager.hpp"
 
-GLFWwindow* window;
 Scene* scene;
 
 void init();
 
 int main()
 {
-
-
-    if (!glfwInit())
-        throw "Could not initialize glwf";
-
-    window = glfwCreateWindow(1280, 720, "hello World", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        throw "Could not initialize glwf";
-    }
-    glfwMakeContextCurrent(window);
-
+    initGLF();
     init();
 
     scene = new Scene();

@@ -12,6 +12,7 @@
 #define _USE_MATH_DEFINES
 
 #include <math.h>
+#include "stb_image.h"
 
 void Scene::draw()
 {
@@ -120,7 +121,7 @@ void Scene::initBaseScene()
 
 	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("models/steve/steve.obj");
 	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);
-	player->scale = glm::vec3(0.2);
+	player->scale = glm::vec3(0.2f);
 }
 
 
