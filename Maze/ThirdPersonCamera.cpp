@@ -5,11 +5,14 @@
 
 ThirdPersonCamera::ThirdPersonCamera(GameObject* subject) : GameObject(nullptr), _subject(subject)
 {
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	GameObject::position = glm::vec3(0, 0, -ThirdPersonCamera::_distanceToSubject);
 }
 
 void ThirdPersonCamera::update(float deltaTime)
 {
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == 0)
+		return;
+
 	double xPos = 0, yPos = 0;
 	glfwGetCursorPos(window, &xPos, &yPos);
 	
@@ -26,7 +29,7 @@ void ThirdPersonCamera::update(float deltaTime)
 
 	//calculate camera position
 	glm::mat4 ret(1.0f);
-	ret = glm::translate(ret, glm::vec3(0, 0, -ThirdPersonCamera::_distanceToSubject));
+	ret = glm::translate(ret, GameObject::position);
 	ret = glm::rotate(ret, glm::radians(rotation.x), glm::vec3(1, 0, 0));
 	ret = glm::rotate(ret, glm::radians(rotation.y), glm::vec3(0, 1, 0));
 	ret = glm::translate(ret, -_subject->position - glm::vec3(0, 1, 0));
