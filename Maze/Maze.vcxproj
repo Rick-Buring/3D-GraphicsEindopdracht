@@ -145,11 +145,13 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="ThirdPersonCamera.cpp" />
     <ClCompile Include="tigl.cpp" />
     <ClCompile Include="utills.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawObjectComponent.hpp" />
+    <ClInclude Include="ThirdPersonCamera.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="glfwManager.hpp" />
     <ClInclude Include="imgui\imconfig.h" />

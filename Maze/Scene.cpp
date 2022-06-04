@@ -14,6 +14,7 @@
 
 #include <math.h>
 #include "stb_image.h"
+#include "ThirdPersonCamera.hpp"
 
 void Scene::draw()
 {
@@ -116,7 +117,10 @@ void Scene::initBaseScene()
 	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);
 	player->scale = glm::vec3(0.2f);
 
+	std::shared_ptr<GameObject> camera = std::make_shared<ThirdPersonCamera>(player.get());
+
 	addGameObject(player);
+	addGameObject(camera);
 }
 
 
