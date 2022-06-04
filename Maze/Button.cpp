@@ -1,15 +1,19 @@
 #include "Button.hpp"
 #include "glfwManager.hpp"
 
+const int ClickDelay = 2;
+
 Button::Button(std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player) : GameObject(model), _player(player)
 {
 	//todo get reffrence for a light
+	_interacted = false;
+	_lastClicked = ClickDelay;
 }
 
 void Button::update(float deltaTime)
 {
 	//function lock to prevent accidental double click
-	if (_lastClicked < 2) {
+	if (_lastClicked < ClickDelay) {
 		_lastClicked += deltaTime;
 		return;
 	}
