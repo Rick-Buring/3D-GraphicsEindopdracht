@@ -19,6 +19,12 @@
     <Filter Include="Source Files\imgui">
       <UniqueIdentifier>{749edbab-9b78-4544-8cfc-e79ee8840384}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\FactoryPattern">
+      <UniqueIdentifier>{cefcae4a-a2d2-4d01-9e82-e5f743484327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FactoryPattern">
+      <UniqueIdentifier>{eaadb311-f8d3-44d5-978d-208fc19c1fbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Maze.cpp">
@@ -74,6 +80,15 @@
     </ClCompile>
     <ClCompile Include="ThirdPersonCamera.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelDataJson.cpp">
+      <Filter>Source Files\FactoryPattern</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelDataRaw.hpp">
+      <Filter>Header Files\FactoryPattern</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelDataRaw.cpp">
+      <Filter>Source Files\FactoryPattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +151,12 @@
     </ClInclude>
     <ClInclude Include="ThirdPersonCamera.hpp">
       <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractLevelData.hpp">
+      <Filter>Header Files\FactoryPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelDataJson.hpp">
+      <Filter>Header Files\FactoryPattern</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

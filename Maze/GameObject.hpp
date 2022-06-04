@@ -23,7 +23,7 @@ public:
 	/// update called once every frame
 	/// </summary>
 	/// <param name="deltaTime"></param>
-	virtual void update(float deltaTime);
+	virtual void update(float deltaTime) {};
 	
 	/// <summary>
 	/// draw called everyframe contains draw functions for 3d objects

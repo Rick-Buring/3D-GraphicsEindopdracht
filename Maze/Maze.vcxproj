@@ -140,6 +140,9 @@
     <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="LevelDataJson.cpp" />
+    <ClCompile Include="LevelDataRaw.cpp" />
+    <ClCompile Include="LevelDataRaw.hpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -150,7 +153,9 @@
     <ClCompile Include="utills.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractLevelData.hpp" />
     <ClInclude Include="DrawObjectComponent.hpp" />
+    <ClInclude Include="LevelDataJson.hpp" />
     <ClInclude Include="ThirdPersonCamera.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="glfwManager.hpp" />

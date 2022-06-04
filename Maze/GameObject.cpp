@@ -9,11 +9,6 @@ GameObject::GameObject(std::shared_ptr<std::vector<Model3D_t>> model) : _model(m
 {
 }
 
-void GameObject::update(float deltaTime)
-{
-
-}
-
 void GameObject::draw()
 {
 	if (_model == nullptr)
