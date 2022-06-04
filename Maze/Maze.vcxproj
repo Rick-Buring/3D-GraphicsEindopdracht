@@ -130,7 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DrawObjectComponent.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glfwManager.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
@@ -154,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractLevelData.hpp" />
-    <ClInclude Include="DrawObjectComponent.hpp" />
+    <ClInclude Include="Button.hpp" />
     <ClInclude Include="LevelDataJson.hpp" />
     <ClInclude Include="ThirdPersonCamera.hpp" />
     <ClInclude Include="GameObject.hpp" />

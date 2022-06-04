@@ -49,7 +49,7 @@ std::shared_ptr<std::vector<LevelData>> LevelDataRaw::getData(const std::string&
 	//todo check escape characters
 
 	LevelData levelData = LevelData();
-	strncpy(levelData.modelFolderPath, line.c_str(), line.size());
+	strncpy_s(levelData.modelFolderPath, line.c_str(), line.size());
 	data->push_back(levelData);
 
 	while (!pFile.eof())

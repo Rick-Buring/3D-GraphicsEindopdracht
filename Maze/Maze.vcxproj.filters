@@ -25,12 +25,15 @@
     <Filter Include="Source Files\FactoryPattern">
       <UniqueIdentifier>{eaadb311-f8d3-44d5-978d-208fc19c1fbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{d98437fd-f288-400a-962a-539d4e3f5a03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjecs">
+      <UniqueIdentifier>{dd03ddc3-24f7-41e5-98b5-3e40fc0cb19e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Maze.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawObjectComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ObjectLoader.cpp">
@@ -40,12 +43,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tigl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
@@ -78,9 +75,6 @@
     <ClCompile Include="utills.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ThirdPersonCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LevelDataJson.cpp">
       <Filter>Source Files\FactoryPattern</Filter>
     </ClCompile>
@@ -90,11 +84,20 @@
     <ClCompile Include="LevelDataRaw.cpp">
       <Filter>Source Files\FactoryPattern</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjecs</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\GameObjecs</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPersonCamera.cpp">
+      <Filter>Source Files\GameObjecs</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DrawObjectComponent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectLoader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -105,12 +108,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tigl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scene.hpp">
@@ -149,14 +146,23 @@
     <ClInclude Include="utills.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdPersonCamera.hpp">
-      <Filter>Header Files\imgui</Filter>
-    </ClInclude>
     <ClInclude Include="AbstractLevelData.hpp">
       <Filter>Header Files\FactoryPattern</Filter>
     </ClInclude>
     <ClInclude Include="LevelDataJson.hpp">
       <Filter>Header Files\FactoryPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPersonCamera.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.hpp">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
