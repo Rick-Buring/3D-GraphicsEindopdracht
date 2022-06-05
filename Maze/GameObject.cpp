@@ -11,7 +11,7 @@ GameObject::GameObject(std::shared_ptr<std::vector<Model3D_t>> model) : _model(m
 
 void GameObject::draw()
 {
-	if (_model == nullptr)
+	if (!_model)
 		return;
 
 	glm::mat4 modelMatrix = glm::mat4(1.0f);

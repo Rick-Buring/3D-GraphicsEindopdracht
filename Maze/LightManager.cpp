@@ -10,6 +10,8 @@ void addLight(lightInfo* out)
 	lightPointers.push_back(out);
 	
 	out->setLight();
+
+	tigl::shader->setLightCount(lightPointers.size());
 }
 
 void removeLight(lightInfo* lightID)

@@ -68,8 +68,8 @@ void init()
     tigl::shader->enableLighting(true);
     
     mainLight.isDirectional = true;
-    mainLight.ambient = glm::vec3(0.5f);
-    mainLight.diffusion = glm::vec3(0.5f);
+    mainLight.ambient = glm::vec3(0.5f, 0.5f, 0.5f);
+    mainLight.diffusion = glm::vec3(0.7f);
     mainLight.specular = glm::vec3(1);
     addLight(&mainLight);
 
