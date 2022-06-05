@@ -16,7 +16,7 @@ void ThirdPersonCamera::update(float deltaTime)
 	double xPos = 0, yPos = 0;
 	glfwGetCursorPos(window, &xPos, &yPos);
 	
-	//calculate delta for mouse and add to current rotation
+	//calculate delta for mouse and add to current rotation 
 	rotation.y += (xPos - ThirdPersonCamera::xPosOld) / 10;
 	rotation.x += (yPos - ThirdPersonCamera::yPosOld) / 10;
 	

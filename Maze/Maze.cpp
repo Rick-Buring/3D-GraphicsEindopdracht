@@ -14,7 +14,6 @@
 #include "LightManager.hpp"
 
 Scene* scene;
-lightInfo mainLight;
 
 void init();
 
@@ -31,16 +30,6 @@ int main()
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        static float lookX = -3, lookY = 4, lookZ = 0;
-
-        ImGui::Begin("DebugWindow");
-        ImGui::SliderFloat("lightDirx", &lookX, -1, 1);
-        ImGui::SliderFloat("lightDiry", &lookY, -1, 1);
-        ImGui::SliderFloat("lightDirz", &lookZ, -1, 1);
-        ImGui::End();
-
-        mainLight.position = glm::vec3(lookX, lookY, lookZ);
-        mainLight.setLight();
 
         scene->update();
 
@@ -66,12 +55,6 @@ void init()
     tigl::init();
 
     tigl::shader->enableLighting(true);
-    
-    mainLight.isDirectional = true;
-    mainLight.ambient = glm::vec3(0.5f, 0.5f, 0.5f);
-    mainLight.diffusion = glm::vec3(0.7f);
-    mainLight.specular = glm::vec3(1);
-    addLight(&mainLight);
 
     //keyboard callback usefull for quick actions, ingame actions should use pull request instead
     glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)

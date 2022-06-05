@@ -16,6 +16,7 @@
 #include "stb_image.h"
 #include "ThirdPersonCamera.hpp"
 #include "Button.hpp"
+#include "Sun.hpp"
 
 void Scene::draw()
 {
@@ -64,6 +65,7 @@ void Scene::initBaseScene()
 	//todo create json file with all file locations for models aswel as the maze image
 	//todo load all models 
 	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
+	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
 
 	//load maze image
 	//loadMazeFromFile(cube);
@@ -75,6 +77,12 @@ void Scene::initBaseScene()
 
 	std::shared_ptr<GameObject> camera = std::make_shared<ThirdPersonCamera>(player.get());
 	addGameObject(camera);
+
+
+	std::shared_ptr<GameObject> sun = std::make_shared<Sun>(sphere);
+	sun->scale = glm::vec3(5.0f);
+	addGameObject(sun);
+
 
 	//std::shared_ptr<GameObject> button = std::make_shared<Button>(cube, player.get(), glm::vec3(0.5));
 	//button->scale = glm::vec3(0.2f);

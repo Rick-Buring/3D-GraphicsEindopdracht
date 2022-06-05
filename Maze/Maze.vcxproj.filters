@@ -99,6 +99,9 @@
     <ClCompile Include="LightManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sun.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectLoader.hpp">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="LightManager.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sun.hpp">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
