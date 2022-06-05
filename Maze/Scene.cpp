@@ -68,7 +68,7 @@ void Scene::initBaseScene()
 	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
 
 	//load maze image
-	//loadMazeFromFile(cube);
+	loadMazeFromFile(cube);
 
 	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("models/steve/steve.obj");
 	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);

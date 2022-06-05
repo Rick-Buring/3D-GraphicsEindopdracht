@@ -93,13 +93,13 @@
     <ClCompile Include="ThirdPersonCamera.cpp">
       <Filter>Source Files\GameObjecs</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LightManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sun.cpp">
+      <Filter>Source Files\GameObjecs</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
       <Filter>Source Files\GameObjecs</Filter>
     </ClCompile>
   </ItemGroup>

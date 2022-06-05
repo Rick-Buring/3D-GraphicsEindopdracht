@@ -2,7 +2,7 @@
 #include <glm/ext/scalar_constants.hpp> // glm::pi
 #include <glm/gtx/color_space.hpp>
 
-const float twoPi = (2 * glm::pi<float>());
+const float twoPi = (2 * glm::pi<float>()), distance = 100;
 
 static glm::vec3 calculatePosition(float angle) {
 	return glm::normalize(glm::vec3(glm::cos(angle), glm::sin(angle), glm::sin(angle)/10));
@@ -21,8 +21,7 @@ Sun::Sun(std::shared_ptr<std::vector<Model3D_t>> model) : GameObject(model)
 	_sunLight.specular = glm::vec3(1);
 
 	_sunLight.position = glm::normalize(position);
-	_sunLight.ambient = glm::vec3(0.5f);
-	_sunLight.diffusion = glm::vec3(0.5f);
+	_sunLight.diffusion = glm::vec3(0.3f);
 
 	addLight(&_sunLight);
 }
@@ -47,9 +46,9 @@ void Sun::update(float deltaTime)
 	//magic formula for calculating hue based on y pos 
 	float hue = fmod(240 + (1 + _sunLight.position.y) * 90, 360);
 
- 	_sunLight.ambient = glm::rgbColor(glm::vec3(hue, 0.2, 1));
+ 	_sunLight.ambient = glm::normalize(glm::rgbColor(glm::vec3(hue, 0.2, 1)));
 	_sunLight.setLight();
 
-	GameObject::position = _sunLight.position * 10;
+	GameObject::position = _sunLight.position * distance;
 
 }
