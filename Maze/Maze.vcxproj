@@ -143,6 +143,7 @@
     <ClCompile Include="LevelDataJson.cpp" />
     <ClCompile Include="LevelDataRaw.cpp" />
     <ClCompile Include="LevelDataRaw.hpp" />
+    <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="AbstractLevelData.hpp" />
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="LevelDataJson.hpp" />
+    <ClInclude Include="LightManager.hpp" />
     <ClInclude Include="ThirdPersonCamera.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="glfwManager.hpp" />
