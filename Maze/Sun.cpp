@@ -3,8 +3,9 @@
 #include <glm/gtx/color_space.hpp>
 
 const float twoPi = (2 * glm::pi<float>());
+
 static glm::vec3 calculatePosition(float angle) {
-	return glm::vec3(glm::cos(angle), glm::sin(angle), glm::cos(angle));
+	return glm::normalize(glm::vec3(glm::cos(angle), glm::sin(angle), glm::sin(angle)/10));
 }
 
 glm::vec3 operator*(const glm::vec3& v1, const float& v2) {

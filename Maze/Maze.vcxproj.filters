@@ -100,7 +100,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sun.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjecs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
