@@ -66,6 +66,25 @@ void Scene::initBaseScene()
 	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
 
 	//load maze image
+	//loadMazeFromFile(cube);
+
+	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("models/steve/steve.obj");
+	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);
+	player->scale = glm::vec3(0.2f);
+	addGameObject(player);
+
+	std::shared_ptr<GameObject> camera = std::make_shared<ThirdPersonCamera>(player.get());
+	addGameObject(camera);
+
+	//std::shared_ptr<GameObject> button = std::make_shared<Button>(cube, player.get(), glm::vec3(0.5));
+	//button->scale = glm::vec3(0.2f);
+	//addGameObject(button);
+
+
+}
+
+void Scene::loadMazeFromFile(std::shared_ptr<std::vector<Model3D_t>>& cube)
+{
 	int width, height, bpp;
 	unsigned char* image = stbi_load("resouces\\mazes\\Maze.png", &width, &height, &bpp, 4);
 
@@ -88,7 +107,7 @@ void Scene::initBaseScene()
 			//todo create 3d objects based off decoded values
 			if (r) {
 				std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
-				c->position.x = (x /4);
+				c->position.x = (x / 4);
 				c->position.z = z;
 				c->position.y = 0;
 				addGameObject(c);
@@ -110,21 +129,6 @@ void Scene::initBaseScene()
 			}
 		}
 	}
-	
-	//Todo create player need to decide if third person or first person view
-
-	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("models/steve/steve.obj");
-	std::shared_ptr<GameObject> player = std::make_shared<Player>(steve);
-	player->scale = glm::vec3(0.2f); 
-	
-	std::shared_ptr<GameObject> button = std::make_shared<Button>(cube, player.get(), glm::vec3(0.5));
-	button->scale = glm::vec3(0.2f);
-
-	std::shared_ptr<GameObject> camera = std::make_shared<ThirdPersonCamera>(player.get());
-
-	addGameObject(player);
-	addGameObject(camera);
-	addGameObject(button);
 }
 
 
