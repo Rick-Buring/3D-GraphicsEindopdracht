@@ -4,5 +4,5 @@
 class LevelDataJson : public AbstractLevelData
 {
 	// Inherited via AbstractLevelData
-	virtual std::shared_ptr<std::vector<LevelData>> getData(const std::string& filePath) override;
+	virtual std::shared_ptr<std::vector<LevelData_t>> getData(const std::string& filePath) override;
 };

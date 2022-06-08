@@ -2,6 +2,9 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+
+#include "Button.hpp"
+
 /**
 * Splits a string into substrings, based on a seperator
 */
@@ -30,7 +33,7 @@ static inline std::string toLowerCase(std::string data)
 	return data;
 }
 
-std::shared_ptr<std::vector<LevelData>> LevelDataRaw::getData(const std::string& filePath)
+std::shared_ptr<std::vector<levelData_u<GameObject>>> LevelDataRaw::getData(const std::string& filePath)
 {
 	std::ifstream pFile(filePath.c_str());
 
@@ -42,16 +45,24 @@ std::shared_ptr<std::vector<LevelData>> LevelDataRaw::getData(const std::string&
 		return nullptr;
 	}
 
-	std::shared_ptr<std::vector<LevelData>> data = std::make_shared<std::vector<LevelData>>();
+	std::shared_ptr<std::vector<levelData_u<GameObject>>> data = std::make_shared<std::vector<levelData_u<GameObject>>>();
 
+	//read model folder path
 	std::string line;
 	std::getline(pFile, line);
-	//todo check escape characters
 
-	LevelData levelData = LevelData();
-	strncpy_s(levelData.modelFolderPath, line.c_str(), line.size());
+	levelData_u<GameObject> levelData = levelData_u<GameObject>();
+	strncpy_s(levelData.path, line.c_str(), line.size());
 	data->push_back(levelData);
+	
+	//read maze file path
+	std::string line;
+	std::getline(pFile, line);
 
+	levelData = levelData_u<GameObject>();
+	strncpy_s(levelData.path, line.c_str(), line.size());
+	data->push_back(levelData);
+	
 	while (!pFile.eof())
 	{
 		std::getline(pFile, line);
@@ -76,13 +87,10 @@ std::shared_ptr<std::vector<LevelData>> LevelDataRaw::getData(const std::string&
 				int cy = std::stoi(coordinates[5]);
 				int cz = std::stoi(coordinates[6]);
 
-				InteractiveObject object = {
-					nullptr, //todo create button object
-					glm::vec3(cx, cy, cz)
-				};
+				auto object = levelData_s<Button>();
 
-				levelData = LevelData();
-				levelData.object = object;
+				levelData = levelData_u<GameObject>();
+				levelData.levelData = object;
 				data->push_back(levelData);
 			}
 

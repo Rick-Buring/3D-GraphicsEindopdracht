@@ -5,5 +5,5 @@
 class LevelDataRaw : public AbstractLevelData
 {
 	// Inherited via AbstractLevelData
-	virtual std::shared_ptr<std::vector<LevelData>> getData(const std::string& filePath) override;
+	std::shared_ptr<std::vector<levelData_u<GameObject>>> getData(const std::string& filePath) override;
 };

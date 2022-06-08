@@ -5,19 +5,25 @@
 #include <string>
 #include <memory>
 
-typedef struct {
-	void* object;
-	glm::vec3 position;
-} InteractiveObject;
+#include "GameObject.hpp"
 
-typedef union {
-	char modelFolderPath[50];
-	InteractiveObject object;
-} LevelData;
+
+template<class T = GameObject>
+struct levelData_s {
+	<T>* object;
+	glm::vec3 position;
+};
+
+
+template<class T = GameObject>
+union levelData_u {
+	char path[50];
+	levelData_s<T> levelData;
+};
 
 class AbstractLevelData
 {
 public:
-	virtual std::shared_ptr<std::vector<LevelData>> getData(const std::string& filePath) = 0;
+	virtual std::shared_ptr<std::vector<levelData_u<GameObject>>> getData(const std::string& filePath) = 0;
 
 };
