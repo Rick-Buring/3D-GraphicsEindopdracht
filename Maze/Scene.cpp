@@ -76,7 +76,7 @@ void Scene::initBaseScene()
 	std::string mazePath = data[1].path;
 
 	//load maze image
-	loadMazeFromFile(mazePath, cube);
+	//loadMazeFromFile(mazePath, cube);
 
 	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("resources/models/steve/steve.obj");
 	auto player = std::make_shared<Player>(steve);
@@ -90,13 +90,13 @@ void Scene::initBaseScene()
 	sun->scale = glm::vec3(5.0f);
 	addGameObject(sun);
 
-	//auto movingWall = std::make_shared<MovingWall>(cube, glm::vec3(1, 0, 0));
-	//movingWall->scale = glm::vec3(1);
-	//addGameObject(movingWall);
+	auto movingWall = std::make_shared<MovingWall>(cube, glm::vec3(1, 0, 0));
+	movingWall->scale = glm::vec3(1);
+	addGameObject(movingWall);
 
-	//auto button = std::make_shared<Button>(cube, player.get(), glm::vec3(0.5), movingWall.get());
-	//button->scale = glm::vec3(0.2f);
-	//addGameObject(button);
+	auto button = std::make_shared<Button>(cube, player.get(), glm::vec3(0.5), movingWall.get());
+	button->scale = glm::vec3(0.2f);
+	addGameObject(button);
 
 }
 

@@ -10,14 +10,9 @@ MovingWall::MovingWall(std::shared_ptr<std::vector<Model3D_t>> model, glm::vec3 
 
 void MovingWall::interact(bool interacted)
 {
-	//if (interacted) {
-	//	GameObject::position += _moveTo;
-	//}else {
-	//	GameObject::position -= _moveTo;
-	//}
-
+	_targetPos += interacted ? _moveTo : -_moveTo;
 	//same as above but absurdly done
-	_targetPos += _moveTo * (((interacted + 1) * 2) - 3);
+	//_targetPos += _moveTo * (((interacted + 1) * 2) - 3);
 }
 
 void MovingWall::update(float deltaTime)
