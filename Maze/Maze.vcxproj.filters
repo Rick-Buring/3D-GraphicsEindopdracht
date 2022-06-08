@@ -109,7 +109,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InteractableGameObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjecs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,7 @@ void ThirdPersonCamera::update(float deltaTime)
 	ThirdPersonCamera::yPosOld = yPos;
 
 	//rotate player according to camera
-	_subject->rotation.y = -glm::radians(rotation.y) + glm::radians(180.0f);
+	_subject->rotation.y = -glm::radians(rotation.y) + glm::radians(90.0f);
 
 	//calculate camera position
 	glm::mat4 ret(1.0f);

@@ -40,7 +40,7 @@ void Player::update(float deltaTime)
 
 		//modelMatrix = glm::translate(modelMatrix, GameObject::position);
 		modelMatrix = glm::rotate(modelMatrix, GameObject::rotation.x, glm::vec3(1, 0, 0));
-		modelMatrix = glm::rotate(modelMatrix, GameObject::rotation.y, glm::vec3(0, 1, 0));
+		modelMatrix = glm::rotate(modelMatrix, GameObject::rotation.y + glm::radians<float>(90), glm::vec3(0, 1, 0));
 		modelMatrix = glm::rotate(modelMatrix, GameObject::rotation.z, glm::vec3(0, 0, 1));
 		modelMatrix = glm::scale(modelMatrix, GameObject::scale);
 		modelMatrix = glm::translate(modelMatrix, move);

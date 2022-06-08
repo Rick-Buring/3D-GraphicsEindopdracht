@@ -47,6 +47,7 @@ void Sun::update(float deltaTime)
 	float hue = fmod(hueOffset + (_sunLight.position.y + 1) * (hueRange / 2), hueMax);
 
 	_sunLight.ambient = glm::normalize(glm::rgbColor(glm::vec3(hue, 0.2, 1)));
+	_sunLight.diffusion = _sunLight.ambient * 0.2;
 	_sunLight.setLight();
 
 	GameObject::position = _sunLight.position * distance;
