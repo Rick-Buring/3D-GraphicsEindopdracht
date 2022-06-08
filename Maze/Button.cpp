@@ -3,7 +3,8 @@
 
 const int ClickDelay = 1;
 
-Button::Button(std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player, glm::vec3 p) : GameObject(model), _player(player)
+Button::Button(std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player, glm::vec3 p, InteractableGameObject* interactableObj)
+	: GameObject(model), _player(player), _interactableObj(interactableObj)
 {
 	//set gameobject position
 	GameObject::position = p;
@@ -13,20 +14,20 @@ Button::Button(std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player
 	_lastClicked = ClickDelay;
 
 	//create light with color red
-	light = lightInfo();
-	light.isDirectional = false;
-	light.position = p;
-	light.ambient = glm::vec3(1, 0, 0);
-	light.diffusion = glm::vec3(1, 0, 0);
-	light.specular = glm::vec3(1);
+	_light = lightInfo();
+	_light.isDirectional = false;
+	_light.position = p;
+	_light.ambient = glm::vec3(1, 0, 0);
+	_light.diffusion = glm::vec3(1, 0, 0);
+	_light.specular = glm::vec3(1);
 
 	//addlight to the scene
-	addLight(&light);
+	addLight(&_light);
 }
 
 Button::~Button()
 {
-	removeLight(&light);
+	removeLight(&_light);
 }
 
 void Button::update(float deltaTime)
@@ -39,22 +40,27 @@ void Button::update(float deltaTime)
 
 	glm::vec3 dif = Button::_player->position - GameObject::position;
 	float distance = glm::length(dif);
-	
+
 	if (distance < 1) {
 
 		if (glfwGetKey(window, GLFW_KEY_E)) {
-			_interacted = !_interacted;
 			_lastClicked = 0;
+
+			_interacted = !_interacted;
 			if (_interacted) {
-				light.ambient = glm::vec3(0, 1, 0);
-				light.diffusion = glm::vec3(0, 1, 0);
+				_light.ambient = glm::vec3(0, 1, 0);
+				_light.diffusion = glm::vec3(0, 1, 0);
 			}
 			else {
-				light.ambient = glm::vec3(1, 0, 0);
-				light.diffusion = glm::vec3(1, 0, 0);
+				_light.ambient = glm::vec3(1, 0, 0);
+				_light.diffusion = glm::vec3(1, 0, 0);
 			}
-			light.setLight();
+			//update light
+			_light.setLight();
 
+			if (_interactableObj) {
+				_interactableObj->interact(_interacted);
+			}
 		}
 	}
 

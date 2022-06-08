@@ -1,16 +1,10 @@
 #include "Sun.hpp"
 #include <glm/ext/scalar_constants.hpp> // glm::pi
 #include <glm/gtx/color_space.hpp>
+#include "glmUtils.hpp"
 
 const float twoPi = (2 * glm::pi<float>()), distance = 100;
-
-static glm::vec3 calculatePosition(float angle) {
-	return glm::normalize(glm::vec3(glm::cos(angle), glm::sin(angle), glm::sin(angle)/10));
-}
-
-glm::vec3 operator*(const glm::vec3& v1, const float& v2) {
-	return glm::vec3(v1.x * v2, v1.y * v2, v1.z * v2);
-}
+const short int hueOffset = 240, hueRange = 180, hueMax = 360;
 
 Sun::Sun(std::shared_ptr<std::vector<Model3D_t>> model) : GameObject(model)
 {
@@ -34,19 +28,25 @@ Sun::~Sun()
 
 void Sun::update(float deltaTime)
 {
-	
-	
+
+
 	_angle += deltaTime / Sun::_rotationSpeed;
 
 	//prevent overflow
 	_angle = fmod(Sun::_angle, twoPi);
-	
+
 	_sunLight.position = calculatePosition(_angle);
 
-	//magic formula for calculating hue based on y pos 
-	float hue = fmod(240 + (1 + _sunLight.position.y) * 90, 360);
+	//formula for calculating infinate hue scrolling based on y value
+	//hueOffset is the hue if y pos is at its lowest
+	//y pos + 1 because y min = sin(270) = -1
+	//hueRange is the diffrent possible hue values to go by in the range y min - y max 
+	//hueRange gets divided by 2 becase y min = -1 y max = 1 y delta = 2
+	//modulo huemax to allow continuous scrolling
+	//make range negative for revese scroling
+	float hue = fmod(hueOffset + (_sunLight.position.y + 1) * (hueRange / 2), hueMax);
 
- 	_sunLight.ambient = glm::normalize(glm::rgbColor(glm::vec3(hue, 0.2, 1)));
+	_sunLight.ambient = glm::normalize(glm::rgbColor(glm::vec3(hue, 0.2, 1)));
 	_sunLight.setLight();
 
 	GameObject::position = _sunLight.position * distance;

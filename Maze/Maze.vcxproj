@@ -140,11 +140,14 @@
     <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="InteractableGameObject.cpp" />
+    <ClCompile Include="InteractableGameObject.hpp" />
     <ClCompile Include="LevelDataJson.cpp" />
     <ClCompile Include="LevelDataRaw.cpp" />
     <ClCompile Include="LevelDataRaw.hpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="Maze.cpp" />
+    <ClCompile Include="MovingWall.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -157,8 +160,10 @@
   <ItemGroup>
     <ClInclude Include="AbstractLevelData.hpp" />
     <ClInclude Include="Button.hpp" />
+    <ClInclude Include="glmUtils.hpp" />
     <ClInclude Include="LevelDataJson.hpp" />
     <ClInclude Include="LightManager.hpp" />
+    <ClInclude Include="MovingWall.hpp" />
     <ClInclude Include="Sun.hpp" />
     <ClInclude Include="ThirdPersonCamera.hpp" />
     <ClInclude Include="GameObject.hpp" />

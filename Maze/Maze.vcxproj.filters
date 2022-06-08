@@ -102,6 +102,15 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\GameObjecs</Filter>
     </ClCompile>
+    <ClCompile Include="InteractableGameObject.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MovingWall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractableGameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectLoader.hpp">
@@ -175,6 +184,12 @@
     </ClInclude>
     <ClInclude Include="Sun.hpp">
       <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MovingWall.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="glmUtils.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
