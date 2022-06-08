@@ -33,36 +33,34 @@ static inline std::string toLowerCase(std::string data)
 	return data;
 }
 
-std::shared_ptr<std::vector<levelData_u<GameObject>>> LevelDataRaw::getData(const std::string& filePath)
+std::shared_ptr<std::vector<LevelData_t>> LevelDataRaw::getData(const std::string& filePath)
 {
 	std::ifstream pFile(filePath.c_str());
 
-	
+
 	if (!pFile.is_open())
 	{
 		std::cout << "Could not open file " << filePath << std::endl;
-
 		return nullptr;
 	}
 
-	std::shared_ptr<std::vector<levelData_u<GameObject>>> data = std::make_shared<std::vector<levelData_u<GameObject>>>();
+	std::shared_ptr<std::vector<LevelData_t>>  data = std::make_shared<std::vector<LevelData_t>>();
 
 	//read model folder path
 	std::string line;
 	std::getline(pFile, line);
 
-	levelData_u<GameObject> levelData = levelData_u<GameObject>();
+	auto levelData = LevelData_t();
 	strncpy_s(levelData.path, line.c_str(), line.size());
 	data->push_back(levelData);
-	
+
 	//read maze file path
-	std::string line;
 	std::getline(pFile, line);
 
-	levelData = levelData_u<GameObject>();
+	levelData = LevelData_t();
 	strncpy_s(levelData.path, line.c_str(), line.size());
 	data->push_back(levelData);
-	
+
 	while (!pFile.eof())
 	{
 		std::getline(pFile, line);
@@ -73,30 +71,37 @@ std::shared_ptr<std::vector<levelData_u<GameObject>>> LevelDataRaw::getData(cons
 		if (line == "")
 			continue;
 
-		if (line[0] == 'b') {
-			std::vector<std::string> coordinates = split(line, " ");
-			
-			//validate data
-			if (coordinates.size() == 7) {
-				int px = std::stoi(coordinates[1]);
-				int py = std::stoi(coordinates[2]);
-				int pz = std::stoi(coordinates[3]);
+		std::vector<std::string> coordinates = split(line, " ");
 
-
-				int cx = std::stoi(coordinates[4]);
-				int cy = std::stoi(coordinates[5]);
-				int cz = std::stoi(coordinates[6]);
-
-				auto object = levelData_s<Button>();
-
-				levelData = levelData_u<GameObject>();
-				levelData.levelData = object;
-				data->push_back(levelData);
-			}
-
+		//validate data
+		if (line.size() < 8)
 			continue;
-		}
 
+		auto type = line[0];
+		auto position = glm::vec3(std::stoi(coordinates[1]), std::stoi(coordinates[2]), std::stoi(coordinates[3]));
+		auto Linkedposition = glm::vec3(std::stoi(coordinates[4]), std::stoi(coordinates[5]), std::stoi(coordinates[6]));
+		auto linkedWithType = line[7];
+		auto action = glm::vec3(0);
+
+		if (line.size() >= 11)
+			action = glm::vec3(std::stoi(coordinates[8]), std::stoi(coordinates[9]), std::stoi(coordinates[10]));
+
+		auto object = levelData_s{
+			type,
+			position,
+			Linkedposition,
+			linkedWithType,
+			action
+		};
+
+		levelData = LevelData_t();
+		levelData.data = object;
+		data->push_back(levelData);
+	}
+
+	if (data->size() < 2) {
+		std::cout << "file data incomplete " << filePath << std::endl;
+		return nullptr;
 	}
 
 	return data;

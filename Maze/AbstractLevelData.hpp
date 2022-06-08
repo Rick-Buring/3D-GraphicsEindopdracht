@@ -8,22 +8,23 @@
 #include "GameObject.hpp"
 
 
-template<class T = GameObject>
 struct levelData_s {
-	<T>* object;
+	char type;
 	glm::vec3 position;
+	glm::vec3 Linkedposition;
+	char linkedWithType;
+	glm::vec3 action;
 };
 
 
-template<class T = GameObject>
-union levelData_u {
+typedef union levelData_u {
 	char path[50];
-	levelData_s<T> levelData;
-};
+	levelData_s data;
+} LevelData_t;
 
 class AbstractLevelData
 {
 public:
-	virtual std::shared_ptr<std::vector<levelData_u<GameObject>>> getData(const std::string& filePath) = 0;
+	virtual std::shared_ptr<std::vector<LevelData_t>> getData(const std::string& filePath) = 0;
 
 };
