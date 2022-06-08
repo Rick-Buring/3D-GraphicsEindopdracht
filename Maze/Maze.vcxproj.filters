@@ -75,13 +75,13 @@
     <ClCompile Include="utills.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelDataJson.cpp">
+    <ClCompile Include="LevelDataReaderJson.cpp">
       <Filter>Source Files\FactoryPattern</Filter>
     </ClCompile>
-    <ClCompile Include="LevelDataRaw.hpp">
+    <ClCompile Include="LevelDataReaderRaw.hpp">
       <Filter>Header Files\FactoryPattern</Filter>
     </ClCompile>
-    <ClCompile Include="LevelDataRaw.cpp">
+    <ClCompile Include="LevelDataReaderRaw.cpp">
       <Filter>Source Files\FactoryPattern</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
@@ -110,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="InteractableGameObject.cpp">
       <Filter>Source Files\GameObjecs</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractLevelDataReader.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,10 +164,10 @@
     <ClInclude Include="utills.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractLevelData.hpp">
+    <ClInclude Include="AbstractLevelDataReader.hpp">
       <Filter>Header Files\FactoryPattern</Filter>
     </ClInclude>
-    <ClInclude Include="LevelDataJson.hpp">
+    <ClInclude Include="LevelDataReaderJson.hpp">
       <Filter>Header Files\FactoryPattern</Filter>
     </ClInclude>
     <ClInclude Include="ThirdPersonCamera.hpp">

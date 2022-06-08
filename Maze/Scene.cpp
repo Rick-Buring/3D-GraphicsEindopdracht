@@ -18,6 +18,7 @@
 #include "Button.hpp"
 #include "Sun.hpp"
 #include "MovingWall.hpp"
+#include "AbstractLevelDataReader.hpp"
 
 void Scene::draw()
 {
@@ -68,10 +69,16 @@ void Scene::initBaseScene()
 	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
 	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
 
-	//load maze image
-	//loadMazeFromFile(cube);
+	std::string filePath = "resources/levels/firstData.txt";
+	AbstractLevelDataReader* reader = getReader(filePath);
+	std::vector<LevelData_t> data = reader->readData(filePath);
 
-	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("models/steve/steve.obj");
+	std::string mazePath = data[1].path;
+
+	//load maze image
+	loadMazeFromFile(mazePath, cube);
+
+	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("resources/models/steve/steve.obj");
 	auto player = std::make_shared<Player>(steve);
 	player->scale = glm::vec3(0.2f);
 	addGameObject(player);
@@ -79,25 +86,24 @@ void Scene::initBaseScene()
 	std::shared_ptr<GameObject> camera = std::make_shared<ThirdPersonCamera>(player.get());
 	addGameObject(camera);
 
-
 	auto sun = std::make_shared<Sun>(sphere);
 	sun->scale = glm::vec3(5.0f);
 	addGameObject(sun);
 
-	auto movingWall = std::make_shared<MovingWall>(cube, glm::vec3(1, 0, 0));
-	movingWall->scale = glm::vec3(1);
-	addGameObject(movingWall);
+	//auto movingWall = std::make_shared<MovingWall>(cube, glm::vec3(1, 0, 0));
+	//movingWall->scale = glm::vec3(1);
+	//addGameObject(movingWall);
 
-	auto button = std::make_shared<Button>(cube, player.get(), glm::vec3(0.5), movingWall.get());
-	button->scale = glm::vec3(0.2f);
-	addGameObject(button);
+	//auto button = std::make_shared<Button>(cube, player.get(), glm::vec3(0.5), movingWall.get());
+	//button->scale = glm::vec3(0.2f);
+	//addGameObject(button);
 
 }
 
-void Scene::loadMazeFromFile(std::shared_ptr<std::vector<Model3D_t>>& cube)
+void Scene::loadMazeFromFile(std::string mazePath, std::shared_ptr<std::vector<Model3D_t>>& cube)
 {
 	int width, height, bpp;
-	unsigned char* image = stbi_load("resouces\\mazes\\Maze.png", &width, &height, &bpp, 4);
+	unsigned char* image = stbi_load(mazePath.c_str(), &width, &height, &bpp, 4);
 
 	for (size_t z = 0; z < height; z++)
 	{

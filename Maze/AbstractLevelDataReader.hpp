@@ -3,7 +3,6 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include <string>
-#include <memory>
 
 #include "GameObject.hpp"
 
@@ -16,15 +15,16 @@ struct levelData_s {
 	glm::vec3 action;
 };
 
-
 typedef union levelData_u {
 	char path[50];
 	levelData_s data;
 } LevelData_t;
 
-class AbstractLevelData
+class AbstractLevelDataReader
 {
 public:
-	virtual std::shared_ptr<std::vector<LevelData_t>> getData(const std::string& filePath) = 0;
+	virtual std::vector<LevelData_t> readData(const std::string& filePath) = 0;
 
 };
+
+AbstractLevelDataReader* getReader(const std::string& file);

@@ -15,6 +15,6 @@ public:
 	void addGameObject(std::shared_ptr<GameObject> gameObject);
 	void initBaseScene();
 
-	void loadMazeFromFile(std::shared_ptr<std::vector<Model3D_t>>& cube);
+	void loadMazeFromFile(std::string, std::shared_ptr<std::vector<Model3D_t>>& cube);
 
 };
