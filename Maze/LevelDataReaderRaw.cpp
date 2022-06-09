@@ -85,10 +85,11 @@ std::vector<LevelData_t> LevelDataRaw::readData(const std::string& filePath)
 		if (coordinates.size() > 4)
 		{
 			linkedWithType = coordinates[4];
-
-			Linkedposition = glm::vec3(std::stoi(coordinates[5]), std::stoi(coordinates[6]), std::stoi(coordinates[7]));
-			if (coordinates.size() >= 11) {
-				action = glm::vec3(std::stoi(coordinates[8]), std::stoi(coordinates[9]), std::stoi(coordinates[10]));
+			if (type != "Level") {
+				Linkedposition = glm::vec3(std::stoi(coordinates[5]), std::stoi(coordinates[6]), std::stoi(coordinates[7]));
+				if (coordinates.size() >= 11) {
+					action = glm::vec3(std::stoi(coordinates[8]), std::stoi(coordinates[9]), std::stoi(coordinates[10]));
+				}
 			}
 		}
 
