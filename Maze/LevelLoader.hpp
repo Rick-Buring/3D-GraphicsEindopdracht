@@ -3,13 +3,16 @@
 #include "InteractableGameObject.hpp"
 #include "Scene.hpp"
 
+#include <memory>
+
 class LevelLoader : public InteractableGameObject {
 private:
-	std::string _levelDataPath;
 	Scene* _scene;
 	LevelLoader(std::string levelDataPath, Scene* scene);
 public:
-	static LevelLoader* createLevelLoader(std::string levelDataPath, Scene* scene);
+	std::string _levelDataPath;
+
+	static std::shared_ptr<LevelLoader> createLevelLoader(std::string levelDataPath, Scene* scene);
 
 	// Inherited via InteractableGameObject
 	virtual void interact(bool interacted) override;

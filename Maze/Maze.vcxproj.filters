@@ -112,7 +112,7 @@
       <Filter>Source Files\GameObjecs</Filter>
     </ClCompile>
     <ClCompile Include="LevelLoader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\GameObjecs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

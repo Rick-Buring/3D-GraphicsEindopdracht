@@ -9,7 +9,7 @@ private:
 	glm::vec3 _targetPos;
 
 public:
-	MovingWall(std::shared_ptr<std::vector<Model3D_t>> model, glm::vec3 moveTo);
+	MovingWall(std::shared_ptr<std::vector<Model3D_t>> model, glm::vec3 position, glm::vec3 moveTo);
 
 
 	// Inherited via InteractableGameObject

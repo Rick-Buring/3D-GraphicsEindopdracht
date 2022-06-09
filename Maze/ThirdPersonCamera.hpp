@@ -8,7 +8,9 @@ public:
 
 	GameObject* _subject;
 
-	ThirdPersonCamera(GameObject* subject);
+	ThirdPersonCamera();
+
+	void setSubject(GameObject* subject);
 
 	void update(float deltaTime) override;
 };

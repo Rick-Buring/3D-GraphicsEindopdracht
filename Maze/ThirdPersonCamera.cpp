@@ -3,14 +3,22 @@
 #include <glm/gtx/matrix_decompose.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-ThirdPersonCamera::ThirdPersonCamera(GameObject* subject) : GameObject(nullptr), _subject(subject)
+ThirdPersonCamera::ThirdPersonCamera() : GameObject(nullptr)
 {
+	_subject = nullptr;
+}
+
+void ThirdPersonCamera::setSubject(GameObject* subject)
+{
+	_subject = subject;
 	GameObject::position = glm::vec3(0, 0, -ThirdPersonCamera::_distanceToSubject);
 }
 
+
+
 void ThirdPersonCamera::update(float deltaTime)
 {
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == 0)
+	if (!_subject || glfwGetKey(window, GLFW_KEY_SPACE) == 0)
 		return;
 
 	double xPos = 0, yPos = 0;

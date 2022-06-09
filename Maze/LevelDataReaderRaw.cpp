@@ -24,15 +24,6 @@ static std::vector<std::string> split(std::string str, const std::string& sepera
 	return ret;
 }
 
-/**
-* Turns a string to lowercase
-*/
-static inline std::string toLowerCase(std::string data)
-{
-	std::transform(data.begin(), data.end(), data.begin(), ::tolower);
-	return data;
-}
-
 std::vector<LevelData_t> LevelDataRaw::readData(const std::string& filePath)
 {
 	std::ifstream pFile(filePath.c_str());
@@ -65,8 +56,6 @@ std::vector<LevelData_t> LevelDataRaw::readData(const std::string& filePath)
 	{
 		std::getline(pFile, line);
 
-		line = toLowerCase(line);
-
 		//skip empty lines
 		if (line == "")
 			continue;
@@ -85,19 +74,19 @@ std::vector<LevelData_t> LevelDataRaw::readData(const std::string& filePath)
 		if (coordinates.size() > 4)
 		{
 			linkedWithType = coordinates[4];
-			if (type != "Level") {
-				Linkedposition = glm::vec3(std::stoi(coordinates[5]), std::stoi(coordinates[6]), std::stoi(coordinates[7]));
+			if (type != "level") {
+ 				Linkedposition = glm::vec3(std::stoi(coordinates[5]), std::stoi(coordinates[6]), std::stoi(coordinates[7]));
 				if (coordinates.size() >= 11) {
 					action = glm::vec3(std::stoi(coordinates[8]), std::stoi(coordinates[9]), std::stoi(coordinates[10]));
 				}
 			}
 		}
 
-		auto object = levelData_s();
+		auto object = levelData_st();
 		strncpy_s(object.type, type.c_str(), type.size() < 10 ? type.size() : 10);
 		object.position = position;
 		object.Linkedposition = Linkedposition;
-		strncpy_s(object.linkedWithType, linkedWithType.c_str(), linkedWithType.size() < 10 ? linkedWithType.size() : 10);
+		strncpy_s(object.linkedWithType, linkedWithType.c_str(), linkedWithType.size());
 		object.action = action;
 			
 

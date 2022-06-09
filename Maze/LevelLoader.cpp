@@ -10,10 +10,10 @@ LevelLoader::LevelLoader(std::string levelDataPath, Scene* scene) : Interactable
 {
 }
 
-LevelLoader* LevelLoader::createLevelLoader(std::string levelDataPath, Scene* scene)
+std::shared_ptr<LevelLoader> LevelLoader::createLevelLoader(std::string levelDataPath, Scene* scene)
 {
 	if (fs::exists(levelDataPath)) {
-		return new LevelLoader(levelDataPath, scene);
+		return std::make_shared<LevelLoader>(LevelLoader(levelDataPath, scene));
 	}
 	
 	std::cout << "invalid level path " << levelDataPath << std::endl;
@@ -23,5 +23,5 @@ LevelLoader* LevelLoader::createLevelLoader(std::string levelDataPath, Scene* sc
 
 void LevelLoader::interact(bool interacted)
 {
-
+	_scene->loadLevel(_levelDataPath);
 }

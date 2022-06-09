@@ -3,8 +3,9 @@
 #include "glmUtils.hpp"
 
 const float movingSpeed = 1.5;
-MovingWall::MovingWall(std::shared_ptr<std::vector<Model3D_t>> model, glm::vec3 moveTo) : InteractableGameObject(model), _moveTo(moveTo)
+MovingWall::MovingWall(std::shared_ptr<std::vector<Model3D_t>> model, glm::vec3 position, glm::vec3 moveTo) : InteractableGameObject(model), _moveTo(moveTo)
 {
+	GameObject::position = position;
 	_targetPos = GameObject::position;
 }
 

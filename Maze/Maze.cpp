@@ -23,7 +23,6 @@ int main()
     init();
 
     scene = new Scene();
-    scene->initBaseScene();
 
     while (!glfwWindowShouldClose(window))
     {

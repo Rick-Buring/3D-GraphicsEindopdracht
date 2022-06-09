@@ -7,17 +7,17 @@
 #include "GameObject.hpp"
 
 
-struct levelData_s {
+typedef struct {
 	char type[10];
 	glm::vec3 position;
 	glm::vec3 Linkedposition;
-	char linkedWithType[10];
+	char linkedWithType[50];
 	glm::vec3 action;
-};
+} levelData_st;
 
 typedef union levelData_u {
 	char path[50];
-	levelData_s data;
+	levelData_st data;
 } LevelData_t;
 
 class AbstractLevelDataReader
