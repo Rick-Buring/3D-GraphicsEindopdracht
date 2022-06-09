@@ -8,10 +8,10 @@
 
 
 struct levelData_s {
-	char type;
+	char type[10];
 	glm::vec3 position;
 	glm::vec3 Linkedposition;
-	char linkedWithType;
+	char linkedWithType[10];
 	glm::vec3 action;
 };
 

@@ -78,16 +78,19 @@ void Scene::initBaseScene()
 	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
 	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
 
+	//load file with factory patern 
 	std::string filePath = "resources/levels/firstData.txt";
 	AbstractLevelDataReader* reader = getReader(filePath);
 	std::vector<LevelData_t> data = reader->readData(filePath);
 
-	std::string mazePath = data[1].path;
-
+	//load 3d models
+	auto models = loadObjects(data[0].path);
+	
 	//load maze image
+	std::string mazePath = data[1].path;
 	loadMazeFromFile(mazePath, cube);
 
-	auto models = loadObjects("resources/models");
+	//create player
 	auto player = std::make_shared<Player>(findModel("Steve", models));
 	player->scale = glm::vec3(0.2f);
 	addGameObject(player);
@@ -95,17 +98,18 @@ void Scene::initBaseScene()
 	std::shared_ptr<GameObject> camera = std::make_shared<ThirdPersonCamera>(player.get());
 	addGameObject(camera);
 
+	//create sun
 	auto sun = std::make_shared<Sun>(sphere);
 	sun->scale = glm::vec3(5.0f);
 	addGameObject(sun);
 
-	auto movingWall = std::make_shared<MovingWall>(cube, glm::vec3(1, 0, 0));
-	movingWall->scale = glm::vec3(1);
-	addGameObject(movingWall);
+	//auto movingWall = std::make_shared<MovingWall>(cube, glm::vec3(1, 0, 0));
+	//movingWall->scale = glm::vec3(1);
+	//addGameObject(movingWall);
 
-	auto button = std::make_shared<Button>(cube, player.get(), glm::vec3(0.5), movingWall.get());
-	button->scale = glm::vec3(0.2f);
-	addGameObject(button);
+	//auto button = std::make_shared<Button>(cube, player.get(), glm::vec3(0.5), movingWall.get());
+	//button->scale = glm::vec3(0.2f);
+	//addGameObject(button);
 
 }
 

@@ -50,7 +50,7 @@ std::vector<LevelData_t> LevelDataRaw::readData(const std::string& filePath)
 	std::string line;
 	std::getline(pFile, line);
 
-	auto levelData = LevelData_t();
+	LevelData_t levelData = LevelData_t();
 	strncpy_s(levelData.path, line.c_str(), line.size());
 	data.push_back(levelData);
 
@@ -77,27 +77,28 @@ std::vector<LevelData_t> LevelDataRaw::readData(const std::string& filePath)
 		if (coordinates.size() < 4)
 			continue;
 
-		auto type = line[0];
+		auto type = coordinates[0];
 		auto position = glm::vec3(std::stoi(coordinates[1]), std::stoi(coordinates[2]), std::stoi(coordinates[3]));
 		glm::vec3 Linkedposition = glm::vec3(0);
-		char linkedWithType = 0;
+		std::string linkedWithType;
 		glm::vec3 action = glm::vec3(0);
 		if (coordinates.size() > 4)
 		{
-			linkedWithType = coordinates[4].c_str()[0];
+			linkedWithType = coordinates[4];
+
 			Linkedposition = glm::vec3(std::stoi(coordinates[5]), std::stoi(coordinates[6]), std::stoi(coordinates[7]));
 			if (coordinates.size() >= 11) {
 				action = glm::vec3(std::stoi(coordinates[8]), std::stoi(coordinates[9]), std::stoi(coordinates[10]));
 			}
 		}
 
-		auto object = levelData_s{
-			type,
-			position,
-			Linkedposition,
-			linkedWithType,
-			action
-		};
+		auto object = levelData_s();
+		strncpy_s(object.type, type.c_str(), type.size() < 10 ? type.size() : 10);
+		object.position = position;
+		object.Linkedposition = Linkedposition;
+		strncpy_s(object.linkedWithType, linkedWithType.c_str(), linkedWithType.size() < 10 ? linkedWithType.size() : 10);
+		object.action = action;
+			
 
 		levelData = LevelData_t();
 		levelData.data = object;
