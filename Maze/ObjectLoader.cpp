@@ -3,9 +3,12 @@
 #include <iostream>
 #include <algorithm>
 #include <list>
+#include <filesystem>
 #include "tigl.h"
 
 #include "Texture.hpp"
+namespace fs = std::filesystem;
+const std::string objectFileExtension = ".obj";
 
 /**
 * Replaces a substring in a string
@@ -111,18 +114,24 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 	for (auto& g : groups)
 	{
 
-		Texture* t = materials[g->materialIndex]->texture;
+		Texture* t = g->materialIndex > -1 ? materials[g->materialIndex]->texture : nullptr;
 
 		std::vector<tigl::Vertex> container;
 
 		for (auto f : g->faces) {
 
 			for (auto v : f.vertices) {
-				if (v.normal < 0) {
+				if (v.normal > -1 && v.texcoord > -1) {
+					container.push_back(tigl::Vertex::PTN(vertices[v.position], texcoords[v.texcoord], normals[v.normal]));
+				}
+				else if (v.texcoord > 0) {
 					container.push_back(tigl::Vertex::PT(vertices[v.position], texcoords[v.texcoord]));
 				}
+				else if (v.normal > 0) {
+					container.push_back(tigl::Vertex::PN(vertices[v.position], normals[v.normal]));
+				}
 				else {
-					container.push_back(tigl::Vertex::PTN(vertices[v.position], texcoords[v.texcoord], normals[v.normal]));
+					container.push_back(tigl::Vertex::P(vertices[v.position]));
 				}
 			}
 
@@ -138,6 +147,46 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 	return returnValue;
 }
 
+static bool stringEndsWith(const std::string& string, const std::string& suffix) {
+
+	int suffixSize = suffix.size();
+	int stringSize = string.size();
+
+	if (stringSize <= suffixSize) {
+		return false;
+	}
+	for (size_t i = 0; i < suffixSize; i++)
+	{
+		if (string[(stringSize - suffixSize) + i] != suffix[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+//recursive function to read all files in folder and if the file is a .obj file load the object
+void loadObjects(const std::string& path, std::vector<NamedModel3D_t>& objectsFromFile) {
+	if (fs::is_directory(path)) {
+		for (const auto& entry : fs::directory_iterator(path)) {
+			fs::path path = entry.path();
+			loadObjects(path.u8string(), objectsFromFile);
+		}
+	}
+	else if (stringEndsWith(path, objectFileExtension)) {
+		std::shared_ptr<std::vector<Model3D_t>> obj = loadObject(path);
+		std::string fileName = ((fs::path)path).filename().u8string();
+		fileName = fileName.substr(0, fileName.size() - objectFileExtension.size());
+		NamedModel3D_t namedModel{ fileName, obj };
+		objectsFromFile.push_back(namedModel);
+	}
+}
+
+std::vector<NamedModel3D_t> loadObjects(const std::string& fileName) {
+	auto returnValue = std::vector<NamedModel3D_t>();
+	loadObjects(fileName.c_str(), returnValue);
+	return returnValue;
+}
+
 /**
 * Loads an object model
 */
@@ -150,14 +199,30 @@ std::shared_ptr<std::vector<Model3D_t>> loadObject(const std::string& fileName)
 	materials = std::vector<MaterialInfo*>();
 
 	std::shared_ptr<std::vector<Model3D_t>> returnValue = std::make_shared<std::vector<Model3D_t>>();
+
 	std::cout << "Loading " << fileName << std::endl;
-	std::string dirName = fileName;
-	if (dirName.rfind("/") != std::string::npos)
-		dirName = dirName.substr(0, dirName.rfind("/"));
-	if (dirName.rfind("\\") != std::string::npos)
-		dirName = dirName.substr(0, dirName.rfind("\\"));
-	if (fileName == dirName)
-		dirName = "";
+	std::string dirName = ((fs::path)fileName).remove_filename().u8string();
+
+	//fixed version of base directory checking
+	//size_t forwardSlashPos = dirName.rfind("/");
+	//size_t escapedBackSlashPos = dirName.rfind("\\");
+	//if (forwardSlashPos != std::string::npos && escapedBackSlashPos != std::string::npos) {
+	//	if (forwardSlashPos < escapedBackSlashPos) {
+	//		dirName = dirName.substr(0, escapedBackSlashPos);
+	//	}
+	//	else {
+	//		dirName = dirName.substr(0, forwardSlashPos);
+	//	}
+	//}
+	//else if (forwardSlashPos != std::string::npos) {
+	//	dirName = dirName.substr(0, forwardSlashPos);
+	//}
+	//else if (escapedBackSlashPos != std::string::npos) {
+	//	dirName = dirName.substr(0, escapedBackSlashPos);
+	//}
+	//else {
+	//	dirName = "";
+	//}
 
 
 	std::ifstream pFile(fileName.c_str());

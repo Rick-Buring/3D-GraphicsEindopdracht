@@ -62,6 +62,15 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 	this->_gameObjects.push_back(gameObject);
 }
 
+std::shared_ptr<std::vector<Model3D_t>> findModel(const std::string& name, std::vector<NamedModel3D_t>& list) {
+	for (auto obj : list) {
+		if (obj.modelName == name) {
+			return obj.model;
+		}
+	}
+	return nullptr;
+}
+
 void Scene::initBaseScene()
 {
 	//todo create json file with all file locations for models aswel as the maze image
@@ -76,10 +85,10 @@ void Scene::initBaseScene()
 	std::string mazePath = data[1].path;
 
 	//load maze image
-	//loadMazeFromFile(mazePath, cube);
+	loadMazeFromFile(mazePath, cube);
 
-	std::shared_ptr<std::vector<Model3D_t>> steve = loadObject("resources/models/steve/steve.obj");
-	auto player = std::make_shared<Player>(steve);
+	auto models = loadObjects("resources/models");
+	auto player = std::make_shared<Player>(findModel("Steve", models));
 	player->scale = glm::vec3(0.2f);
 	addGameObject(player);
 
