@@ -1,5 +1,5 @@
 resources/models
-resources/mazes/Maze.png
+resources/mazes/Maze2.png
 player 0 0 0
 sun 5 5 5
 butten 1 0 1 moving_wall 1 0 2 1 0 0

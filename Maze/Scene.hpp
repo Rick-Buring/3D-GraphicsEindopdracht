@@ -16,7 +16,7 @@ private:
 	double _lastFrameTime;
 	void draw();
 	void reset();
-	std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> loadMazeFromFile(std::string, std::shared_ptr<std::vector<Model3D_t>>& cube);
+	std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> loadMazeFromFile(std::string, std::vector<NamedModel3D_t>& models,std::shared_ptr<std::vector<Model3D_t>>& cube);
 
 
 public:

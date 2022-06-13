@@ -18,6 +18,9 @@
 #include "MovingWall.hpp"
 #include "AbstractLevelDataReader.hpp"
 #include "LevelLoader.hpp"
+#include <iostream>
+
+typedef std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> yzxGameObject;
 
 void Scene::draw()
 {
@@ -85,10 +88,13 @@ void Scene::reset() {
 
 void Scene::loadLevel(const std::string& path)
 {
-	char localPathCopy[50];
-	strncpy_s(localPathCopy, path.c_str(), path.size());
+	//create copy for live reload
+	std::string localPathCopy = path.c_str();
+
+	//reset scene
 	reset();
 
+	//standart objects
 	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
 	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
 
@@ -102,7 +108,7 @@ void Scene::loadLevel(const std::string& path)
 
 	//load maze image
 	std::string mazePath = levelData[1].path;
-	auto maze = loadMazeFromFile(mazePath, cube);
+	auto maze = loadMazeFromFile(mazePath, models, cube);
 
 	for (size_t i = 2; i < levelData.size(); i++)
 	{
@@ -129,21 +135,21 @@ void Scene::loadLevel(const std::string& path)
 		}
 		else if (dataType == "butten") {
 			//std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player, glm::vec3 position, InteractableGameObject* interactableObj = nullptr)
-			std::shared_ptr<InteractableGameObject> interactingObject = 
+			std::shared_ptr<InteractableGameObject> interactingObject =
 				std::string(data.linkedWithType) == "moving_wall" ? std::make_shared<MovingWall>(cube, data.Linkedposition, data.action) :
 				nullptr;
 
 			//validate vecor range
-			if (data.Linkedposition.y > -1 && data.Linkedposition.y < maze.size()&& 
+			if (data.Linkedposition.y > -1 && data.Linkedposition.y < maze.size() &&
 				data.Linkedposition.z > -1 && data.Linkedposition.z < maze[data.Linkedposition.y].size() &&
 				data.Linkedposition.x > -1 && data.Linkedposition.x < maze[data.Linkedposition.y][data.Linkedposition.z].size()) {
-				
+
 				maze[data.Linkedposition.y][data.Linkedposition.z][data.Linkedposition.x] = interactingObject;
 
 				auto butten = std::make_shared<Button>(cube, _player.get(), data.position, interactingObject.get());
 				butten->scale = glm::vec3(.5f);
 				addGameObject(butten);
-			}	
+			}
 		}
 		else if (dataType == "level") {
 			std::shared_ptr<LevelLoader> levelLoader = LevelLoader::createLevelLoader(data.linkedWithType, this);
@@ -159,9 +165,9 @@ void Scene::loadLevel(const std::string& path)
 	}
 
 	//add maze to scene
-	for (auto a : maze) {
-		for (auto b : a) {
-			for (auto gameObject : b) {
+	for (auto y : maze) {
+		for (auto z : y) {
+			for (auto gameObject : z) {
 
 				//check if gameObject at index
 				if (gameObject) {
@@ -172,12 +178,12 @@ void Scene::loadLevel(const std::string& path)
 	}
 }
 
-std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> Scene::loadMazeFromFile(std::string mazePath, std::shared_ptr<std::vector<Model3D_t>>& cube)
+yzxGameObject Scene::loadMazeFromFile(std::string mazePath, std::vector<NamedModel3D_t>& models, std::shared_ptr<std::vector<Model3D_t>>& cube)
 {
 	int width, height, bpp;
 	unsigned char* image = stbi_load(mazePath.c_str(), &width, &height, &bpp, 4);
 
-	std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> maze = std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>>(3);
+	yzxGameObject maze = yzxGameObject(3);
 
 	maze[0] = std::vector<std::vector<std::shared_ptr<GameObject>>>(height); // y value
 	maze[1] = std::vector<std::vector<std::shared_ptr<GameObject>>>(height); // y value
@@ -201,7 +207,7 @@ std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> Scene::loadMa
 			//z is encoded in height of image
 			//y is encoded in color channel of image
 			//value in chanel is the index of the object to render
-			unsigned char rgb[] = { 
+			unsigned char rgb[] = {
 				image[z * height * 4 + x4 + 0],
 				image[z * height * 4 + x4 + 1],
 				image[z * height * 4 + x4 + 2]
@@ -212,7 +218,9 @@ std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> Scene::loadMa
 
 			for (size_t y = 0; y < 3; y++) {
 				if (rgb[y]) {
-					std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>(cube);
+					
+  					std::shared_ptr<std::vector<Model3D_t>> model = rgb[y] < models.size() ? models[rgb[y]].model : cube;
+					std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>(model);
 					gameObject->position.x = x;
 					gameObject->position.z = z;
 					gameObject->position.y = y;
