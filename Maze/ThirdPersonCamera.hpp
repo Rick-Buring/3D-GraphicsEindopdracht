@@ -3,7 +3,7 @@
 
 class ThirdPersonCamera : public GameObject {
 public:
-	float _distanceToSubject = 5;
+	float _distanceToSubject = 2;
 	double xPosOld = 0, yPosOld = 0;
 
 	GameObject* _subject;

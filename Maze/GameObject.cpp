@@ -5,7 +5,7 @@
 #include "Texture.hpp"
 
 
-GameObject::GameObject(std::shared_ptr<std::vector<Model3D_t>> model) : _model(model)
+GameObject::GameObject(std::shared_ptr<std::vector<Model3D_t>> model) : model(model)
 {
 }
 
@@ -15,7 +15,7 @@ void GameObject::update(float deltaTime)
 
 void GameObject::draw()
 {
-	if (!_model)
+	if (!model)
 		return;
 
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
@@ -28,7 +28,7 @@ void GameObject::draw()
 
 	tigl::shader->setModelMatrix(modelMatrix);
 
-	for (auto model : *_model) {
+	for (auto model : *model) {
 		if (model.texture) {
 			tigl::shader->enableTexture(true);
 			model.texture->bind(); 

@@ -181,9 +181,22 @@ void loadObjects(const std::string& path, std::vector<NamedModel3D_t>& objectsFr
 	}
 }
 
+static void stringtoLowerCase(std::string& out) {
+	std::transform(out.begin(), out.end(), out.begin(), [](unsigned char c) { return std::tolower(c); });
+}
+static bool compareByName(const NamedModel3D_t& a, const NamedModel3D_t& b)
+{
+	std::string lowerA = a.modelName.c_str(), lowerB = b.modelName.c_str();
+	stringtoLowerCase(lowerA);
+	stringtoLowerCase(lowerB);
+	int value = lowerA.compare(lowerB);
+	return value < 0;
+}
+
 std::vector<NamedModel3D_t> loadObjects(const std::string& fileName) {
 	auto returnValue = std::vector<NamedModel3D_t>();
 	loadObjects(fileName.c_str(), returnValue);
+	std::sort(returnValue.begin(), returnValue.end(), compareByName);
 	return returnValue;
 }
 

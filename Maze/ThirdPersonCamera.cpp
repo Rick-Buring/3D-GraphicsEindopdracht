@@ -14,8 +14,6 @@ void ThirdPersonCamera::setSubject(GameObject* subject)
 	GameObject::position = glm::vec3(0, 0, -ThirdPersonCamera::_distanceToSubject);
 }
 
-
-
 void ThirdPersonCamera::update(float deltaTime)
 {
 	if (!_subject || glfwGetKey(window, GLFW_KEY_SPACE) == 0)
@@ -40,7 +38,7 @@ void ThirdPersonCamera::update(float deltaTime)
 	ret = glm::translate(ret, GameObject::position);
 	ret = glm::rotate(ret, glm::radians(rotation.x), glm::vec3(1, 0, 0));
 	ret = glm::rotate(ret, glm::radians(rotation.y), glm::vec3(0, 1, 0));
-	ret = glm::translate(ret, -_subject->position - glm::vec3(0, 1, 0));
+	ret = glm::translate(ret, -_subject->position - glm::vec3(0, 0.5, 0));
 
 	//set new view position
 	tigl::shader->setViewMatrix(ret);

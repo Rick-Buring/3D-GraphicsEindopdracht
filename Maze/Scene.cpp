@@ -95,8 +95,8 @@ void Scene::loadLevel(const std::string& path)
 	reset();
 
 	//standart objects
-	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
-	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(2));
+	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
+	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
 
 	//load file with factory patern 
 	std::string filePath = localPathCopy;
@@ -106,9 +106,15 @@ void Scene::loadLevel(const std::string& path)
 	//load 3d models
 	auto models = loadObjects(levelData[0].path);
 
+	std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>(findModel("wall", models));
+	addGameObject(gameObject);
+	std::shared_ptr<GameObject> gameObject2 = std::make_shared<GameObject>(cube);
+	gameObject2->position.x = 1;
+	addGameObject(gameObject2);
+
 	//load maze image
 	std::string mazePath = levelData[1].path;
-	auto maze = loadMazeFromFile(mazePath, models, cube);
+	auto maze = loadMazeFromImage(mazePath, models, cube);
 
 	for (size_t i = 2; i < levelData.size(); i++)
 	{
@@ -121,8 +127,9 @@ void Scene::loadLevel(const std::string& path)
 				continue;
 
 			_player = std::make_shared<Player>(findModel("player", models));
-			_player->scale = glm::vec3(0.2f);
+			_player->scale = glm::vec3(0.1f);
 			_player->position = data.position;
+			_player->position.y -= 0.5f;
 
 			_camera->setSubject(_player.get());
 		}
@@ -135,16 +142,22 @@ void Scene::loadLevel(const std::string& path)
 		}
 		else if (dataType == "butten") {
 			//std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player, glm::vec3 position, InteractableGameObject* interactableObj = nullptr)
-			std::shared_ptr<InteractableGameObject> interactingObject =
-				std::string(data.linkedWithType) == "moving_wall" ? std::make_shared<MovingWall>(cube, data.Linkedposition, data.action) :
-				nullptr;
 
 			//validate vecor range
 			if (data.Linkedposition.y > -1 && data.Linkedposition.y < maze.size() &&
 				data.Linkedposition.z > -1 && data.Linkedposition.z < maze[data.Linkedposition.y].size() &&
 				data.Linkedposition.x > -1 && data.Linkedposition.x < maze[data.Linkedposition.y][data.Linkedposition.z].size()) {
 
-				maze[data.Linkedposition.y][data.Linkedposition.z][data.Linkedposition.x] = interactingObject;
+				auto gameObject = maze[data.Linkedposition.y][data.Linkedposition.z][data.Linkedposition.x];
+				auto model = gameObject ? gameObject->model : cube;
+				auto position = gameObject ? gameObject->position : data.Linkedposition;
+
+				std::shared_ptr<InteractableGameObject> interactingObject =
+					std::string(data.linkedWithType) == "moving_wall" ? std::make_shared<MovingWall>(model, position, data.action) :
+					nullptr;
+
+				interactingObject->rotation = gameObject ? gameObject->rotation : glm::vec3(0);
+				addGameObject(interactingObject);
 
 				auto butten = std::make_shared<Button>(cube, _player.get(), data.position, interactingObject.get());
 				butten->scale = glm::vec3(.5f);
@@ -178,7 +191,7 @@ void Scene::loadLevel(const std::string& path)
 	}
 }
 
-yzxGameObject Scene::loadMazeFromFile(std::string mazePath, std::vector<NamedModel3D_t>& models, std::shared_ptr<std::vector<Model3D_t>>& cube)
+yzxGameObject Scene::loadMazeFromImage(std::string mazePath, std::vector<NamedModel3D_t>& models, std::shared_ptr<std::vector<Model3D_t>>& cube)
 {
 	int width, height, bpp;
 	unsigned char* image = stbi_load(mazePath.c_str(), &width, &height, &bpp, 4);
@@ -213,22 +226,24 @@ yzxGameObject Scene::loadMazeFromFile(std::string mazePath, std::vector<NamedMod
 				image[z * height * 4 + x4 + 2]
 			};
 
-			//alpha not usefull image cant create image with r,b,g value x and alpha 0
-			//int a = image[z * height * 4 + x + 3];
+			//encoded value used for rotation 
+			//         y2 y1 y0 **
+			// example 11 10 01 11 = 270 degrees on y 2, 180 degrees on y 1, 90 degrees on y 0
+			// example y0 270 y1 0 degrees y2 180 degrees = 10 00 11 11
+			unsigned char a = image[z * height * 4 + x + 3];
 
 			for (size_t y = 0; y < 3; y++) {
 				if (rgb[y]) {
-					
-  					std::shared_ptr<std::vector<Model3D_t>> model = rgb[y] < models.size() ? models[rgb[y]].model : cube;
+					std::shared_ptr<std::vector<Model3D_t>> model = rgb[y] == 0xff ? cube : models[rgb[y] % models.size()].model;
 					std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>(model);
 					gameObject->position.x = x;
 					gameObject->position.z = z;
 					gameObject->position.y = y;
 					maze[y][z][x] = gameObject;
+					char rotation = (a >> y + 1) & 0x3;
+					gameObject->rotation.y = glm::radians(90.0f * rotation);
 				}
 			}
-
-			//todo create 3d objects based off decoded values
 		}
 	}
 	return maze;

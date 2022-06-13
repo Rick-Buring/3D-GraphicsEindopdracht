@@ -1,4 +1,4 @@
-resources/models
+resources/modelsv1
 resources/mazes/Maze2.png
 player 0 0 0
 sun 5 5 5
