@@ -102,7 +102,7 @@ void Scene::loadLevel(const std::string& path)
 
 	//load maze image
 	std::string mazePath = levelData[1].path;
-	loadMazeFromFile(mazePath, cube);
+	auto maze = loadMazeFromFile(mazePath, cube);
 
 	for (size_t i = 2; i < levelData.size(); i++)
 	{
@@ -129,21 +129,24 @@ void Scene::loadLevel(const std::string& path)
 		}
 		else if (dataType == "butten") {
 			//std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player, glm::vec3 position, InteractableGameObject* interactableObj = nullptr)
-			std::shared_ptr<InteractableGameObject> interactingObject = nullptr;
+			std::shared_ptr<InteractableGameObject> interactingObject = 
+				std::string(data.linkedWithType) == "moving_wall" ? std::make_shared<MovingWall>(cube, data.Linkedposition, data.action) :
+				nullptr;
 
-			if (std::string(data.linkedWithType) == "moving_wall") {
-				interactingObject = std::make_shared<MovingWall>(cube, data.Linkedposition, data.action);
-			}
+			//validate vecor range
+			if (data.Linkedposition.y > -1 && data.Linkedposition.y < maze.size()&& 
+				data.Linkedposition.z > -1 && data.Linkedposition.z < maze[data.Linkedposition.y].size() &&
+				data.Linkedposition.x > -1 && data.Linkedposition.x < maze[data.Linkedposition.y][data.Linkedposition.z].size()) {
+				
+				maze[data.Linkedposition.y][data.Linkedposition.z][data.Linkedposition.x] = interactingObject;
 
-			if (interactingObject)
-				addGameObject(interactingObject);
-
-			auto butten = std::make_shared<Button>(cube, _player.get(), data.position, interactingObject.get());
-			butten->scale = glm::vec3(.5f);
-			addGameObject(butten);
+				auto butten = std::make_shared<Button>(cube, _player.get(), data.position, interactingObject.get());
+				butten->scale = glm::vec3(.5f);
+				addGameObject(butten);
+			}	
 		}
 		else if (dataType == "level") {
-  			std::shared_ptr<LevelLoader> levelLoader = LevelLoader::createLevelLoader(data.linkedWithType, this);
+			std::shared_ptr<LevelLoader> levelLoader = LevelLoader::createLevelLoader(data.linkedWithType, this);
 			if (levelLoader) {
 				addGameObject(levelLoader);
 
@@ -155,55 +158,70 @@ void Scene::loadLevel(const std::string& path)
 
 	}
 
+	//add maze to scene
+	for (auto a : maze) {
+		for (auto b : a) {
+			for (auto gameObject : b) {
 
-
-
+				//check if gameObject at index
+				if (gameObject) {
+					addGameObject(gameObject);
+				}
+			}
+		}
+	}
 }
 
-void Scene::loadMazeFromFile(std::string mazePath, std::shared_ptr<std::vector<Model3D_t>>& cube)
+std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> Scene::loadMazeFromFile(std::string mazePath, std::shared_ptr<std::vector<Model3D_t>>& cube)
 {
 	int width, height, bpp;
 	unsigned char* image = stbi_load(mazePath.c_str(), &width, &height, &bpp, 4);
 
+	std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> maze = std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>>(3);
+
+	maze[0] = std::vector<std::vector<std::shared_ptr<GameObject>>>(height); // y value
+	maze[1] = std::vector<std::vector<std::shared_ptr<GameObject>>>(height); // y value
+	maze[2] = std::vector<std::vector<std::shared_ptr<GameObject>>>(height); // y value
+
 	for (size_t z = 0; z < height; z++)
 	{
-		for (size_t x = 0; x < width * 4; x += 4)
+		maze[0][z] = std::vector<std::shared_ptr<GameObject>>(width); // z value
+		maze[1][z] = std::vector<std::shared_ptr<GameObject>>(width); // z value
+		maze[2][z] = std::vector<std::shared_ptr<GameObject>>(width); // z value
+
+		for (size_t x4 = 0; x4 < width * 4; x4 += 4)
 		{
+			int x = x4 / 4;
+			maze[0][z][x] = (nullptr); // x value
+			maze[1][z][x] = (nullptr); // x value
+			maze[2][z][z] = (nullptr); // x value
+
 			//objects position is x y z
 			//x is encoded in width of image
 			//z is encoded in height of image
 			//y is encoded in color channel of image
 			//value in chanel is the index of the object to render
-			int r = image[z * height * 4 + x + 0];
-			int g = image[z * height * 4 + x + 1];
-			int b = image[z * height * 4 + x + 2];
+			unsigned char rgb[] = { 
+				image[z * height * 4 + x4 + 0],
+				image[z * height * 4 + x4 + 1],
+				image[z * height * 4 + x4 + 2]
+			};
 
 			//alpha not usefull image cant create image with r,b,g value x and alpha 0
-			int a = image[z * height * 4 + x + 3];
+			//int a = image[z * height * 4 + x + 3];
+
+			for (size_t y = 0; y < 3; y++) {
+				if (rgb[y]) {
+					std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>(cube);
+					gameObject->position.x = x;
+					gameObject->position.z = z;
+					gameObject->position.y = y;
+					maze[y][z][x] = gameObject;
+				}
+			}
 
 			//todo create 3d objects based off decoded values
-			if (r) {
-				std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
-				c->position.x = (x / 4);
-				c->position.z = z;
-				c->position.y = 0;
-				addGameObject(c);
-			}
-			if (g) {
-
-				std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
-				c->position.x = (x / 4);
-				c->position.z = z;
-				c->position.y = 1;
-				addGameObject(c);
-			}
-			if (b) {
-				std::shared_ptr<GameObject> c = std::make_shared<GameObject>(cube);
-				c->position.x = (x / 4);
-				c->position.z = z;
-				c->position.y = 2;
-				addGameObject(c);
-			}
 		}
 	}
+	return maze;
 }
