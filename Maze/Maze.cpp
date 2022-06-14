@@ -58,8 +58,15 @@ void init()
     //keyboard callback usefull for quick actions, ingame actions should use pull request instead
     glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
         {
-            if (key == GLFW_KEY_ESCAPE)
+            if (key == GLFW_KEY_ESCAPE) {
+                //quit application
                 glfwSetWindowShouldClose(window, true);
+            }
+            if (key == GLFW_KEY_TAB && action == GLFW_RELEASE) {
+                //togle mouse state
+                int newMouseState = glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED ? GLFW_CURSOR_NORMAL: GLFW_CURSOR_DISABLED;
+                glfwSetInputMode(window, GLFW_CURSOR, newMouseState);
+            }
         });
 
     //im gui initilization

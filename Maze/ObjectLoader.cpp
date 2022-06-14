@@ -77,8 +77,8 @@ void loadMaterialFile(const std::string& fileName, const std::string& dirName);
 
 struct Vertex {
 	int position;
-	int normal;
-	int texcoord;
+	int normal = -1;
+	int texcoord = -1;
 };
 struct Face
 {
@@ -118,9 +118,9 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 
 		std::vector<tigl::Vertex> container;
 
-		for (auto f : g->faces) {
+		for (auto &f : g->faces) {
 
-			for (auto v : f.vertices) {
+			for (auto &v : f.vertices) {
 				if (v.normal > -1 && v.texcoord > -1) {
 					container.push_back(tigl::Vertex::PTN(vertices[v.position], texcoords[v.texcoord], normals[v.normal]));
 				}
@@ -138,7 +138,7 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 		}
 
 		tigl::VBO* vbo = tigl::createVbo(container);
-		Model3D_t temp;
+		Model3D_t temp = Model3D_t();
 		temp.texture = t;
 		temp.vbo = vbo;
 		returnValue->push_back(temp);
@@ -149,8 +149,8 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 
 static bool stringEndsWith(const std::string& string, const std::string& suffix) {
 
-	int suffixSize = suffix.size();
-	int stringSize = string.size();
+	size_t suffixSize = suffix.size();
+	size_t stringSize = string.size();
 
 	if (stringSize <= suffixSize) {
 		return false;
@@ -276,7 +276,7 @@ std::shared_ptr<std::vector<Model3D_t>> loadObject(const std::string& fileName)
 
 				for (size_t i = ii - 3; i < ii; i++)	//magische forlus om van quads triangles te maken ;)
 				{
-					Vertex vertex;
+					Vertex vertex = Vertex();
 					std::vector<std::string> indices = split(params[i == (ii - 3) ? 1 : i], "/");
 					if (indices.size() >= 1)	//er is een positie
 						vertex.position = atoi(indices[0].c_str()) - 1;
@@ -312,7 +312,7 @@ std::shared_ptr<std::vector<Model3D_t>> loadObject(const std::string& fileName)
 				MaterialInfo* info = materials[i];
 				if (info->name == params[1])
 				{
-					currentGroup->materialIndex = i;
+					currentGroup->materialIndex = (int)i;
 					break;
 				}
 			}

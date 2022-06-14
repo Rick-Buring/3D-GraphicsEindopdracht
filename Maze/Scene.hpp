@@ -12,6 +12,7 @@ private:
 	std::vector<std::shared_ptr<GameObject>> _gameObjects;
 	std::shared_ptr<Player> _player;
 	std::shared_ptr<ThirdPersonCamera> _camera;
+	std::shared_ptr<GameObject> _loadScreen;
 
 	double _lastFrameTime;
 	void draw();

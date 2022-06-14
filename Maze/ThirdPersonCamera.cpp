@@ -6,6 +6,12 @@
 ThirdPersonCamera::ThirdPersonCamera() : GameObject(nullptr)
 {
 	_subject = nullptr;
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+ThirdPersonCamera::~ThirdPersonCamera()
+{
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
 void ThirdPersonCamera::setSubject(GameObject* subject)
@@ -16,15 +22,16 @@ void ThirdPersonCamera::setSubject(GameObject* subject)
 
 void ThirdPersonCamera::update(float deltaTime)
 {
-	if (!_subject || glfwGetKey(window, GLFW_KEY_SPACE) == 0)
+	//check if mouse is visable if it is return so user can freely use his mouse
+	if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) {
 		return;
-
+	}
 	double xPos = 0, yPos = 0;
 	glfwGetCursorPos(window, &xPos, &yPos);
 	
 	//calculate delta for mouse and add to current rotation 
-	rotation.y += (xPos - ThirdPersonCamera::xPosOld) / 10;
-	rotation.x += (yPos - ThirdPersonCamera::yPosOld) / 10;
+	rotation.y += (float) (xPos - ThirdPersonCamera::xPosOld) / 10.0f;
+	rotation.x += (float) (yPos - ThirdPersonCamera::yPosOld) / 10.0f;
 	
 	//reset values
 	ThirdPersonCamera::xPosOld = xPos;

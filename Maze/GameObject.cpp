@@ -28,13 +28,15 @@ void GameObject::draw()
 
 	tigl::shader->setModelMatrix(modelMatrix);
 
-	for (auto model : *model) {
+	for (auto& model : *model) {
 		if (model.texture) {
 			tigl::shader->enableTexture(true);
 			model.texture->bind(); 
-			tigl::drawVertices(GL_TRIANGLES, model.vbo);
-			tigl::shader->enableTexture(false);
 		}
-		tigl::drawVertices(GL_TRIANGLES, model.vbo);		
+		
+		tigl::drawVertices(GL_TRIANGLES, model.vbo);
+
+		TextureUnbind();
+		tigl::shader->enableTexture(false);
 	}
 }

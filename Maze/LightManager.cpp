@@ -6,21 +6,21 @@ std::vector<lightInfo*> lightPointers = std::vector<lightInfo*>();
 
 void addLight(lightInfo* out)
 {
-	out->lightId = lightPointers.size();
+	out->lightId = (int)lightPointers.size();
 	lightPointers.push_back(out);
 	
 	out->setLight();
 
-	tigl::shader->setLightCount(lightPointers.size());
+	tigl::shader->setLightCount((int)lightPointers.size());
 }
 
 void removeLight(lightInfo* lightID)
 {
 	//remove the light
 	lightPointers.erase(std::remove(lightPointers.begin(), lightPointers.end(), lightID));
-	tigl::shader->setLightCount(lightPointers.size());
+	tigl::shader->setLightCount((int)lightPointers.size());
 
-	for (size_t i = 0; i < lightPointers.size(); i++)
+	for (int i = 0; i < lightPointers.size(); i++)
 	{
 		lightInfo* currentLight = lightPointers[i];
 		currentLight->lightId = i;

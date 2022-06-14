@@ -114,6 +114,12 @@
     <ClCompile Include="LevelLoader.cpp">
       <Filter>Source Files\GameObjecs</Filter>
     </ClCompile>
+    <ClCompile Include="LoadScreen.hpp">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadScreen.cpp">
+      <Filter>Source Files\GameObjecs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectLoader.hpp">

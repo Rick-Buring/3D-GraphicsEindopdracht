@@ -44,10 +44,10 @@ void Sun::update(float deltaTime)
 	//hueRange gets divided by 2 becase y min = -1 y max = 1 y delta = 2
 	//modulo huemax to allow continuous scrolling
 	//make range negative for revese scroling
-	float hue = fmod(hueOffset + (_sunLight.position.y + 1) * (hueRange / 2), hueMax);
+	float hue = (float) fmod(hueOffset + (_sunLight.position.y + 1) * (hueRange / 2.0f), hueMax);
 
 	_sunLight.ambient = glm::normalize(glm::rgbColor(glm::vec3(hue, 0.2, 1)));
-	_sunLight.diffusion = _sunLight.ambient * 0.2;
+	_sunLight.diffusion = _sunLight.ambient * 0.2f;
 	_sunLight.setLight();
 
 	GameObject::position = _sunLight.position * distance;

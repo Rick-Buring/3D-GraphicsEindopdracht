@@ -14,8 +14,8 @@ const std::vector<readerByExtension> Readers = {
 
 static bool stringEndsWith(const std::string& string, const std::string& suffix) {
 
-    int suffixSize = suffix.size();
-    int stringSize = string.size();
+    size_t suffixSize = suffix.size();
+    size_t stringSize = string.size();
 
     if (stringSize <= suffixSize) {
         return false;
@@ -31,7 +31,7 @@ static bool stringEndsWith(const std::string& string, const std::string& suffix)
 
 AbstractLevelDataReader* getReader(const std::string& file)
 {
-    for (auto readerBySuffix : Readers)
+    for (auto &readerBySuffix : Readers)
     {
         if (stringEndsWith(file, readerBySuffix.suffix))
             return readerBySuffix.reader;

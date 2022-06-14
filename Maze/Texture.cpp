@@ -30,10 +30,10 @@ Texture::Texture(const std::string& fileName)
 
 void Texture::bind()
 {
-	//glGenTextures(1, &textureId);
 	glBindTexture(GL_TEXTURE_2D, id);
+}
 
-	//imgData = stbi_load("Atlas.png", &width, &height, &bpp, 4);
-
-
+void TextureUnbind()
+{
+	glBindTexture(GL_TEXTURE_2D, -1);
 }

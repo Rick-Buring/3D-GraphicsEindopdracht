@@ -9,6 +9,7 @@ public:
 	GameObject* _subject;
 
 	ThirdPersonCamera();
+	~ThirdPersonCamera();
 
 	void setSubject(GameObject* subject);
 

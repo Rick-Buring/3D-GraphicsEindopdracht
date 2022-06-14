@@ -148,6 +148,8 @@
     <ClCompile Include="LevelDataReaderRaw.hpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="LoadScreen.cpp" />
+    <ClCompile Include="LoadScreen.hpp" />
     <ClCompile Include="Maze.cpp" />
     <ClCompile Include="MovingWall.cpp" />
     <ClCompile Include="ObjectLoader.cpp" />

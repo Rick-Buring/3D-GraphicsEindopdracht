@@ -19,6 +19,7 @@
 #include "AbstractLevelDataReader.hpp"
 #include "LevelLoader.hpp"
 #include <iostream>
+#include "glfwManager.hpp"
 
 typedef std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> yzxGameObject;
 
@@ -27,8 +28,18 @@ void Scene::draw()
 	glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+	int width, height;
+	glfwGetWindowSize(window, &width, &height);
 	int viewport[4];
 	glGetIntegerv(GL_VIEWPORT, viewport);
+
+	//check if window has resized
+	if (viewport[2] != width || viewport[3] != height)
+	{
+		glViewport(0, 0, width, height);
+	}
+
 	glm::mat4 projection = glm::perspective(glm::radians(75.0f), viewport[2] / (float)viewport[3], 0.01f, 1000.0f);
 
 	glEnable(GL_DEPTH_TEST);
@@ -36,7 +47,7 @@ void Scene::draw()
 	tigl::shader->setProjectionMatrix(projection);
 	tigl::shader->setModelMatrix(glm::mat4(1.0f));
 
-	for (auto gameObject : _gameObjects) {
+	for (auto& gameObject : _gameObjects) {
 		gameObject->draw();
 	}
 	_player->draw();
@@ -44,6 +55,7 @@ void Scene::draw()
 
 Scene::Scene()
 {
+
 	_camera = std::make_shared<ThirdPersonCamera>();
 	loadLevel("resources/levels/firstData.txt");
 }
@@ -52,13 +64,12 @@ void Scene::update()
 {
 	//calculate time passed since last frame
 	double currentFrameTime = glfwGetTime();
-	double deltaTime = currentFrameTime - Scene::_lastFrameTime;
+	float deltaTime = (float)(currentFrameTime - Scene::_lastFrameTime);
 	_lastFrameTime = currentFrameTime;
 
 	//update logic
-
-	for (auto gameObject : Scene::_gameObjects) {
-		gameObject->update((float)deltaTime);
+	for (auto& gameObject : Scene::_gameObjects) {
+		gameObject->update(deltaTime);
 	}
 	_player->update(deltaTime);
 	_camera->update(deltaTime);
@@ -72,7 +83,7 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 }
 
 std::shared_ptr<std::vector<Model3D_t>> findModel(const std::string& name, std::vector<NamedModel3D_t>& list) {
-	for (auto obj : list) {
+	for (auto& obj : list) {
 		if (obj.modelName == name) {
 			return obj.model;
 		}
@@ -145,12 +156,12 @@ void Scene::loadLevel(const std::string& path)
 
 			//validate vecor range
 			if (data.Linkedposition.y > -1 && data.Linkedposition.y < maze.size() &&
-				data.Linkedposition.z > -1 && data.Linkedposition.z < maze[data.Linkedposition.y].size() &&
-				data.Linkedposition.x > -1 && data.Linkedposition.x < maze[data.Linkedposition.y][data.Linkedposition.z].size()) {
+				data.Linkedposition.z > -1 && data.Linkedposition.z < maze[(__int64)data.Linkedposition.y].size() &&
+				data.Linkedposition.x > -1 && data.Linkedposition.x < maze[(__int64)data.Linkedposition.y][(__int64)data.Linkedposition.z].size()) {
 
-				auto gameObject = maze[data.Linkedposition.y][data.Linkedposition.z][data.Linkedposition.x];
-				auto model = gameObject ? gameObject->model : cube;
-				auto position = gameObject ? gameObject->position : data.Linkedposition;
+				std::shared_ptr<GameObject> gameObject = maze[(__int64)data.Linkedposition.y][(__int64)data.Linkedposition.z][(__int64)data.Linkedposition.x];
+				std::shared_ptr<std::vector<Model3D_t>> model = gameObject ? gameObject->model : cube;
+				glm::vec3 position = gameObject ? gameObject->position : data.Linkedposition;
 
 				std::shared_ptr<InteractableGameObject> interactingObject =
 					std::string(data.linkedWithType) == "moving_wall" ? std::make_shared<MovingWall>(model, position, data.action) :
@@ -178,9 +189,9 @@ void Scene::loadLevel(const std::string& path)
 	}
 
 	//add maze to scene
-	for (auto y : maze) {
-		for (auto z : y) {
-			for (auto gameObject : z) {
+	for (auto& y : maze) {
+		for (auto& z : y) {
+			for (auto& gameObject : z) {
 
 				//check if gameObject at index
 				if (gameObject) {
@@ -208,7 +219,7 @@ yzxGameObject Scene::loadMazeFromImage(std::string mazePath, std::vector<NamedMo
 		maze[1][z] = std::vector<std::shared_ptr<GameObject>>(width); // z value
 		maze[2][z] = std::vector<std::shared_ptr<GameObject>>(width); // z value
 
-		for (size_t x4 = 0; x4 < width * 4; x4 += 4)
+		for (int x4 = 0; x4 < width * 4; x4 += 4)
 		{
 			int x = x4 / 4;
 			maze[0][z][x] = (nullptr); // x value
@@ -236,11 +247,11 @@ yzxGameObject Scene::loadMazeFromImage(std::string mazePath, std::vector<NamedMo
 				if (rgb[y]) {
 					std::shared_ptr<std::vector<Model3D_t>> model = rgb[y] == 0xff ? cube : models[rgb[y] % models.size()].model;
 					std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>(model);
-					gameObject->position.x = x;
-					gameObject->position.z = z;
-					gameObject->position.y = y;
+					gameObject->position.x = (float)x;
+					gameObject->position.z = (float)z;
+					gameObject->position.y = (float)y;
 					maze[y][z][x] = gameObject;
-					char rotation = (a >> y + 1) & 0x3;
+					char rotation = (a >> (y + 1)) & 0x3;
 					gameObject->rotation.y = glm::radians(90.0f * rotation);
 				}
 			}

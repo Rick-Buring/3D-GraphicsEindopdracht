@@ -24,10 +24,12 @@ void Player::update(float deltaTime)
 	glm::vec3 move = glm::vec3(0);
 
 	//update move vector with key directions
-	move.z += glfwGetKey(window, GLFW_KEY_W); //move forward
-	move.z -= glfwGetKey(window, GLFW_KEY_S); //move backward
-	move.x += glfwGetKey(window, GLFW_KEY_A); //move left
-	move.x -= glfwGetKey(window, GLFW_KEY_D); //move right
+	move.z += glfwGetKey(window, GLFW_KEY_W);			//move forward
+	move.z -= glfwGetKey(window, GLFW_KEY_S);			//move backward
+	move.x += glfwGetKey(window, GLFW_KEY_A);			//move left
+	move.x -= glfwGetKey(window, GLFW_KEY_D);			//move right
+	move.y += glfwGetKey(window, GLFW_KEY_SPACE);		//move up
+	move.y -= glfwGetKey(window, GLFW_KEY_LEFT_SHIFT);	//move down
 
 	//check if we move
 	if (move.x || move.z) {
@@ -60,5 +62,4 @@ void Player::update(float deltaTime)
 void Player::draw()
 {
 	GameObject::draw();
-
 }
