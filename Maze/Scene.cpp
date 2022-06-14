@@ -47,8 +47,6 @@ void Scene::draw()
 	tigl::shader->setProjectionMatrix(projection);
 	tigl::shader->setModelMatrix(glm::mat4(1.0f));
 
-	tigl::shader->setViewMatrix(glm::lookAt(glm::vec3(0, 0, -10), glm::vec3(0), glm::vec3(0, 1, 0)));
-
 	for (auto& gameObject : _gameObjects) {
 		gameObject->draw();
 	}
@@ -61,10 +59,10 @@ bool loading = false;
 Scene::Scene()
 {
 	_camera = std::make_shared<ThirdPersonCamera>();
-	_loadScreen = std::make_shared<LoadScreen>(new Texture("resources\\modelsv1\\wall\\Rock037_4K_Color.jpg"));
-	addGameObject(_loadScreen);
-	loading = true;
-	//loadLevel("resources/levels/firstData.txt");
+	//_loadScreen = std::make_shared<LoadScreen>(new Texture("resources\\modelsv1\\wall\\Rock037_4K_Color.jpg"));
+	//addGameObject(_loadScreen);
+	//loading = true;
+	loadLevel("resources/levels/firstData.txt");
 }
 void Scene::update()
 {
