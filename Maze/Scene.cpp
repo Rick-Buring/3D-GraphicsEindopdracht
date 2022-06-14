@@ -64,6 +64,7 @@ Scene::Scene()
 	//loading = true;
 	loadLevel("resources/levels/firstData.txt");
 }
+
 void Scene::update()
 {
 	if (loading) {
@@ -91,6 +92,13 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 	this->_gameObjects.push_back(gameObject);
 }
 
+void Scene::reset() {
+	_gameObjects.clear();
+	_player = nullptr;
+	_camera->setSubject(_player.get());
+}
+#pragma region TODO Move to new file
+
 std::shared_ptr<std::vector<Model3D_t>> findModel(const std::string& name, std::vector<NamedModel3D_t>& list) {
 	for (auto& obj : list) {
 		if (obj.modelName == name) {
@@ -98,12 +106,6 @@ std::shared_ptr<std::vector<Model3D_t>> findModel(const std::string& name, std::
 		}
 	}
 	return nullptr;
-}
-
-void Scene::reset() {
-	_gameObjects.clear();
-	_player = nullptr;
-	_camera->setSubject(_player.get());
 }
 
 void Scene::loadLevel(const std::string& path)
@@ -268,3 +270,4 @@ yzxGameObject Scene::loadMazeFromImage(std::string mazePath, std::vector<NamedMo
 	}
 	return maze;
 }
+#pragma endregion
