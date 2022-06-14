@@ -6,13 +6,14 @@
 #include "GameObject.hpp"
 #include "Player.hpp"
 #include "ThirdPersonCamera.hpp"
+#include "LoadScreen.hpp"
 
 class Scene {
 private:
 	std::vector<std::shared_ptr<GameObject>> _gameObjects;
 	std::shared_ptr<Player> _player;
 	std::shared_ptr<ThirdPersonCamera> _camera;
-	std::shared_ptr<GameObject> _loadScreen;
+	std::shared_ptr<LoadScreen> _loadScreen;
 
 	double _lastFrameTime;
 	void draw();

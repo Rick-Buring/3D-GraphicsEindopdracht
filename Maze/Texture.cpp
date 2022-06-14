@@ -7,7 +7,6 @@
 
 Texture::Texture(const std::string& fileName)
 {
-	//TODO
 	stbi_uc* imgData;
 	int width, height, bpp;
 	imgData = stbi_load(fileName.c_str(), &width, &height, &bpp, 4);
