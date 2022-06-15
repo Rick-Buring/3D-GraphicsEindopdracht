@@ -94,11 +94,13 @@ static std::vector<mazeValue*> loadMazeFromImage(std::string imagePath, unsigned
 }
 
 static std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene, std::vector<LevelData_t>& leveldata, std::vector<NamedModel3D_t>& models, std::vector<mazeValue*>& maze) {
+	//standart objects
 	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
 	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
 
-	//standart objects
+	//return value
 	std::vector<std::shared_ptr<GameObject>> returnValue = std::vector <std::shared_ptr<GameObject>>();
+	//create player at start of return value
 	std::shared_ptr<Player> player = nullptr;
 
 	returnValue.push_back(player);
@@ -192,6 +194,7 @@ void LoadNewScene(Scene& scene, std::string path)
 	//generate gameObjects
 	auto gameObjects = generateGameObjects(scene, levelData, models, maze);
 
+	//add gameObjects to scene
 	scene.addGameObjects(gameObjects);
 }
 
