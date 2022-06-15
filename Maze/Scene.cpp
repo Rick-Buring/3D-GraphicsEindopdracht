@@ -26,13 +26,19 @@
 
 #define Multithreading true //multithreading not working because
 typedef std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> yzxGameObject;
-
+auto _sunLight = lightInfo();
 Scene::Scene()
 {
+	_sunLight.isDirectional = true;
+	_sunLight.specular = glm::vec3(1);
+
+	_sunLight.position = glm::normalize(glm::vec3(1));
+	_sunLight.diffusion = glm::vec3(0.5f);	
+	_sunLight.ambient = glm::vec3(0.5f);
+
 	_lastFrameTime = glfwGetTime();
 	_camera = std::make_shared<ThirdPersonCamera>();
-	_loadScreen = std::make_shared<LoadScreen>(new Texture("resources\\modelsv1\\wall\\Rock037_4K_Color.jpg"));
-
+	_loadScreen = std::make_shared<LoadScreen>(new Texture("resources\\loadingScreen\\loadingscreenv1.png"));
 	loadLevel("resources/levels/firstData.txt");
 }
 
@@ -87,6 +93,7 @@ void Scene::update()
 #endif
 	}
 	else if (_state == STATE::READY) {
+		_thread.join();
 		_player = (_buffer[0]);
 		_camera->setSubject(_player.get());
 
@@ -126,7 +133,7 @@ void Scene::addGameObjects(std::vector<std::shared_ptr<GameObject>> gameObjects)
 void Scene::reset() {
 	_gameObjects.clear();
 	_player = nullptr;
-	_camera->setSubject(_player.get());
+	_camera->setSubject(nullptr);
 }
 
 void Scene::loadLevel(const std::string& path)
@@ -136,9 +143,13 @@ void Scene::loadLevel(const std::string& path)
 	_state = STATE::ReloadPending;
 }
 
+
 void Scene::startLoading() {
 	_state = STATE::LOADING;
+
+	addLight(&_sunLight);
 }
 void Scene::stopLoading() {
 	_state = STATE::READY;
+	removeLight(&_sunLight);
 }
