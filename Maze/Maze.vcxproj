@@ -148,6 +148,7 @@
     <ClCompile Include="LevelDataReaderRaw.hpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="LoadScene.cpp" />
     <ClCompile Include="LoadScreen.cpp" />
     <ClCompile Include="LoadScreen.hpp" />
     <ClCompile Include="Maze.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="LevelDataReaderJson.hpp" />
     <ClInclude Include="LevelLoader.hpp" />
     <ClInclude Include="LightManager.hpp" />
+    <ClInclude Include="LoadScene.hpp" />
     <ClInclude Include="MovingWall.hpp" />
     <ClInclude Include="Sun.hpp" />
     <ClInclude Include="ThirdPersonCamera.hpp" />

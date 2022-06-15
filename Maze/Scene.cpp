@@ -22,7 +22,20 @@
 #include "glfwManager.hpp"
 #include "Texture.hpp"
 
+#include "LoadScene.hpp"
+
 typedef std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> yzxGameObject;
+
+bool loading = false;
+
+Scene::Scene()
+{
+	_lastFrameTime = glfwGetTime();
+	_camera = std::make_shared<ThirdPersonCamera>();
+	_loadScreen = std::make_shared<LoadScreen>(new Texture("resources\\modelsv1\\wall\\Rock037_4K_Color.jpg"));
+
+	loadLevel("resources/levels/firstData.txt");
+}
 
 void Scene::draw()
 {
@@ -50,19 +63,6 @@ void Scene::draw()
 	for (auto& gameObject : _gameObjects) {
 		gameObject->draw();
 	}
-	if (_player) {
-		_player->draw();
-	}
-}
-bool loading = false;
-
-Scene::Scene()
-{
-	_camera = std::make_shared<ThirdPersonCamera>();
-	//_loadScreen = std::make_shared<LoadScreen>(new Texture("resources\\modelsv1\\wall\\Rock037_4K_Color.jpg"));
-	//addGameObject(_loadScreen);
-	//loading = true;
-	loadLevel("resources/levels/firstData.txt");
 }
 
 void Scene::update()
@@ -92,6 +92,17 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 	this->_gameObjects.push_back(gameObject);
 }
 
+void Scene::addGameObjects(std::vector<std::shared_ptr<GameObject>> gameObjects)
+{
+	_player = (gameObjects[0]);
+	_camera->setSubject(_player.get());
+
+	//add gameObjects to scene
+	for (auto& gameObject : gameObjects) {
+		addGameObject(gameObject);
+	}
+}
+
 void Scene::reset() {
 	_gameObjects.clear();
 	_player = nullptr;
@@ -99,14 +110,6 @@ void Scene::reset() {
 }
 #pragma region TODO Move to new file
 
-std::shared_ptr<std::vector<Model3D_t>> findModel(const std::string& name, std::vector<NamedModel3D_t>& list) {
-	for (auto& obj : list) {
-		if (obj.modelName == name) {
-			return obj.model;
-		}
-	}
-	return nullptr;
-}
 
 void Scene::loadLevel(const std::string& path)
 {
@@ -116,101 +119,8 @@ void Scene::loadLevel(const std::string& path)
 	//reset scene
 	reset();
 
-	//standart objects
-	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
-	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
+	LoadNewScene(*this, localPathCopy);
 
-	//load file with factory patern 
-	std::string filePath = localPathCopy;
-	AbstractLevelDataReader* reader = getReader(filePath);
-	std::vector<LevelData_t> levelData = reader->readData(filePath);
-
-	//load 3d models
-	auto models = loadObjects(levelData[0].path);
-
-	std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>(findModel("wall", models));
-	addGameObject(gameObject);
-	std::shared_ptr<GameObject> gameObject2 = std::make_shared<GameObject>(cube);
-	gameObject2->position.x = 1;
-	addGameObject(gameObject2);
-
-	//load maze image
-	std::string mazePath = levelData[1].path;
-	auto maze = loadMazeFromImage(mazePath, models, cube);
-
-	for (size_t i = 2; i < levelData.size(); i++)
-	{
-		levelData_st data = levelData[i].data;
-		std::string dataType = data.type;
-
-		if (dataType == "player") {
-			//only one player per level
-			if (_player)
-				continue;
-
-			_player = std::make_shared<Player>(findModel("player", models));
-			_player->scale = glm::vec3(0.1f);
-			_player->position = data.position;
-			_player->position.y -= 0.5f;
-
-			_camera->setSubject(_player.get());
-		}
-		else if (dataType == "sun")
-		{
-			//create sun
-			auto sun = std::make_shared<Sun>(sphere);
-			sun->scale = glm::vec3(5.0f);
-			addGameObject(sun);
-		}
-		else if (dataType == "butten") {
-			//std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player, glm::vec3 position, InteractableGameObject* interactableObj = nullptr)
-
-			//validate vecor range
-			if (data.Linkedposition.y > -1 && data.Linkedposition.y < maze.size() &&
-				data.Linkedposition.z > -1 && data.Linkedposition.z < maze[(__int64)data.Linkedposition.y].size() &&
-				data.Linkedposition.x > -1 && data.Linkedposition.x < maze[(__int64)data.Linkedposition.y][(__int64)data.Linkedposition.z].size()) {
-
-				std::shared_ptr<GameObject> gameObject = maze[(__int64)data.Linkedposition.y][(__int64)data.Linkedposition.z][(__int64)data.Linkedposition.x];
-				std::shared_ptr<std::vector<Model3D_t>> model = gameObject ? gameObject->model : cube;
-				glm::vec3 position = gameObject ? gameObject->position : data.Linkedposition;
-
-				std::shared_ptr<InteractableGameObject> interactingObject =
-					std::string(data.linkedWithType) == "moving_wall" ? std::make_shared<MovingWall>(model, position, data.action) :
-					nullptr;
-
-				interactingObject->rotation = gameObject ? gameObject->rotation : glm::vec3(0);
-				addGameObject(interactingObject);
-
-				auto butten = std::make_shared<Button>(cube, _player.get(), data.position, interactingObject.get());
-				butten->scale = glm::vec3(.5f);
-				addGameObject(butten);
-			}
-		}
-		else if (dataType == "level") {
-			std::shared_ptr<LevelLoader> levelLoader = LevelLoader::createLevelLoader(data.linkedWithType, this);
-			if (levelLoader) {
-				addGameObject(levelLoader);
-
-				auto butten = std::make_shared<Button>(cube, _player.get(), data.position, levelLoader.get());
-				butten->scale = glm::vec3(.5f);
-				addGameObject(butten);
-			}
-		}
-
-	}
-
-	//add maze to scene
-	for (auto& y : maze) {
-		for (auto& z : y) {
-			for (auto& gameObject : z) {
-
-				//check if gameObject at index
-				if (gameObject) {
-					addGameObject(gameObject);
-				}
-			}
-		}
-	}
 }
 
 yzxGameObject Scene::loadMazeFromImage(std::string mazePath, std::vector<NamedModel3D_t>& models, std::shared_ptr<std::vector<Model3D_t>>& cube)

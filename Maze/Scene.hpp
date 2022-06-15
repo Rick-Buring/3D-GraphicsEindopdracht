@@ -11,7 +11,7 @@
 class Scene {
 private:
 	std::vector<std::shared_ptr<GameObject>> _gameObjects;
-	std::shared_ptr<Player> _player;
+	std::shared_ptr<GameObject> _player;
 	std::shared_ptr<ThirdPersonCamera> _camera;
 	std::shared_ptr<LoadScreen> _loadScreen;
 
@@ -25,5 +25,6 @@ public:
 	Scene();
 	void update();
 	void addGameObject(std::shared_ptr<GameObject> gameObject);
+	void addGameObjects(std::vector<std::shared_ptr<GameObject>> gameObject);
 	void loadLevel(const std::string& path);
 };
