@@ -33,7 +33,7 @@ Scene::Scene()
 	_sunLight.specular = glm::vec3(1);
 
 	_sunLight.position = glm::normalize(glm::vec3(1));
-	_sunLight.diffusion = glm::vec3(0.5f);	
+	_sunLight.diffusion = glm::vec3(0.5f);
 	_sunLight.ambient = glm::vec3(0.5f);
 
 	_lastFrameTime = glfwGetTime();
@@ -89,21 +89,15 @@ void Scene::update()
 		_thread = std::thread(LoadNewSceneAsync, this, _localPathCopy);
 #else
 		LoadNewScene(*this, _localPathCopy);
-		stopLoading();
+		_state = STATE::RUNNING;
 #endif
 	}
+#if Multithreading
 	else if (_state == STATE::READY) {
-		_thread.join();
-		_player = (_buffer[0]);
-		_camera->setSubject(_player.get());
-
-		//add gameObjects to scene
-		for (auto& gameObject : _buffer) {
-			addGameObject(gameObject);
-		}
-		_buffer.clear();
+		_thread.join();//gracefully stop thread so it can be reused
 		_state = STATE::RUNNING;
 	}
+#endif
 
 	if (_state != RUNNING)
 	{
@@ -127,7 +121,13 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 
 void Scene::addGameObjects(std::vector<std::shared_ptr<GameObject>> gameObjects)
 {
-	this->_buffer = gameObjects;
+	_player = (gameObjects[0]);
+	_camera->setSubject(_player.get());
+
+	//add gameObjects to scene
+	for (auto& gameObject : gameObjects) {
+		addGameObject(gameObject);
+	}
 }
 
 void Scene::reset() {

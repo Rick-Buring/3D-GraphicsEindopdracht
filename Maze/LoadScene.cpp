@@ -170,7 +170,7 @@ static std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene
 
 	for (const auto& mazeV: maze) {
 		std::shared_ptr<std::vector<Model3D_t>> model =
-			mazeV->type == 255 ? cube :
+			mazeV->type == 255 || models.size() == 0 ? cube :
 			mazeV->type < models.size() ? models[mazeV->type].model :
 			models[mazeV->type % models.size()].model;
 		std::shared_ptr<GameObject> go = std::make_shared<GameObject>(model);
