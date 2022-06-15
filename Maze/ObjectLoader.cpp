@@ -94,6 +94,7 @@ public:
 struct MaterialInfo {
 public:
 	std::string name;
+	std::string Path;
 	Texture* texture;
 };
 
@@ -114,8 +115,8 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 	for (auto& g : groups)
 	{
 
-		Texture* t = g->materialIndex > -1 ? materials[g->materialIndex]->texture : nullptr;
-
+		//Texture* t = g->materialIndex > -1 ? materials[g->materialIndex]->texture : nullptr;
+		std::string texturePath = g->materialIndex > -1 ? materials[g->materialIndex]->Path : nullptr;
 		std::vector<tigl::Vertex> container;
 
 		for (auto &f : g->faces) {
@@ -137,10 +138,12 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 
 		}
 
-		tigl::VBO* vbo = tigl::createVbo(container);
+		//tigl::VBO* vbo = tigl::createVbo(container);
 		Model3D_t temp = Model3D_t();
-		temp.texture = t;
-		temp.vbo = vbo;
+		temp.texture = nullptr;
+		temp.vbo = nullptr;
+		temp.container = container;
+		temp.texturePath = texturePath;
 		returnValue->push_back(temp);
 
 	}
@@ -365,7 +368,8 @@ void loadMaterialFile(const std::string& fileName, const std::string& dirName)
 			if (tex.find("\\"))
 				tex = tex.substr(tex.rfind("\\") + 1);
 			//TODO
-			currentMaterial->texture = new Texture(dirName + "/" + tex);
+			//currentMaterial->texture = new Texture(dirName + "/" + tex);
+			currentMaterial->Path = dirName + "/" + tex;
 		}
 		else if (params[0] == "kd")
 		{//TODO, diffuse color

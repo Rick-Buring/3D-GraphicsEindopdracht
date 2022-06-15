@@ -57,7 +57,9 @@ std::shared_ptr<std::vector<Model3D_t>> buildCube(const glm::vec3& p, const glm:
 	
 	Model3D_t tempModel;
 	tempModel.texture = nullptr;
-	tempModel.vbo = tigl::createVbo(verts);
+	//tempModel.vbo = tigl::createVbo(verts);
+	tempModel.vbo = nullptr;
+	tempModel.container = verts;
 
 	returnValue->push_back(tempModel);
 
@@ -95,9 +97,12 @@ std::shared_ptr<std::vector<Model3D_t>> buildSphere(const glm::vec3& p, const gl
 	}
 
 
+
 	Model3D_t tempModel;
 	tempModel.texture = nullptr;
-	tempModel.vbo = tigl::createVbo(verts);
+	//tempModel.vbo = tigl::createVbo(verts);
+	tempModel.vbo = nullptr;
+	tempModel.container = verts;
 
 	returnValue->push_back(tempModel);
 
@@ -120,9 +125,12 @@ std::shared_ptr<std::vector<Model3D_t>> createPlane(float width, float height) {
 	verts.push_back(tigl::Vertex::PCN(glm::vec3(width, 0, height), col, glm::vec3(0, 1, 0)));
 	verts.push_back(tigl::Vertex::PCN(glm::vec3(-width, 0, height), col, glm::vec3(0, 1, 0)));
 
+
 	Model3D_t tempModel;
 	tempModel.texture = nullptr;
-	tempModel.vbo = tigl::createVbo(verts);
+	//tempModel.vbo = tigl::createVbo(verts);
+	tempModel.vbo = nullptr;
+	tempModel.container = verts;
 
 	returnValue->push_back(tempModel);
 

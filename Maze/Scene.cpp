@@ -23,7 +23,8 @@
 #include "Texture.hpp"
 
 #include "LoadScene.hpp"
-#define Multithreading false
+
+#define Multithreading true //multithreading not working because
 typedef std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> yzxGameObject;
 
 Scene::Scene()
@@ -75,7 +76,18 @@ void Scene::update()
 	float deltaTime = (float)(currentFrameTime - Scene::_lastFrameTime);
 	_lastFrameTime = currentFrameTime;
 
-	if (_state == STATE::READY) {
+	if (_state == STATE::ReloadPending) {
+		//reset scene
+		reset();
+#if Multithreading
+		startLoading();
+		_thread = std::thread(LoadNewSceneAsync, this, _localPathCopy);
+#else
+		LoadNewScene(*this, _localPathCopy);
+		stopLoading();
+#endif
+	}
+	else if (_state == STATE::READY) {
 		_player = (_buffer[0]);
 		_camera->setSubject(_player.get());
 
@@ -131,17 +143,8 @@ void Scene::reset() {
 void Scene::loadLevel(const std::string& path)
 {
 	//create copy for live reload
-	std::string localPathCopy = path.c_str();
-
-	//reset scene
-	reset();
-#if Multithreading
-	_thread = std::thread(LoadNewSceneAsync, this, localPathCopy);
-#else
-	LoadNewScene(*this, localPathCopy);
-	stopLoading();
-#endif
-
+	_localPathCopy = path.c_str();
+	_state = STATE::ReloadPending;
 }
 
 void Scene::startLoading() {

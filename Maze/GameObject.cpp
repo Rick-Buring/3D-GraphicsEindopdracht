@@ -31,9 +31,16 @@ void GameObject::draw()
 	for (auto& model : *model) {
 		if (model.texture) {
 			tigl::shader->enableTexture(true);
-			model.texture->bind(); 
+			model.texture->bind();
 		}
-		
+		if (!model.vbo) {
+			if (model.container.size() == 0)
+				continue;
+			if (!model.texturePath.empty())
+				model.texture = new Texture(model.texturePath);
+			model.vbo = tigl::createVbo(model.container);
+		}
+
 		tigl::drawVertices(GL_TRIANGLES, model.vbo);
 
 		TextureUnbind();

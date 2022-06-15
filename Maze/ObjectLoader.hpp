@@ -9,7 +9,9 @@
 class Texture;
 
 typedef struct {
+	std::vector<tigl::Vertex> container;
 	tigl::VBO* vbo;
+	std::string texturePath;
 	Texture* texture;
 } Model3D_t;
 

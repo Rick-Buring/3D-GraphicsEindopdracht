@@ -12,7 +12,8 @@
 enum STATE {
 	RUNNING,
 	LOADING,
-	READY
+	READY,
+	ReloadPending
 };
 
 class Scene {
@@ -24,6 +25,8 @@ private:
 	std::thread _thread;
 
 	std::vector<std::shared_ptr<GameObject>> _buffer;
+	
+	std::string _localPathCopy;
 
 	STATE _state = STATE::RUNNING;
 
