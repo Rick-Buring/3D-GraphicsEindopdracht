@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 !Maze/resources/*
+!Maze/lib/*
