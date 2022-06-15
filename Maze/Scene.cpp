@@ -23,10 +23,8 @@
 #include "Texture.hpp"
 
 #include "LoadScene.hpp"
-
+#define Multithreading false
 typedef std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> yzxGameObject;
-
-bool loading = false;
 
 Scene::Scene()
 {
@@ -52,38 +50,65 @@ void Scene::draw()
 	{
 		glViewport(0, 0, width, height);
 	}
+	if (_state != RUNNING) {
+		_loadScreen->draw();
+	}
+	else {
+		glm::mat4 projection = glm::perspective(glm::radians(75.0f), viewport[2] / (float)viewport[3], 0.01f, 1000.0f);
 
-	glm::mat4 projection = glm::perspective(glm::radians(75.0f), viewport[2] / (float)viewport[3], 0.01f, 1000.0f);
+		glEnable(GL_DEPTH_TEST);
 
-	glEnable(GL_DEPTH_TEST);
+		tigl::shader->setProjectionMatrix(projection);
+		tigl::shader->setModelMatrix(glm::mat4(1.0f));
 
-	tigl::shader->setProjectionMatrix(projection);
-	tigl::shader->setModelMatrix(glm::mat4(1.0f));
-
-	for (auto& gameObject : _gameObjects) {
-		gameObject->draw();
+		for (auto& gameObject : _gameObjects) {
+			gameObject->draw();
+		}
 	}
 }
+static bool bener = false;
 
 void Scene::update()
 {
-	if (loading) {
-		draw();
-		return;
-	}
-
 	//calculate time passed since last frame
 	double currentFrameTime = glfwGetTime();
 	float deltaTime = (float)(currentFrameTime - Scene::_lastFrameTime);
 	_lastFrameTime = currentFrameTime;
 
-	//update logic
-	for (auto& gameObject : Scene::_gameObjects) {
-		gameObject->update(deltaTime);
-	}
-	_player->update(deltaTime);
-	_camera->update(deltaTime);
+	if (_state == STATE::READY) {
+		_player = (_buffer[0]);
+		_camera->setSubject(_player.get());
 
+		//add gameObjects to scene
+		for (auto& gameObject : _buffer) {
+			addGameObject(gameObject);
+		}
+		_buffer.clear();
+		_state = STATE::RUNNING;
+	}
+
+	if (_state != RUNNING)
+	{
+		_loadScreen->update(deltaTime);
+	}
+	else {
+		//update logic
+		int count = 0;
+		if (!bener) {
+			bener = true;
+			for (std::shared_ptr<GameObject> gameObject : Scene::_gameObjects) {
+				count++;
+				std::cout << count << std::endl;
+				gameObject->update(deltaTime);
+			}
+			_player->update(deltaTime);
+			_camera->update(deltaTime);
+			bener = false;
+		}
+		else {
+			std::cout << "failed";
+		}
+	}
 	this->draw();
 }
 
@@ -94,13 +119,7 @@ void Scene::addGameObject(std::shared_ptr<GameObject> gameObject)
 
 void Scene::addGameObjects(std::vector<std::shared_ptr<GameObject>> gameObjects)
 {
-	_player = (gameObjects[0]);
-	_camera->setSubject(_player.get());
-
-	//add gameObjects to scene
-	for (auto& gameObject : gameObjects) {
-		addGameObject(gameObject);
-	}
+	this->_buffer = gameObjects;
 }
 
 void Scene::reset() {
@@ -108,8 +127,6 @@ void Scene::reset() {
 	_player = nullptr;
 	_camera->setSubject(_player.get());
 }
-#pragma region TODO Move to new file
-
 
 void Scene::loadLevel(const std::string& path)
 {
@@ -118,66 +135,18 @@ void Scene::loadLevel(const std::string& path)
 
 	//reset scene
 	reset();
-
+#if Multithreading
+	_thread = std::thread(LoadNewSceneAsync, this, localPathCopy);
+#else
 	LoadNewScene(*this, localPathCopy);
+	stopLoading();
+#endif
 
 }
 
-yzxGameObject Scene::loadMazeFromImage(std::string mazePath, std::vector<NamedModel3D_t>& models, std::shared_ptr<std::vector<Model3D_t>>& cube)
-{
-	int width, height, bpp;
-	unsigned char* image = stbi_load(mazePath.c_str(), &width, &height, &bpp, 4);
-
-	yzxGameObject maze = yzxGameObject(3);
-
-	maze[0] = std::vector<std::vector<std::shared_ptr<GameObject>>>(height); // y value
-	maze[1] = std::vector<std::vector<std::shared_ptr<GameObject>>>(height); // y value
-	maze[2] = std::vector<std::vector<std::shared_ptr<GameObject>>>(height); // y value
-
-	for (size_t z = 0; z < height; z++)
-	{
-		maze[0][z] = std::vector<std::shared_ptr<GameObject>>(width); // z value
-		maze[1][z] = std::vector<std::shared_ptr<GameObject>>(width); // z value
-		maze[2][z] = std::vector<std::shared_ptr<GameObject>>(width); // z value
-
-		for (int x4 = 0; x4 < width * 4; x4 += 4)
-		{
-			int x = x4 / 4;
-			maze[0][z][x] = (nullptr); // x value
-			maze[1][z][x] = (nullptr); // x value
-			maze[2][z][z] = (nullptr); // x value
-
-			//objects position is x y z
-			//x is encoded in width of image
-			//z is encoded in height of image
-			//y is encoded in color channel of image
-			//value in chanel is the index of the object to render
-			unsigned char rgb[] = {
-				image[z * height * 4 + x4 + 0],
-				image[z * height * 4 + x4 + 1],
-				image[z * height * 4 + x4 + 2]
-			};
-
-			//encoded value used for rotation 
-			//         y2 y1 y0 **
-			// example 11 10 01 11 = 270 degrees on y 2, 180 degrees on y 1, 90 degrees on y 0
-			// example y0 270 y1 0 degrees y2 180 degrees = 10 00 11 11
-			unsigned char a = image[z * height * 4 + x + 3];
-
-			for (size_t y = 0; y < 3; y++) {
-				if (rgb[y]) {
-					std::shared_ptr<std::vector<Model3D_t>> model = rgb[y] == 0xff ? cube : models[rgb[y] % models.size()].model;
-					std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>(model);
-					gameObject->position.x = (float)x;
-					gameObject->position.z = (float)z;
-					gameObject->position.y = (float)y;
-					maze[y][z][x] = gameObject;
-					char rotation = (a >> (y + 1)) & 0x3;
-					gameObject->rotation.y = glm::radians(90.0f * rotation);
-				}
-			}
-		}
-	}
-	return maze;
+void Scene::startLoading() {
+	_state = STATE::LOADING;
 }
-#pragma endregion
+void Scene::stopLoading() {
+	_state = STATE::READY;
+}

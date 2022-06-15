@@ -2,11 +2,18 @@
 
 #include <memory>
 #include <vector>
+#include <thread>
 
 #include "GameObject.hpp"
 #include "Player.hpp"
 #include "ThirdPersonCamera.hpp"
 #include "LoadScreen.hpp"
+
+enum STATE {
+	RUNNING,
+	LOADING,
+	READY
+};
 
 class Scene {
 private:
@@ -14,6 +21,11 @@ private:
 	std::shared_ptr<GameObject> _player;
 	std::shared_ptr<ThirdPersonCamera> _camera;
 	std::shared_ptr<LoadScreen> _loadScreen;
+	std::thread _thread;
+
+	std::vector<std::shared_ptr<GameObject>> _buffer;
+
+	STATE _state = STATE::RUNNING;
 
 	double _lastFrameTime;
 	void draw();
@@ -27,4 +39,8 @@ public:
 	void addGameObject(std::shared_ptr<GameObject> gameObject);
 	void addGameObjects(std::vector<std::shared_ptr<GameObject>> gameObject);
 	void loadLevel(const std::string& path);
+
+	void startLoading();
+	void stopLoading();
+
 };

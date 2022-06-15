@@ -130,9 +130,10 @@ static std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene
 			returnValue.push_back(sun);
 		}
 		else if (dataType == "butten") {
-			
+			mazeValue const* valueToRemove = nullptr;
 			for (const auto& mazeV : maze) {
 				if (mazeV->position == data.Linkedposition) {
+					valueToRemove = mazeV;
 					std::shared_ptr<std::vector<Model3D_t>> model = 
 						mazeV->type == 255 ? cube : 
 						mazeV->type < models.size() ? models[mazeV->type].model :
@@ -151,6 +152,9 @@ static std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene
 
 					break;
 				}
+			}
+			if (valueToRemove) {
+				maze.erase(std::remove(maze.begin(), maze.end(), valueToRemove), maze.end());
 			}
 		}
 		else if (dataType == "level") {
@@ -198,7 +202,13 @@ void LoadNewScene(Scene& scene, std::string path)
 	scene.addGameObjects(gameObjects);
 }
 
-void LoadNewSceneAsync(Scene& scene, std::string path)
+void LoadNewSceneAsync(Scene* scene, std::string path)
 {
+	scene->startLoading();
+	LoadNewScene(*scene, path);
+	scene->stopLoading();
+}
 
+void LoadNewSceneAsync()
+{
 }
