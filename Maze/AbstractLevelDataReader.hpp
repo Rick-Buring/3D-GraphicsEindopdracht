@@ -27,4 +27,4 @@ public:
 
 };
 
-AbstractLevelDataReader* getReader(const std::string& file);
+AbstractLevelDataReader* AbstractLevelReader_getReader(const std::string& file);

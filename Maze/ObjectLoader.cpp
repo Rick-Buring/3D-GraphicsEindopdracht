@@ -7,6 +7,7 @@
 #include "tigl.h"
 
 #include "Texture.hpp"
+#include "stringUtil.hpp"
 namespace fs = std::filesystem;
 const std::string objectFileExtension = ".obj";
 
@@ -148,23 +149,6 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 
 	}
 	return returnValue;
-}
-
-static bool stringEndsWith(const std::string& string, const std::string& suffix) {
-
-	size_t suffixSize = suffix.size();
-	size_t stringSize = string.size();
-
-	if (stringSize <= suffixSize) {
-		return false;
-	}
-	for (size_t i = 0; i < suffixSize; i++)
-	{
-		if (string[(stringSize - suffixSize) + i] != suffix[i]) {
-			return false;
-		}
-	}
-	return true;
 }
 
 //recursive function to read all files in folder and if the file is a .obj file load the object

@@ -21,6 +21,9 @@ Player::~Player()
 
 void Player::update(float deltaTime)
 {
+	if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) {
+		return;
+	}
 	glm::vec3 move = glm::vec3(0);
 
 	//update move vector with key directions
@@ -32,8 +35,8 @@ void Player::update(float deltaTime)
 	move.y -= glfwGetKey(window, GLFW_KEY_LEFT_SHIFT);	//move down
 
 	//check if we move
-	if (move.x || move.z) {
-		
+	if (move.x || move.z || move.y) {
+
 		move = glm::normalize(move);
 		move = move * walkSpeed * deltaTime;
 

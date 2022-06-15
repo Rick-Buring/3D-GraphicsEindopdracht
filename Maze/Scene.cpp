@@ -67,7 +67,6 @@ void Scene::draw()
 		}
 	}
 }
-static bool bener = false;
 
 void Scene::update()
 {
@@ -105,21 +104,11 @@ void Scene::update()
 	}
 	else {
 		//update logic
-		int count = 0;
-		if (!bener) {
-			bener = true;
-			for (std::shared_ptr<GameObject> gameObject : Scene::_gameObjects) {
-				count++;
-				std::cout << count << std::endl;
-				gameObject->update(deltaTime);
-			}
-			_player->update(deltaTime);
-			_camera->update(deltaTime);
-			bener = false;
+		for (std::shared_ptr<GameObject> gameObject : Scene::_gameObjects) {
+			gameObject->update(deltaTime);
 		}
-		else {
-			std::cout << "failed";
-		}
+		_player->update(deltaTime);
+		_camera->update(deltaTime);
 	}
 	this->draw();
 }

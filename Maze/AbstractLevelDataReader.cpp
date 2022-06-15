@@ -2,6 +2,8 @@
 #include "LevelDataReaderJson.hpp"
 #include "LevelDataReaderRaw.hpp"
 
+#include "stringUtil.hpp"
+
 typedef struct {
     AbstractLevelDataReader* reader;
     std::string suffix;
@@ -12,24 +14,7 @@ const std::vector<readerByExtension> Readers = {
     {new LevelDataJson(), ".json"}
 };
 
-static bool stringEndsWith(const std::string& string, const std::string& suffix) {
-
-    size_t suffixSize = suffix.size();
-    size_t stringSize = string.size();
-
-    if (stringSize <= suffixSize) {
-        return false;
-    }
-    for (size_t i = 0; i < suffixSize; i++)
-    {
-        if (string[(stringSize - suffixSize) + i] != suffix[i]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-AbstractLevelDataReader* getReader(const std::string& file)
+AbstractLevelDataReader* AbstractLevelReader_getReader(const std::string& file)
 {
     for (auto &readerBySuffix : Readers)
     {

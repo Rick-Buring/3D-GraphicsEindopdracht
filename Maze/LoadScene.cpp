@@ -17,7 +17,7 @@ typedef struct {
 } mazeValue;
 
 static std::vector<LevelData_t> getLevelData(std::string path) {
-	AbstractLevelDataReader* reader = getReader(path);
+	AbstractLevelDataReader* reader = AbstractLevelReader_getReader(path);
 	return reader->readData(path);
 }
 
@@ -35,7 +35,6 @@ static std::shared_ptr<std::vector<Model3D_t>> findModel(const std::string& name
 	}
 	return nullptr;
 }
-
 
 static std::vector<mazeValue*> loadMazeFromImage(std::string imagePath, unsigned char modelCount) {
 	int width, height, bpp;

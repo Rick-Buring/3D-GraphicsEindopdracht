@@ -123,6 +123,9 @@
     <ClCompile Include="LoadScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="stringUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectLoader.hpp">
@@ -207,6 +210,9 @@
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="LoadScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stringUtil.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
