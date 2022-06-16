@@ -117,7 +117,7 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 	{
 
 		//Texture* t = g->materialIndex > -1 ? materials[g->materialIndex]->texture : nullptr;
-		std::string texturePath = g->materialIndex > -1 ? materials[g->materialIndex]->Path : nullptr;
+		std::string texturePath = g->materialIndex > -1 ? materials[g->materialIndex]->Path : "";
 		std::vector<tigl::Vertex> container;
 
 		for (auto &f : g->faces) {
