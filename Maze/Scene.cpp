@@ -38,7 +38,13 @@ Scene::Scene()
 
 	_lastFrameTime = glfwGetTime();
 	_camera = std::make_shared<ThirdPersonCamera>();
-	_loadScreen = std::make_shared<LoadScreen>(new Texture("resources\\loadingScreen\\loadingscreenv1.png"));
+
+	auto loadTextures = std::vector<Texture*>{
+		new Texture("resources\\loadingScreen\\loadingscreenv1.png"),
+		new Texture("resources\\mazes\\Maze2.png")
+	};
+
+	_loadScreen = std::make_shared<LoadScreen>(loadTextures);
 	loadLevel("resources/levels/firstData.txt");
 }
 

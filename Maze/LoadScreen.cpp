@@ -9,9 +9,11 @@
 
 constexpr glm::vec3 s = glm::vec3(2, 2, 0);
 constexpr glm::vec4 color = glm::vec4(1);
+constexpr float TimeBetweenLoadScreenImages = 2.0f;
 
-LoadScreen::LoadScreen(Texture* texture) : GameObject(nullptr), texture(texture)
+LoadScreen::LoadScreen(std::vector<Texture*> textures) : GameObject(nullptr), _textures(textures)
 {
+	_currentTexture = 0;
 	std::vector<tigl::Vertex> vertexBuffer = std::vector<tigl::Vertex>();
 
 	vertexBuffer.push_back(tigl::Vertex::PCTN(glm::vec3(-s.x, -s.y, s.z), color, glm::vec2(0, 0), glm::vec3(0, 0, 1)));
@@ -29,7 +31,7 @@ LoadScreen::LoadScreen(Texture* texture) : GameObject(nullptr), texture(texture)
 void LoadScreen::draw()
 {
 	tigl::shader->enableTexture(true);
-	LoadScreen::texture->bind();
+	LoadScreen::_textures.at(((int)_currentTexture) % _textures.size())->bind();
 
 	int width = 10, height = 10;
 
@@ -43,4 +45,12 @@ void LoadScreen::draw()
 	tigl::drawVertices(GL_TRIANGLES, _plane);
 	TextureUnbind();
 	tigl::shader->enableTexture(false);
+}
+
+void LoadScreen::update(float deltaTime)
+{
+	_currentTexture += (deltaTime / TimeBetweenLoadScreenImages);
+	if (_currentTexture > _textures.size()) {
+		_currentTexture = 0;
+	}
 }
