@@ -172,6 +172,7 @@
     <ClInclude Include="LightManager.hpp" />
     <ClInclude Include="LoadScene.hpp" />
     <ClInclude Include="MovingWall.hpp" />
+    <ClInclude Include="stb_image_write.h" />
     <ClInclude Include="stringUtil.hpp" />
     <ClInclude Include="Sun.hpp" />
     <ClInclude Include="ThirdPersonCamera.hpp" />

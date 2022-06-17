@@ -70,11 +70,11 @@ static std::vector<mazeValue*> loadMazeFromImage(std::string imagePath, unsigned
 			//         y2 y1 y0 **
 			// example 11 10 01 11 = 270 degrees on y 2, 180 degrees on y 1, 90 degrees on y 0
 			// example y0 270 y1 0 degrees y2 180 degrees = 10 00 11 11
-			unsigned char a = image[z * height * 4 + x + 3];
+			unsigned char a = image[z * height * 4 + x4 + 3];
 
 			for (size_t y = 0; y < 3; y++) {
 				if (rgb[y]) {
-					char rotation = (a >> (y + 1)) & 0x3;
+					char rotation = (a >> (y*2 + 2)) & 0x3;
 
 					maze[index] = new mazeValue{
 						glm::vec3(x, y, z), //position
