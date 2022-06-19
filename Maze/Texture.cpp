@@ -5,11 +5,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+const int channelCount = 4;
+
 Texture::Texture(const std::string& fileName)
 {
 	stbi_uc* imgData;
 	int width, height, bpp;
-	imgData = stbi_load(fileName.c_str(), &width, &height, &bpp, 4);
+	imgData = stbi_load(fileName.c_str(), &width, &height, &bpp, channelCount);
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
 	//think about saving filename and only opening the file when binding

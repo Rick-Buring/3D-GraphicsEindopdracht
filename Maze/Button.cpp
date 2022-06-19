@@ -2,8 +2,9 @@
 #include "glfwManager.hpp"
 #include "glmUtils.hpp"
 
-const int ClickDelay = 1;
-const glm::vec3 red = glm::vec3(0.4f, 0.25f, 0.25f) * 0.5, green= glm::vec3(0.25f, 0.4f, 0.25f)   ;
+constexpr int ClickDelay = 1;
+const glm::vec3 red = glm::vec3(1, 0, 0) * 0.02, green= glm::vec3(0, 1, 0) * 0.02;
+
 Button::Button(std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player, glm::vec3 p, InteractableGameObject* interactableObj)
 	: GameObject(model), _player(player), _interactableObj(interactableObj)
 {
@@ -19,16 +20,16 @@ Button::Button(std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player
 	_light.isDirectional = false;
 	_light.position = p;
 	_light.ambient = red;
-	_light.diffusion = glm::vec3(0.2f);
+	_light.diffusion = glm::vec3(0.0f);
 	_light.specular = glm::vec3(1);
 
 	//addlight to the scene
-	//addLight(&_light);
+	addLight(&_light);
 }
 
 Button::~Button()
 {
-	//removeLight(&_light);
+	removeLight(&_light);
 }
 
 void Button::update(float deltaTime)
@@ -55,7 +56,7 @@ void Button::update(float deltaTime)
 				_light.ambient = red;
 			}
 			//update light
-			//_light.setLight();
+			_light.setLight();
 
 			if (_interactableObj) {
 				_interactableObj->interact(_interacted);

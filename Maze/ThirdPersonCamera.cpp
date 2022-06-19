@@ -3,6 +3,8 @@
 #include <glm/gtx/matrix_decompose.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+const float rotationSpeed = 0.1f;
+
 ThirdPersonCamera::ThirdPersonCamera() : GameObject(nullptr)
 {
 	_subject = nullptr;
@@ -30,8 +32,8 @@ void ThirdPersonCamera::update(float deltaTime)
 	glfwGetCursorPos(Window, &xPos, &yPos);
 	
 	//calculate delta for mouse and add to current rotation 
-	Rotation.y += (float) (xPos - ThirdPersonCamera::_xPosOld) / 10.0f;
-	Rotation.x += (float) (yPos - ThirdPersonCamera::_yPosOld) / 10.0f;
+	Rotation.y += (float) (xPos - ThirdPersonCamera::_xPosOld) * rotationSpeed;
+	Rotation.x += (float) (yPos - ThirdPersonCamera::_yPosOld) * rotationSpeed;
 	
 	//reset values
 	ThirdPersonCamera::_xPosOld = xPos;

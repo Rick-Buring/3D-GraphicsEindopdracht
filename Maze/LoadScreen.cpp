@@ -33,8 +33,6 @@ void LoadScreen::draw()
 	tigl::shader->enableTexture(true);
 	LoadScreen::_textures.at(((int)_currentTexture) % _textures.size())->bind();
 
-	int width = 10, height = 10;
-
 	glm::mat4 projection = glm::ortho(0.0f, s.x, s.y, 0.0f, 1.0f, 10.0f);
 	tigl::shader->setProjectionMatrix(projection);
 

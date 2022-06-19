@@ -6,15 +6,9 @@
 #include <glm/gtx/matrix_decompose.hpp>
 #include "glfwManager.hpp"
 
-//const glm::vec3 forwards = glm::vec3(0, 0, 1), backwards = glm::vec3(0, 0, -1), left = glm::vec3(-1, 0, 0), right = glm::vec3(1, 0, 0);
 const float walkSpeed = 30;
 
 Player::Player(std::shared_ptr<std::vector<Model3D_t>> model) : GameObject(model)
-{
-	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-}
-
-Player::~Player()
 {
 }
 

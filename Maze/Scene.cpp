@@ -29,6 +29,8 @@
 
 typedef std::vector<std::vector<std::vector<std::shared_ptr<GameObject>>>> yzxGameObject;
 
+const float viewAngle = 75, closeClip = 0.01f, farClip = 1000.0f;
+
 Scene::Scene()
 {
 	_sunLight = lightInfo();
@@ -70,7 +72,7 @@ void Scene::draw()
 		_loadScreen->draw();
 	}
 	else {
-		glm::mat4 projection = glm::perspective(glm::radians(75.0f), viewport[2] / (float)viewport[3], 0.01f, 1000.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(viewAngle), viewport[2] / (float)viewport[3], closeClip, farClip);
 
 		glEnable(GL_DEPTH_TEST);
 
