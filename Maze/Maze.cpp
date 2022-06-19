@@ -1,10 +1,7 @@
 #ifdef TEST
-#define CONFIG_CATCH_MAIN
+#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-int main() {
-    return 0;
-}
 #else
 #include "imgui.h"
 #include "imgui_impl_glfw.h"

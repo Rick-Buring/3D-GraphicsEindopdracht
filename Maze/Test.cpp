@@ -1,7 +1,6 @@
-#define CONFIG_CATCH_MAIN
-
+//#define CONFIG_CATCH_MAIN
 #include "catch.hpp"
 
-//TEST_CASE("First Test") {
-//    REQUIRE(6 * 9 == 42);
-//}
+TEST_CASE("First Test") {
+    REQUIRE(6 * 9 == 42);
+}
