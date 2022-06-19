@@ -212,7 +212,8 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="stringUtil.cpp" />
     <ClCompile Include="Sun.cpp" />
-    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="TestStringUtil.cpp" />
+    <ClCompile Include="TestLoadScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="ThirdPersonCamera.cpp" />
     <ClCompile Include="tigl.cpp" />

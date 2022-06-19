@@ -1,8 +1,12 @@
+//the header associated with this cpp file
 #include "LoadScene.hpp"
-#include "AbstractLevelDataReader.hpp"
+
+//standard library's
 #include "stb_image.h"
 #include <iostream>
 
+
+//gameobjects
 #include "Sun.hpp"
 #include "utills.hpp"
 #include "InteractableGameObject.hpp"
@@ -10,11 +14,6 @@
 #include "Button.hpp"
 #include "LevelLoader.hpp"
 
-typedef struct {
-	glm::vec3 position;
-	glm::vec3 rotation;
-	unsigned char type;
-} mazeValue;
 
 static std::vector<LevelData_t> getLevelData(std::string path) {
 	AbstractLevelDataReader* reader = AbstractLevelReader_getReader(path);
@@ -27,7 +26,7 @@ static LevelData_t popfront(std::vector<LevelData_t>& data) {
 	return value;
 }
 
-static std::shared_ptr<std::vector<Model3D_t>> findModel(const std::string& name, std::vector<NamedModel3D_t>& list) {
+std::shared_ptr<std::vector<Model3D_t>> findModel(const std::string& name, std::vector<NamedModel3D_t>& list) {
 	for (auto& obj : list) {
 		if (obj.modelName == name) {
 			return obj.model;
@@ -36,13 +35,13 @@ static std::shared_ptr<std::vector<Model3D_t>> findModel(const std::string& name
 	return nullptr;
 }
 
-static std::vector<mazeValue*> loadMazeFromImage(std::string imagePath, unsigned char modelCount) {
+std::vector<mazeValue*> loadMazeFromImage(std::string imagePath) {
 	int width, height, bpp;
 	unsigned char* image = stbi_load(imagePath.c_str(), &width, &height, &bpp, 4);
 	//check if maze loaded succefully
 	if (!image) {
 		std::cout << "invalid maze path" << std::endl << imagePath << std::endl;
-		return std::vector<mazeValue*>();
+		throw "Invalid maze path";
 	}
 
 	auto maze = std::vector<mazeValue*>(width * height * 3);
@@ -92,7 +91,7 @@ static std::vector<mazeValue*> loadMazeFromImage(std::string imagePath, unsigned
 	return maze;
 }
 
-static std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene, std::vector<LevelData_t>& leveldata, std::vector<NamedModel3D_t>& models, std::vector<mazeValue*>& maze) {
+std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene, std::vector<LevelData_t>& leveldata, std::vector<NamedModel3D_t>& models, std::vector<mazeValue*>& maze) {
 	//standart objects
 	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
 	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
@@ -192,7 +191,7 @@ void LoadNewScene(Scene& scene, std::string path)
 	auto models = loadObjects(popfront(levelData).path);
 
 	//load maze
-	auto maze = loadMazeFromImage(popfront(levelData).path, models.size());
+	auto maze = loadMazeFromImage(popfront(levelData).path);
 
 	//generate gameObjects
 	auto gameObjects = generateGameObjects(scene, levelData, models, maze);

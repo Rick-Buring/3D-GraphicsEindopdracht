@@ -132,7 +132,10 @@
     <ClCompile Include="stringUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test.cpp">
+    <ClCompile Include="TestStringUtil.cpp">
+      <Filter>Source Files\UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLoadScene.cpp">
       <Filter>Source Files\UnitTests</Filter>
     </ClCompile>
   </ItemGroup>
