@@ -8,6 +8,7 @@
 #include "Player.hpp"
 #include "ThirdPersonCamera.hpp"
 #include "LoadScreen.hpp"
+#include "LightManager.hpp"
 
 enum STATE {
 	RUNNING,
@@ -23,10 +24,9 @@ private:
 	std::shared_ptr<ThirdPersonCamera> _camera;
 	std::shared_ptr<LoadScreen> _loadScreen;
 	std::thread _thread;
+	lightStruct _sunLight;
 
-	std::string _localPathCopy;
-
-	STATE _state = STATE::RUNNING;
+	std::string _currentLevelPath;
 
 	double _lastFrameTime;
 	void draw();
@@ -41,7 +41,5 @@ public:
 	void addGameObjects(std::vector<std::shared_ptr<GameObject>> gameObject);
 	void loadLevel(const std::string& path);
 
-	void startLoading();
-	void stopLoading();
-
+	STATE state = RUNNING;
 };

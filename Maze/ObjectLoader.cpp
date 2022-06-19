@@ -203,28 +203,6 @@ std::shared_ptr<std::vector<Model3D_t>> loadObject(const std::string& fileName)
 	std::cout << "Loading " << fileName << std::endl;
 	std::string dirName = ((fs::path)fileName).remove_filename().u8string();
 
-	//fixed version of base directory checking
-	//size_t forwardSlashPos = dirName.rfind("/");
-	//size_t escapedBackSlashPos = dirName.rfind("\\");
-	//if (forwardSlashPos != std::string::npos && escapedBackSlashPos != std::string::npos) {
-	//	if (forwardSlashPos < escapedBackSlashPos) {
-	//		dirName = dirName.substr(0, escapedBackSlashPos);
-	//	}
-	//	else {
-	//		dirName = dirName.substr(0, forwardSlashPos);
-	//	}
-	//}
-	//else if (forwardSlashPos != std::string::npos) {
-	//	dirName = dirName.substr(0, forwardSlashPos);
-	//}
-	//else if (escapedBackSlashPos != std::string::npos) {
-	//	dirName = dirName.substr(0, escapedBackSlashPos);
-	//}
-	//else {
-	//	dirName = "";
-	//}
-
-
 	std::ifstream pFile(fileName.c_str());
 
 	if (!pFile.is_open())

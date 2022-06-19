@@ -203,10 +203,7 @@ void LoadNewScene(Scene& scene, std::string path)
 
 void LoadNewSceneAsync(Scene* scene, std::string path)
 {
+	scene->state = LOADING;
 	LoadNewScene(*scene, path);
-	scene->stopLoading();
-}
-
-void LoadNewSceneAsync()
-{
+	scene->state = READY;
 }
