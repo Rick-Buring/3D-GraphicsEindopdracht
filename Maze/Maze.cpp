@@ -1,3 +1,11 @@
+#ifdef TEST
+#define CONFIG_CATCH_MAIN
+#include "catch.hpp"
+
+int main() {
+    return 0;
+}
+#else
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -78,3 +86,5 @@ void init()
     ImGui_ImplOpenGL3_Init("#version 330");
 
 }
+
+#endif
