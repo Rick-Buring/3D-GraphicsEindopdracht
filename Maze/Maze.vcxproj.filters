@@ -19,17 +19,17 @@
     <Filter Include="Source Files\imgui">
       <UniqueIdentifier>{749edbab-9b78-4544-8cfc-e79ee8840384}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\FactoryPattern">
-      <UniqueIdentifier>{cefcae4a-a2d2-4d01-9e82-e5f743484327}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\FactoryPattern">
-      <UniqueIdentifier>{eaadb311-f8d3-44d5-978d-208fc19c1fbb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\GameObjects">
       <UniqueIdentifier>{d98437fd-f288-400a-962a-539d4e3f5a03}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\GameObjecs">
       <UniqueIdentifier>{dd03ddc3-24f7-41e5-98b5-3e40fc0cb19e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\levelReader">
+      <UniqueIdentifier>{eaadb311-f8d3-44d5-978d-208fc19c1fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LevelReader">
+      <UniqueIdentifier>{cefcae4a-a2d2-4d01-9e82-e5f743484327}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,13 +76,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LevelDataReaderJson.cpp">
-      <Filter>Source Files\FactoryPattern</Filter>
+      <Filter>Source Files\levelReader</Filter>
     </ClCompile>
     <ClCompile Include="LevelDataReaderRaw.hpp">
-      <Filter>Header Files\FactoryPattern</Filter>
+      <Filter>Header Files\LevelReader</Filter>
     </ClCompile>
     <ClCompile Include="LevelDataReaderRaw.cpp">
-      <Filter>Source Files\FactoryPattern</Filter>
+      <Filter>Source Files\levelReader</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\GameObjecs</Filter>
@@ -106,7 +106,7 @@
       <Filter>Header Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="AbstractLevelDataReader.cpp">
-      <Filter>Source Files\FactoryPattern</Filter>
+      <Filter>Source Files\levelReader</Filter>
     </ClCompile>
     <ClCompile Include="MovingWall.cpp">
       <Filter>Source Files\GameObjecs</Filter>
@@ -177,10 +177,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AbstractLevelDataReader.hpp">
-      <Filter>Header Files\FactoryPattern</Filter>
+      <Filter>Header Files\LevelReader</Filter>
     </ClInclude>
     <ClInclude Include="LevelDataReaderJson.hpp">
-      <Filter>Header Files\FactoryPattern</Filter>
+      <Filter>Header Files\LevelReader</Filter>
     </ClInclude>
     <ClInclude Include="ThirdPersonCamera.hpp">
       <Filter>Header Files\GameObjects</Filter>

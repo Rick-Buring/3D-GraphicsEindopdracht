@@ -50,3 +50,7 @@ void ThirdPersonCamera::update(float deltaTime)
 	//set new view position
 	tigl::shader->setViewMatrix(ret);
 }
+
+void ThirdPersonCamera::draw()
+{
+}

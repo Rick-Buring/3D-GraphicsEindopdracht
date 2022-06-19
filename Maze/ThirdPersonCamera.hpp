@@ -13,5 +13,7 @@ public:
 
 	void setSubject(GameObject* subject);
 
+	//inherided from GameObject
 	void update(float deltaTime) override;
+	void draw() override;
 };
