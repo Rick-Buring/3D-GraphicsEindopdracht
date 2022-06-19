@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 /// <summary>
 /// function to check if a string ands in a suffix
 /// </summary>
