@@ -37,7 +37,6 @@ void Player::update(float deltaTime)
 		//translate local forward to world direction
 		glm::mat4 modelMatrix = glm::mat4(1.0f);
 
-		//modelMatrix = glm::translate(modelMatrix, GameObject::position);
 		modelMatrix = glm::rotate(modelMatrix, GameObject::Rotation.x, glm::vec3(1, 0, 0));
 		modelMatrix = glm::rotate(modelMatrix, GameObject::Rotation.y + glm::radians<float>(90), glm::vec3(0, 1, 0));
 		modelMatrix = glm::rotate(modelMatrix, GameObject::Rotation.z, glm::vec3(0, 0, 1));

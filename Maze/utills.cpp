@@ -57,7 +57,6 @@ std::shared_ptr<std::vector<Model3D_t>> utills_buildCube(const glm::vec3& p, con
 	
 	Model3D_t tempModel;
 	tempModel.texture = nullptr;
-	//tempModel.vbo = tigl::createVbo(verts);
 	tempModel.vbo = nullptr;
 	tempModel.container = verts;
 
@@ -100,7 +99,6 @@ std::shared_ptr<std::vector<Model3D_t>> utills_buildSphere(const glm::vec3& p, c
 
 	Model3D_t tempModel;
 	tempModel.texture = nullptr;
-	//tempModel.vbo = tigl::createVbo(verts);
 	tempModel.vbo = nullptr;
 	tempModel.container = verts;
 
@@ -128,7 +126,6 @@ std::shared_ptr<std::vector<Model3D_t>> utills_createPlane(float width, float he
 
 	Model3D_t tempModel;
 	tempModel.texture = nullptr;
-	//tempModel.vbo = tigl::createVbo(verts);
 	tempModel.vbo = nullptr;
 	tempModel.container = verts;
 
