@@ -31,9 +31,6 @@
     <Filter Include="Header Files\LevelReader">
       <UniqueIdentifier>{cefcae4a-a2d2-4d01-9e82-e5f743484327}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Catch2">
-      <UniqueIdentifier>{c1b3172c-f366-4c7f-90c8-e6303d98f148}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\UnitTests">
       <UniqueIdentifier>{d535aa09-3e45-4097-8662-5104aba35ccd}</UniqueIdentifier>
     </Filter>

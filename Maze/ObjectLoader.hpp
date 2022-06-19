@@ -5,8 +5,7 @@
 #include <glm/glm.hpp>
 #include "tigl.h"
 #include <vector>
-
-class Texture;
+#include "Texture.hpp"
 
 typedef struct {
 	std::vector<tigl::Vertex> container;
@@ -20,7 +19,17 @@ typedef struct {
 	std::shared_ptr<std::vector<Model3D_t>> model;
 } NamedModel3D_t;
 
-std::shared_ptr<std::vector<Model3D_t>> loadObject(const std::string& filename);
+/// <summary>
+/// loads a single object file
+/// </summary>
+/// <param name="filename">path to the object file</param>
+/// <returns>a shared pointer to the created object</returns>
+std::shared_ptr<std::vector<Model3D_t>> ObjectLoader_loadObject(const std::string& filename);
 
-std::vector<NamedModel3D_t> loadObjects(const std::string& fileName);
+/// <summary>
+/// loads all object files recursively in a directory
+/// </summary>
+/// <param name="fileName">directory path where all the object files are located</param>
+/// <returns>vector of all created objects sorted by name</returns>
+std::vector<NamedModel3D_t> ObjectLoader_loadObjects(const std::string& fileName);
 

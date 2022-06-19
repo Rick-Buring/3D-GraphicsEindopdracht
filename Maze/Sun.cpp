@@ -8,13 +8,13 @@ const short int hueOffset = 240, hueRange = 180, hueMax = 360;
 
 Sun::Sun(std::shared_ptr<std::vector<Model3D_t>> model) : GameObject(model)
 {
-	position = calculatePosition(_angle) * 10;
+	Position = glmUtils_calculatePosition(_angle) * 10;
 
 	_sunLight = lightInfo();
 	_sunLight.isDirectional = true;
 	_sunLight.specular = glm::vec3(1);
 
-	_sunLight.position = glm::normalize(position);
+	_sunLight.position = glm::normalize(Position);
 	_sunLight.diffusion = glm::vec3(0.3f);
 
 	addLight(&_sunLight);
@@ -35,7 +35,7 @@ void Sun::update(float deltaTime)
 	//prevent overflow
 	_angle = fmod(Sun::_angle, twoPi);
 
-	_sunLight.position = calculatePosition(_angle);
+	_sunLight.position = glmUtils_calculatePosition(_angle);
 
 	//formula for calculating infinate hue scrolling based on y value
 	//hueOffset is the hue if y pos is at its lowest
@@ -50,6 +50,6 @@ void Sun::update(float deltaTime)
 	_sunLight.diffusion = _sunLight.ambient * 0.2f;
 	_sunLight.setLight();
 
-	GameObject::position = _sunLight.position * distance;
+	GameObject::Position = _sunLight.position * distance;
 
 }

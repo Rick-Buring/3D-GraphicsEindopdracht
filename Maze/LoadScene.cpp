@@ -93,8 +93,8 @@ std::vector<mazeValue*> loadMazeFromImage(std::string imagePath) {
 
 std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene, std::vector<LevelData_t>& leveldata, std::vector<NamedModel3D_t>& models, std::vector<mazeValue*>& maze) {
 	//standart objects
-	std::shared_ptr<std::vector<Model3D_t>> cube = buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
-	std::shared_ptr<std::vector<Model3D_t>> sphere = buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
+	std::shared_ptr<std::vector<Model3D_t>> cube = utills_buildCube(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
+	std::shared_ptr<std::vector<Model3D_t>> sphere = utills_buildSphere(glm::vec3(0), glm::vec3(0.5), glm::vec4(1));
 
 	//return value
 	std::vector<std::shared_ptr<GameObject>> returnValue = std::vector <std::shared_ptr<GameObject>>();
@@ -114,9 +114,9 @@ std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene, std::
 				continue;
 
 			player = std::make_shared<Player>(findModel("player", models));
-			player->scale = glm::vec3(0.1f);
-			player->position = data.position;
-			player->position.y -= 0.5f;
+			player->Scale = glm::vec3(0.1f);
+			player->Position = data.position;
+			player->Position.y -= 0.5f;
 
 			returnValue[0] = player;
 		}
@@ -124,7 +124,7 @@ std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene, std::
 		{
 			//create sun
 			auto sun = std::make_shared<Sun>(sphere);
-			sun->scale = glm::vec3(5.0f);
+			sun->Scale = glm::vec3(5.0f);
 			returnValue.push_back(sun);
 		}
 		else if (dataType == "butten") {
@@ -140,11 +140,11 @@ std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene, std::
 					std::shared_ptr<InteractableGameObject> interactingObject =
 						std::string(data.linkedWithType) == "moving_wall" ? std::make_shared<MovingWall>(model, mazeV->position, data.action) :
 						nullptr;
-					interactingObject->rotation = mazeV->rotation;
+					interactingObject->Rotation = mazeV->rotation;
 					returnValue.push_back(interactingObject);
 
 					auto butten = std::make_shared<Button>(cube, player.get(), data.position, interactingObject.get());
-					butten->scale = glm::vec3(.5f);
+					butten->Scale = glm::vec3(.5f);
 
 					returnValue.push_back(butten);
 
@@ -161,7 +161,7 @@ std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene, std::
 				returnValue.push_back(levelLoader);
 
 				auto butten = std::make_shared<Button>(cube, player.get(), data.position, levelLoader.get());
-				butten->scale = glm::vec3(.5f);
+				butten->Scale = glm::vec3(.5f);
 				returnValue.push_back(butten);
 			}
 		}
@@ -173,8 +173,8 @@ std::vector<std::shared_ptr<GameObject>> generateGameObjects(Scene& scene, std::
 			mazeV->type < models.size() ? models[mazeV->type].model :
 			models[mazeV->type % models.size()].model;
 		std::shared_ptr<GameObject> go = std::make_shared<GameObject>(model);
-		go->position = mazeV->position;
-		go->rotation = mazeV->rotation;
+		go->Position = mazeV->position;
+		go->Rotation = mazeV->rotation;
 		returnValue.push_back(go);
 
 	}
@@ -188,7 +188,7 @@ void LoadNewScene(Scene& scene, std::string path)
 	auto levelData = getLevelData(path);
 
 	//load 3d models
-	auto models = loadObjects(popfront(levelData).path);
+	auto models = ObjectLoader_loadObjects(popfront(levelData).path);
 
 	//load maze
 	auto maze = loadMazeFromImage(popfront(levelData).path);

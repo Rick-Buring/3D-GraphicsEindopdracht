@@ -8,14 +8,14 @@ class GameObject {
 protected:
 	glm::mat4 _modelMatrix = glm::mat4(1.0f);
 
-private:
-	//model for drawing
-
 public:
-	glm::vec3 position = glm::vec3(0);
-	glm::vec3 rotation = glm::vec3(0);
-	glm::vec3 scale = glm::vec3(1);
-	std::shared_ptr<std::vector<Model3D_t>> model;
+	//World relative position rotation and scale used to calculate modelMatrix
+	glm::vec3 Position = glm::vec3(0);
+	glm::vec3 Rotation = glm::vec3(0);
+	glm::vec3 Scale = glm::vec3(1);
+
+	//model for drawing
+	std::shared_ptr<std::vector<Model3D_t>> Model;
 
 	GameObject(std::shared_ptr<std::vector<Model3D_t>>);
 

@@ -3,7 +3,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-std::shared_ptr<std::vector<Model3D_t>> buildCube(const glm::vec3& p, const glm::vec3& s, const glm::vec4& color)
+std::shared_ptr<std::vector<Model3D_t>> utills_buildCube(const glm::vec3& p, const glm::vec3& s, const glm::vec4& color)
 {
 	std::shared_ptr<std::vector<Model3D_t>> returnValue = std::make_shared<std::vector<Model3D_t>>();
 	std::vector<tigl::Vertex> verts;
@@ -66,7 +66,7 @@ std::shared_ptr<std::vector<Model3D_t>> buildCube(const glm::vec3& p, const glm:
 	return returnValue;
 }
 
-std::shared_ptr<std::vector<Model3D_t>> buildSphere(const glm::vec3& p, const glm::vec3& s, const glm::vec4& color)
+std::shared_ptr<std::vector<Model3D_t>> utills_buildSphere(const glm::vec3& p, const glm::vec3& s, const glm::vec4& color)
 {
 	std::shared_ptr<std::vector<Model3D_t>> returnValue = std::make_shared<std::vector<Model3D_t>>();
 	std::vector<tigl::Vertex> verts;
@@ -109,7 +109,7 @@ std::shared_ptr<std::vector<Model3D_t>> buildSphere(const glm::vec3& p, const gl
 	return returnValue;
 }
 
-std::shared_ptr<std::vector<Model3D_t>> createPlane(float width, float height) {
+std::shared_ptr<std::vector<Model3D_t>> utills_createPlane(float width, float height) {
 	std::shared_ptr<std::vector<Model3D_t>> returnValue = std::make_shared<std::vector<Model3D_t>>();
 
 	std::vector<tigl::Vertex> verts;

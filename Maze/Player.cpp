@@ -21,18 +21,18 @@ Player::~Player()
 
 void Player::update(float deltaTime)
 {
-	if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) {
+	if (glfwGetInputMode(Window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL) {
 		return;
 	}
 	glm::vec3 move = glm::vec3(0);
 
 	//update move vector with key directions
-	move.z += glfwGetKey(window, GLFW_KEY_W);			//move forward
-	move.z -= glfwGetKey(window, GLFW_KEY_S);			//move backward
-	move.x += glfwGetKey(window, GLFW_KEY_A);			//move left
-	move.x -= glfwGetKey(window, GLFW_KEY_D);			//move right
-	move.y += glfwGetKey(window, GLFW_KEY_SPACE);		//move up
-	move.y -= glfwGetKey(window, GLFW_KEY_LEFT_SHIFT);	//move down
+	move.z += glfwGetKey(Window, GLFW_KEY_W);			//move forward
+	move.z -= glfwGetKey(Window, GLFW_KEY_S);			//move backward
+	move.x += glfwGetKey(Window, GLFW_KEY_A);			//move left
+	move.x -= glfwGetKey(Window, GLFW_KEY_D);			//move right
+	move.y += glfwGetKey(Window, GLFW_KEY_SPACE);		//move up
+	move.y -= glfwGetKey(Window, GLFW_KEY_LEFT_SHIFT);	//move down
 
 	//check if we move
 	if (move.x || move.z || move.y) {
@@ -44,10 +44,10 @@ void Player::update(float deltaTime)
 		glm::mat4 modelMatrix = glm::mat4(1.0f);
 
 		//modelMatrix = glm::translate(modelMatrix, GameObject::position);
-		modelMatrix = glm::rotate(modelMatrix, GameObject::rotation.x, glm::vec3(1, 0, 0));
-		modelMatrix = glm::rotate(modelMatrix, GameObject::rotation.y + glm::radians<float>(90), glm::vec3(0, 1, 0));
-		modelMatrix = glm::rotate(modelMatrix, GameObject::rotation.z, glm::vec3(0, 0, 1));
-		modelMatrix = glm::scale(modelMatrix, GameObject::scale);
+		modelMatrix = glm::rotate(modelMatrix, GameObject::Rotation.x, glm::vec3(1, 0, 0));
+		modelMatrix = glm::rotate(modelMatrix, GameObject::Rotation.y + glm::radians<float>(90), glm::vec3(0, 1, 0));
+		modelMatrix = glm::rotate(modelMatrix, GameObject::Rotation.z, glm::vec3(0, 0, 1));
+		modelMatrix = glm::scale(modelMatrix, GameObject::Scale);
 		modelMatrix = glm::translate(modelMatrix, move);
 
 		glm::vec3 scale;
@@ -57,12 +57,7 @@ void Player::update(float deltaTime)
 		glm::decompose(modelMatrix, scale, rotation, move, skew, perspective);
 
 
-		GameObject::position += move;
+		GameObject::Position += move;
 	}
 
-}
-
-void Player::draw()
-{
-	GameObject::draw();
 }

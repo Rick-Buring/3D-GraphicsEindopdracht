@@ -43,7 +43,7 @@ void LoadScreen::draw()
 
 	tigl::shader->setModelMatrix(glm::mat4(1.0f));
 	tigl::drawVertices(GL_TRIANGLES, _plane);
-	TextureUnbind();
+	Texture_unbind();
 	tigl::shader->enableTexture(false);
 }
 

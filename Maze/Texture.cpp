@@ -32,7 +32,7 @@ void Texture::bind()
 	glBindTexture(GL_TEXTURE_2D, id);
 }
 
-void TextureUnbind()
+void Texture_unbind()
 {
 	glBindTexture(GL_TEXTURE_2D, -1);
 }

@@ -12,6 +12,10 @@ public:
 	Sun(std::shared_ptr<std::vector<Model3D_t>>);
 	~Sun();
 
+	/// <summary>
+	/// updates the object possition smootly with a constand speed.
+	/// </summary>
+	/// <param name="deltaTime">time passed since last update</param>
 	void update(float deltaTime) override;
 
 };

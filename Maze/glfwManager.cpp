@@ -1,17 +1,17 @@
 #include "glfwManager.hpp"
 
-GLFWwindow* window;
+GLFWwindow* Window;
 
-void initGLF()
+void glfwManager_initGLF()
 {
     if (!glfwInit())
         throw "Could not initialize glwf";
 
-    window = glfwCreateWindow(1280, 720, "hello World", NULL, NULL);
-    if (!window)
+    Window = glfwCreateWindow(1280, 720, "hello World", NULL, NULL);
+    if (!Window)
     {
         glfwTerminate();
         throw "Could not initialize glwf";
     }
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(Window);
 }

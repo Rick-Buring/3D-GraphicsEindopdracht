@@ -5,8 +5,8 @@
 const float movingSpeed = 1.5;
 MovingWall::MovingWall(std::shared_ptr<std::vector<Model3D_t>> model, glm::vec3 position, glm::vec3 moveTo) : InteractableGameObject(model), _moveTo(moveTo)
 {
-	GameObject::position = position;
-	_targetPos = GameObject::position;
+	GameObject::Position = position;
+	_targetPos = GameObject::Position;
 }
 
 void MovingWall::interact(bool interacted)
@@ -18,13 +18,13 @@ void MovingWall::interact(bool interacted)
 
 void MovingWall::update(float deltaTime)
 {
-	glm::vec3 delta = MovingWall::_targetPos - GameObject::position;
+	glm::vec3 delta = MovingWall::_targetPos - GameObject::Position;
 	//check if we arrived
 	if (glm::length(delta) < 0.01) {
-		GameObject::position = MovingWall::_targetPos;
+		GameObject::Position = MovingWall::_targetPos;
 		return;
 	}
 
-  	GameObject::position += glm::normalize(delta) * (movingSpeed * deltaTime);
+  	GameObject::Position += glm::normalize(delta) * (movingSpeed * deltaTime);
 
 }

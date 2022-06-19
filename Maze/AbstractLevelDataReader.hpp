@@ -20,11 +20,27 @@ typedef union levelData_u {
 	levelData_st data;
 } LevelData_t;
 
+/// <summary>
+/// abstract class to read files from diffrent types
+/// </summary>
 class AbstractLevelDataReader
 {
 public:
+	/// <summary>
+	/// returns vector of levelData first element is the modelPath,
+	/// secend element is the maze image Path
+	/// third element is a player gameObject
+	/// all other elements are diffrent gameObject types
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <returns></returns>
 	virtual std::vector<LevelData_t> readData(const std::string& filePath) = 0;
 
 };
 
+/// <summary>
+/// get the correct reader based on file type
+/// </summary>
+/// <param name="file"></param>
+/// <returns>null if no suitable Reader was found else returns the reader</returns>
 AbstractLevelDataReader* AbstractLevelReader_getReader(const std::string& file);

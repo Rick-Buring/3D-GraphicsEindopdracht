@@ -152,15 +152,15 @@ std::shared_ptr<std::vector<Model3D_t>> generateVBO(std::shared_ptr<std::vector<
 }
 
 //recursive function to read all files in folder and if the file is a .obj file load the object
-void loadObjects(const std::string& path, std::vector<NamedModel3D_t>& objectsFromFile) {
+void ObjectLoader_loadObjects(const std::string& path, std::vector<NamedModel3D_t>& objectsFromFile) {
 	if (fs::is_directory(path)) {
 		for (const auto& entry : fs::directory_iterator(path)) {
 			fs::path path = entry.path();
-			loadObjects(path.u8string(), objectsFromFile);
+			ObjectLoader_loadObjects(path.u8string(), objectsFromFile);
 		}
 	}
 	else if (stringEndsWith(path, objectFileExtension)) {
-		std::shared_ptr<std::vector<Model3D_t>> obj = loadObject(path);
+		std::shared_ptr<std::vector<Model3D_t>> obj = ObjectLoader_loadObject(path);
 		std::string fileName = ((fs::path)path).filename().u8string();
 		fileName = fileName.substr(0, fileName.size() - objectFileExtension.size());
 		NamedModel3D_t namedModel{ fileName, obj };
@@ -180,9 +180,9 @@ static bool compareByName(const NamedModel3D_t& a, const NamedModel3D_t& b)
 	return value < 0;
 }
 
-std::vector<NamedModel3D_t> loadObjects(const std::string& fileName) {
+std::vector<NamedModel3D_t> ObjectLoader_loadObjects(const std::string& fileName) {
 	auto returnValue = std::vector<NamedModel3D_t>();
-	loadObjects(fileName.c_str(), returnValue);
+	ObjectLoader_loadObjects(fileName.c_str(), returnValue);
 	std::sort(returnValue.begin(), returnValue.end(), compareByName);
 	return returnValue;
 }
@@ -190,7 +190,7 @@ std::vector<NamedModel3D_t> loadObjects(const std::string& fileName) {
 /**
 * Loads an object model
 */
-std::shared_ptr<std::vector<Model3D_t>> loadObject(const std::string& fileName)
+std::shared_ptr<std::vector<Model3D_t>> ObjectLoader_loadObject(const std::string& fileName)
 {
 	vertices = std::vector<glm::vec3>();
 	normals = std::vector<glm::vec3>();

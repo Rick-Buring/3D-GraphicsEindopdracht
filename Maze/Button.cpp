@@ -8,7 +8,7 @@ Button::Button(std::shared_ptr<std::vector<Model3D_t>> model, GameObject* player
 	: GameObject(model), _player(player), _interactableObj(interactableObj)
 {
 	//set gameobject position
-	GameObject::position = p;
+	GameObject::Position = p;
 
 	//initialize default values
 	_interacted = false;
@@ -39,12 +39,12 @@ void Button::update(float deltaTime)
 		return;
 	}
 
-	glm::vec3 dif = Button::_player->position - GameObject::position;
+	glm::vec3 dif = Button::_player->Position - GameObject::Position;
 	float distance = glm::length(dif);
 
 	if (distance < 1) {
 
-		if (glfwGetKey(window, GLFW_KEY_E)) {
+		if (glfwGetKey(Window, GLFW_KEY_E)) {
 			_lastClicked = 0;
 
 			_interacted = !_interacted;

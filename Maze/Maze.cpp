@@ -24,12 +24,12 @@ void init();
 
 int main()
 {
-    initGLF();
+    glfwManager_initGLF();
     init();
 
     scene = new Scene();
 
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(Window))
     {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
@@ -40,7 +40,7 @@ int main()
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(Window);
         glfwPollEvents();
     }
 
@@ -61,16 +61,16 @@ void init()
     tigl::shader->enableLighting(true);
 
     //keyboard callback usefull for quick actions, ingame actions should use pull request instead
-    glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+    glfwSetKeyCallback(Window, [](GLFWwindow* Window, int key, int scancode, int action, int mods)
         {
             if (key == GLFW_KEY_ESCAPE) {
                 //quit application
-                glfwSetWindowShouldClose(window, true);
+                glfwSetWindowShouldClose(Window, true);
             }
             if (key == GLFW_KEY_TAB && action == GLFW_RELEASE) {
                 //togle mouse state
-                int newMouseState = glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED ? GLFW_CURSOR_NORMAL: GLFW_CURSOR_DISABLED;
-                glfwSetInputMode(window, GLFW_CURSOR, newMouseState);
+                int newMouseState = glfwGetInputMode(Window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED ? GLFW_CURSOR_NORMAL: GLFW_CURSOR_DISABLED;
+                glfwSetInputMode(Window, GLFW_CURSOR, newMouseState);
             }
         });
 
@@ -79,7 +79,7 @@ void init()
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
-    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplGlfw_InitForOpenGL(Window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
 
 }
