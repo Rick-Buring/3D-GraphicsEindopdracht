@@ -54,8 +54,8 @@ Inheritance diagram for GameObject:</div>
  <div class="center">
   <img src="class_game_object.png" usemap="#GameObject_map" alt=""/>
   <map id="GameObject_map" name="GameObject_map">
-<area href="class_button.html" title="dit is een test voor doxygen" alt="Button" shape="rect" coords="0,56,147,80"/>
-<area href="class_interactable_game_object.html" alt="InteractableGameObject" shape="rect" coords="157,56,304,80"/>
+<area href="class_button.html" alt="Button" shape="rect" coords="0,56,147,80"/>
+<area href="class_interactable_game_object.html" title="abstract interface class" alt="InteractableGameObject" shape="rect" coords="157,56,304,80"/>
 <area href="class_load_screen.html" alt="LoadScreen" shape="rect" coords="314,56,461,80"/>
 <area href="class_plane.html" alt="Plane" shape="rect" coords="471,56,618,80"/>
 <area href="class_player.html" alt="Player" shape="rect" coords="628,56,775,80"/>
@@ -80,18 +80,18 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a16e2e8c2546d7bf920bbe2e288acb278"><td class="memItemLeft" align="right" valign="top"><a id="a16e2e8c2546d7bf920bbe2e288acb278" name="a16e2e8c2546d7bf920bbe2e288acb278"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>position</b> = glm::vec3(0)</td></tr>
-<tr class="separator:a16e2e8c2546d7bf920bbe2e288acb278"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acaf894c39661e6d4c13ad39b60684a38"><td class="memItemLeft" align="right" valign="top"><a id="acaf894c39661e6d4c13ad39b60684a38" name="acaf894c39661e6d4c13ad39b60684a38"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>rotation</b> = glm::vec3(0)</td></tr>
-<tr class="separator:acaf894c39661e6d4c13ad39b60684a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5205edf429098d4b7bf0c442d72592d1"><td class="memItemLeft" align="right" valign="top"><a id="a5205edf429098d4b7bf0c442d72592d1" name="a5205edf429098d4b7bf0c442d72592d1"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> = glm::vec3(1)</td></tr>
-<tr class="separator:a5205edf429098d4b7bf0c442d72592d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52636726574f770496fbbe630ceb1865"><td class="memItemLeft" align="right" valign="top"><a id="a52636726574f770496fbbe630ceb1865" name="a52636726574f770496fbbe630ceb1865"></a>
-std::shared_ptr&lt; std::vector&lt; <a class="el" href="struct_model3_d__t.html">Model3D_t</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>model</b></td></tr>
-<tr class="separator:a52636726574f770496fbbe630ceb1865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6d84d37ec029b427cf7de38601164c"><td class="memItemLeft" align="right" valign="top"><a id="a0e6d84d37ec029b427cf7de38601164c" name="a0e6d84d37ec029b427cf7de38601164c"></a>
+glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>Position</b> = glm::vec3(0)</td></tr>
+<tr class="separator:a0e6d84d37ec029b427cf7de38601164c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1beab2b3179baba361c954670b013684"><td class="memItemLeft" align="right" valign="top"><a id="a1beab2b3179baba361c954670b013684" name="a1beab2b3179baba361c954670b013684"></a>
+glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>Rotation</b> = glm::vec3(0)</td></tr>
+<tr class="separator:a1beab2b3179baba361c954670b013684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad23918bce0f84cf867b5b95c2f4542ef"><td class="memItemLeft" align="right" valign="top"><a id="ad23918bce0f84cf867b5b95c2f4542ef" name="ad23918bce0f84cf867b5b95c2f4542ef"></a>
+glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>Scale</b> = glm::vec3(1)</td></tr>
+<tr class="separator:ad23918bce0f84cf867b5b95c2f4542ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a2c448c92d1ffcc48a239b37c623118"><td class="memItemLeft" align="right" valign="top"><a id="a4a2c448c92d1ffcc48a239b37c623118" name="a4a2c448c92d1ffcc48a239b37c623118"></a>
+std::shared_ptr&lt; std::vector&lt; <a class="el" href="struct_model3_d__t.html">Model3D_t</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Model</b></td></tr>
+<tr class="separator:a4a2c448c92d1ffcc48a239b37c623118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -125,7 +125,7 @@ glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>_modelMatrix</b>
 
 <p>draw called everyframe contains draw functions for 3d objects </p>
 
-<p>Reimplemented in <a class="el" href="class_button.html#af4d14cf544d8e0620f4ffcd7984103f7">Button</a>, <a class="el" href="class_load_screen.html#a61980d81cde717672bb0bf3c7ea4adb6">LoadScreen</a>, <a class="el" href="class_plane.html#a911599ede854d7ccf0266e482b5d131d">Plane</a>, and <a class="el" href="class_player.html#a7abe0fbf95b42b9ff4a2c0c7d334bc68">Player</a>.</p>
+<p>Reimplemented in <a class="el" href="class_button.html#af4d14cf544d8e0620f4ffcd7984103f7">Button</a>, <a class="el" href="class_load_screen.html#a61980d81cde717672bb0bf3c7ea4adb6">LoadScreen</a>, <a class="el" href="class_plane.html#a911599ede854d7ccf0266e482b5d131d">Plane</a>, and <a class="el" href="class_third_person_camera.html#adee4ec41e7c843f6e81765a9d83ed50b">ThirdPersonCamera</a>.</p>
 
 </div>
 </div>

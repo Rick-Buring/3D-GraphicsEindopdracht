@@ -58,13 +58,19 @@ $(function() {
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="comment">// Inherited via InteractableGameObject</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> interact(<span class="keywordtype">bool</span> interacted) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_moving_wall.html#a244cd4e167836a254e95af45ef6641e5">update</a>(<span class="keywordtype">float</span> deltaTime) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>};</div>
-<div class="ttc" id="aclass_interactable_game_object_html"><div class="ttname"><a href="class_interactable_game_object.html">InteractableGameObject</a></div><div class="ttdef"><b>Definition:</b> InteractableGameObject.hpp:5</div></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_moving_wall.html#a4be68ff2ad0b93645c58274c58821457">interact</a>(<span class="keywordtype">bool</span> interacted) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="comment">//inherited via GameObject</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_moving_wall.html#a244cd4e167836a254e95af45ef6641e5">update</a>(<span class="keywordtype">float</span> deltaTime) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>};</div>
+<div class="ttc" id="aclass_interactable_game_object_html"><div class="ttname"><a href="class_interactable_game_object.html">InteractableGameObject</a></div><div class="ttdoc">abstract interface class</div><div class="ttdef"><b>Definition:</b> InteractableGameObject.hpp:8</div></div>
 <div class="ttc" id="aclass_moving_wall_html"><div class="ttname"><a href="class_moving_wall.html">MovingWall</a></div><div class="ttdef"><b>Definition:</b> MovingWall.hpp:6</div></div>
-<div class="ttc" id="aclass_moving_wall_html_a244cd4e167836a254e95af45ef6641e5"><div class="ttname"><a href="class_moving_wall.html#a244cd4e167836a254e95af45ef6641e5">MovingWall::update</a></div><div class="ttdeci">virtual void update(float deltaTime) override</div><div class="ttdoc">update called once every frame</div><div class="ttdef"><b>Definition:</b> MovingWall.cpp:19</div></div>
+<div class="ttc" id="aclass_moving_wall_html_a244cd4e167836a254e95af45ef6641e5"><div class="ttname"><a href="class_moving_wall.html#a244cd4e167836a254e95af45ef6641e5">MovingWall::update</a></div><div class="ttdeci">virtual void update(float deltaTime) override</div><div class="ttdoc">updates the object possition smootly with a constand speed.</div><div class="ttdef"><b>Definition:</b> MovingWall.cpp:19</div></div>
+<div class="ttc" id="aclass_moving_wall_html_a4be68ff2ad0b93645c58274c58821457"><div class="ttname"><a href="class_moving_wall.html#a4be68ff2ad0b93645c58274c58821457">MovingWall::interact</a></div><div class="ttdeci">virtual void interact(bool interacted) override</div><div class="ttdoc">when this is called the object moves to a new world position namely the _targetPos</div><div class="ttdef"><b>Definition:</b> MovingWall.cpp:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

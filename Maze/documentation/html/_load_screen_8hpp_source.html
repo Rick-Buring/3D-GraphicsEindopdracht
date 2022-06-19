@@ -49,20 +49,25 @@ $(function() {
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;tigl.h&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="class_load_screen.html">    6</a></span><span class="keyword">class </span><a class="code hl_class" href="class_load_screen.html">LoadScreen</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_game_object.html">GameObject</a> {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <a class="code hl_class" href="class_load_screen.html">LoadScreen</a>(std::vector&lt;Texture*&gt; textures);</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_load_screen.html#a61980d81cde717672bb0bf3c7ea4adb6">draw</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_load_screen.html#a367d49da541eeb26d2dad9d08333a32e">update</a>(<span class="keywordtype">float</span> deltaTime) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    std::vector&lt;Texture*&gt; _textures;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">float</span> _currentTexture;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="classtigl_1_1_v_b_o.html">tigl::VBO</a>* _plane;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>};</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    std::vector&lt;Texture*&gt; _textures;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keywordtype">float</span> _currentTexture;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_class" href="classtigl_1_1_v_b_o.html">tigl::VBO</a>* _plane;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="class_load_screen.html">LoadScreen</a>(std::vector&lt;Texture*&gt; textures);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="comment">//inhareted functions from gameObject</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_load_screen.html#a61980d81cde717672bb0bf3c7ea4adb6">draw</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_load_screen.html#a367d49da541eeb26d2dad9d08333a32e">update</a>(<span class="keywordtype">float</span> deltaTime) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
 <div class="ttc" id="aclass_game_object_html"><div class="ttname"><a href="class_game_object.html">GameObject</a></div><div class="ttdef"><b>Definition:</b> GameObject.hpp:7</div></div>
 <div class="ttc" id="aclass_load_screen_html"><div class="ttname"><a href="class_load_screen.html">LoadScreen</a></div><div class="ttdef"><b>Definition:</b> LoadScreen.hpp:6</div></div>
-<div class="ttc" id="aclass_load_screen_html_a367d49da541eeb26d2dad9d08333a32e"><div class="ttname"><a href="class_load_screen.html#a367d49da541eeb26d2dad9d08333a32e">LoadScreen::update</a></div><div class="ttdeci">void update(float deltaTime) override</div><div class="ttdoc">update called once every frame</div><div class="ttdef"><b>Definition:</b> LoadScreen.cpp:50</div></div>
-<div class="ttc" id="aclass_load_screen_html_a61980d81cde717672bb0bf3c7ea4adb6"><div class="ttname"><a href="class_load_screen.html#a61980d81cde717672bb0bf3c7ea4adb6">LoadScreen::draw</a></div><div class="ttdeci">void draw() override</div><div class="ttdoc">draw called everyframe contains draw functions for 3d objects</div><div class="ttdef"><b>Definition:</b> LoadScreen.cpp:31</div></div>
+<div class="ttc" id="aclass_load_screen_html_a367d49da541eeb26d2dad9d08333a32e"><div class="ttname"><a href="class_load_screen.html#a367d49da541eeb26d2dad9d08333a32e">LoadScreen::update</a></div><div class="ttdeci">void update(float deltaTime) override</div><div class="ttdoc">updatefunction used to switch textures for dynamicly showing diffrent loadingscreens</div><div class="ttdef"><b>Definition:</b> LoadScreen.cpp:48</div></div>
+<div class="ttc" id="aclass_load_screen_html_a61980d81cde717672bb0bf3c7ea4adb6"><div class="ttname"><a href="class_load_screen.html#a61980d81cde717672bb0bf3c7ea4adb6">LoadScreen::draw</a></div><div class="ttdeci">void draw() override</div><div class="ttdoc">draws the loading screen this takes over the current draw context and fills the screen....</div><div class="ttdef"><b>Definition:</b> LoadScreen.cpp:31</div></div>
 <div class="ttc" id="aclasstigl_1_1_v_b_o_html"><div class="ttname"><a href="classtigl_1_1_v_b_o.html">tigl::VBO</a></div><div class="ttdef"><b>Definition:</b> tigl.h:135</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

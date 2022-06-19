@@ -70,25 +70,31 @@ $(function() {
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    std::shared_ptr&lt;LoadScreen&gt; _loadScreen;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    std::thread _thread;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <a class="code hl_struct" href="structlight_struct.html">lightStruct</a> _sunLight;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    std::string _currentLevelPath;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    std::string _currentLevelPath;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">double</span> _lastFrameTime;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">double</span> _lastFrameTime;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> draw();</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> reset();</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    std::vector&lt;std::vector&lt;std::vector&lt;std::shared_ptr&lt;GameObject&gt;&gt;&gt;&gt; loadMazeFromImage(std::string, std::vector&lt;NamedModel3D_t&gt;&amp; models, std::shared_ptr&lt;std::vector&lt;Model3D_t&gt;&gt;&amp; cube);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> draw();</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_class" href="class_scene.html">Scene</a>();</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> update();</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> addGameObject(std::shared_ptr&lt;GameObject&gt; gameObject);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">void</span> addGameObjects(std::vector&lt;std::shared_ptr&lt;GameObject&gt;&gt; gameObject);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> loadLevel(<span class="keyword">const</span> std::string&amp; path);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> reset();</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_class" href="class_scene.html">Scene</a>();</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    STATE state = RUNNING;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_scene.html#aa24c7e636c10e4e42650c1374b90bb80">update</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_scene.html#a892fcfb88a5374f4aa3ceefa581fcf1f">addGameObject</a>(std::shared_ptr&lt;GameObject&gt; gameObject);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_scene.html#a239d641e20f26bad7b72b7d13575632d">addGameObjects</a>(std::vector&lt;std::shared_ptr&lt;GameObject&gt;&gt; gameObject);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_scene.html#ac9ce1e1d13c63a991e002fc08ac806c5">loadLevel</a>(<span class="keyword">const</span> std::string&amp; path);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    STATE state = RUNNING;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>};</div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.hpp:20</div></div>
+<div class="ttc" id="aclass_scene_html_a239d641e20f26bad7b72b7d13575632d"><div class="ttname"><a href="class_scene.html#a239d641e20f26bad7b72b7d13575632d">Scene::addGameObjects</a></div><div class="ttdeci">void addGameObjects(std::vector&lt; std::shared_ptr&lt; GameObject &gt; &gt; gameObject)</div><div class="ttdoc">adds a load of gameObjects to the scene</div><div class="ttdef"><b>Definition:</b> Scene.cpp:136</div></div>
+<div class="ttc" id="aclass_scene_html_a892fcfb88a5374f4aa3ceefa581fcf1f"><div class="ttname"><a href="class_scene.html#a892fcfb88a5374f4aa3ceefa581fcf1f">Scene::addGameObject</a></div><div class="ttdeci">void addGameObject(std::shared_ptr&lt; GameObject &gt; gameObject)</div><div class="ttdoc">adds a single gameObject to the scene</div><div class="ttdef"><b>Definition:</b> Scene.cpp:131</div></div>
+<div class="ttc" id="aclass_scene_html_aa24c7e636c10e4e42650c1374b90bb80"><div class="ttname"><a href="class_scene.html#aa24c7e636c10e4e42650c1374b90bb80">Scene::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">updates all gameObjects.</div><div class="ttdef"><b>Definition:</b> Scene.cpp:88</div></div>
+<div class="ttc" id="aclass_scene_html_ac9ce1e1d13c63a991e002fc08ac806c5"><div class="ttname"><a href="class_scene.html#ac9ce1e1d13c63a991e002fc08ac806c5">Scene::loadLevel</a></div><div class="ttdeci">void loadLevel(const std::string &amp;path)</div><div class="ttdoc">sets the scene up to change the scene next update cycle</div><div class="ttdef"><b>Definition:</b> Scene.cpp:153</div></div>
 <div class="ttc" id="astructlight_struct_html"><div class="ttname"><a href="structlight_struct.html">lightStruct</a></div><div class="ttdef"><b>Definition:</b> LightManager.hpp:5</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

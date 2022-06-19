@@ -52,15 +52,17 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa24c7e636c10e4e42650c1374b90bb80"><td class="memItemLeft" align="right" valign="top"><a id="aa24c7e636c10e4e42650c1374b90bb80" name="aa24c7e636c10e4e42650c1374b90bb80"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
+<tr class="memdesc:aa24c7e636c10e4e42650c1374b90bb80"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates all gameObjects. <br /></td></tr>
 <tr class="separator:aa24c7e636c10e4e42650c1374b90bb80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a892fcfb88a5374f4aa3ceefa581fcf1f"><td class="memItemLeft" align="right" valign="top"><a id="a892fcfb88a5374f4aa3ceefa581fcf1f" name="a892fcfb88a5374f4aa3ceefa581fcf1f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addGameObject</b> (std::shared_ptr&lt; <a class="el" href="class_game_object.html">GameObject</a> &gt; gameObject)</td></tr>
+<tr class="memitem:a892fcfb88a5374f4aa3ceefa581fcf1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a892fcfb88a5374f4aa3ceefa581fcf1f">addGameObject</a> (std::shared_ptr&lt; <a class="el" href="class_game_object.html">GameObject</a> &gt; gameObject)</td></tr>
+<tr class="memdesc:a892fcfb88a5374f4aa3ceefa581fcf1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a single gameObject to the scene  <a href="class_scene.html#a892fcfb88a5374f4aa3ceefa581fcf1f">More...</a><br /></td></tr>
 <tr class="separator:a892fcfb88a5374f4aa3ceefa581fcf1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a239d641e20f26bad7b72b7d13575632d"><td class="memItemLeft" align="right" valign="top"><a id="a239d641e20f26bad7b72b7d13575632d" name="a239d641e20f26bad7b72b7d13575632d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addGameObjects</b> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_game_object.html">GameObject</a> &gt; &gt; gameObject)</td></tr>
+<tr class="memitem:a239d641e20f26bad7b72b7d13575632d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_scene.html#a239d641e20f26bad7b72b7d13575632d">addGameObjects</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_game_object.html">GameObject</a> &gt; &gt; gameObject)</td></tr>
+<tr class="memdesc:a239d641e20f26bad7b72b7d13575632d"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a load of gameObjects to the scene  <a href="class_scene.html#a239d641e20f26bad7b72b7d13575632d">More...</a><br /></td></tr>
 <tr class="separator:a239d641e20f26bad7b72b7d13575632d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9ce1e1d13c63a991e002fc08ac806c5"><td class="memItemLeft" align="right" valign="top"><a id="ac9ce1e1d13c63a991e002fc08ac806c5" name="ac9ce1e1d13c63a991e002fc08ac806c5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>loadLevel</b> (const std::string &amp;path)</td></tr>
+<tr class="memdesc:ac9ce1e1d13c63a991e002fc08ac806c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the scene up to change the scene next update cycle <br /></td></tr>
 <tr class="separator:ac9ce1e1d13c63a991e002fc08ac806c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -69,6 +71,59 @@ Public Attributes</h2></td></tr>
 STATE&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> = RUNNING</td></tr>
 <tr class="separator:ac8e2109f3bf14f22bc263de8b2cc74bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a892fcfb88a5374f4aa3ceefa581fcf1f" name="a892fcfb88a5374f4aa3ceefa581fcf1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a892fcfb88a5374f4aa3ceefa581fcf1f">&#9670;&nbsp;</a></span>addGameObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scene::addGameObject </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_game_object.html">GameObject</a> &gt;&#160;</td>
+          <td class="paramname"><em>gameObject</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>adds a single gameObject to the scene </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameObject</td><td>gameObject to be added to the scene</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a239d641e20f26bad7b72b7d13575632d" name="a239d641e20f26bad7b72b7d13575632d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a239d641e20f26bad7b72b7d13575632d">&#9670;&nbsp;</a></span>addGameObjects()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Scene::addGameObjects </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_game_object.html">GameObject</a> &gt; &gt;&#160;</td>
+          <td class="paramname"><em>gameObject</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>adds a load of gameObjects to the scene </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gameObject</td><td>gameObjects to be added to the scene</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_scene_8hpp_source.html">Scene.hpp</a></li>
 <li>Scene.cpp</li>

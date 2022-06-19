@@ -47,13 +47,15 @@ $(function() {
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;GameObject.hpp&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="class_interactable_game_object.html">    5</a></span><span class="keyword">class </span><a class="code hl_class" href="class_interactable_game_object.html">InteractableGameObject</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_game_object.html">GameObject</a> {</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <a class="code hl_class" href="class_interactable_game_object.html">InteractableGameObject</a>(std::shared_ptr&lt;std::vector&lt;Model3D_t&gt;&gt; model) : <a class="code hl_class" href="class_game_object.html">GameObject</a>(model) {};</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> interact(<span class="keywordtype">bool</span> interacted) = 0;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>};</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_interactable_game_object.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="class_interactable_game_object.html">InteractableGameObject</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_game_object.html">GameObject</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_class" href="class_interactable_game_object.html">InteractableGameObject</a>(std::shared_ptr&lt;std::vector&lt;Model3D_t&gt;&gt; model) : <a class="code hl_class" href="class_game_object.html">GameObject</a>(model) {};</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_interactable_game_object.html#a2b9caa3ff0a78b23c9c246954a54fde9">   16</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_interactable_game_object.html#a2b9caa3ff0a78b23c9c246954a54fde9">interact</a>(<span class="keywordtype">bool</span> interacted) = 0;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>};</div>
 <div class="ttc" id="aclass_game_object_html"><div class="ttname"><a href="class_game_object.html">GameObject</a></div><div class="ttdef"><b>Definition:</b> GameObject.hpp:7</div></div>
-<div class="ttc" id="aclass_interactable_game_object_html"><div class="ttname"><a href="class_interactable_game_object.html">InteractableGameObject</a></div><div class="ttdef"><b>Definition:</b> InteractableGameObject.hpp:5</div></div>
+<div class="ttc" id="aclass_interactable_game_object_html"><div class="ttname"><a href="class_interactable_game_object.html">InteractableGameObject</a></div><div class="ttdoc">abstract interface class</div><div class="ttdef"><b>Definition:</b> InteractableGameObject.hpp:8</div></div>
+<div class="ttc" id="aclass_interactable_game_object_html_a2b9caa3ff0a78b23c9c246954a54fde9"><div class="ttname"><a href="class_interactable_game_object.html#a2b9caa3ff0a78b23c9c246954a54fde9">InteractableGameObject::interact</a></div><div class="ttdeci">virtual void interact(bool interacted)=0</div><div class="ttdoc">function called when this object is interacted with</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

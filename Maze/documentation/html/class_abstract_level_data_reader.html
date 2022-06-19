@@ -46,6 +46,11 @@ $(function() {
   <div class="headertitle"><div class="title">AbstractLevelDataReader Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>abstract class to read files from diffrent types  
+ <a href="class_abstract_level_data_reader.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_abstract_level_data_reader_8hpp_source.html">AbstractLevelDataReader.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for AbstractLevelDataReader:</div>
 <div class="dyncontent">
@@ -59,10 +64,48 @@ Inheritance diagram for AbstractLevelDataReader:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a44fc161ee9028f91234a39d5df8e096c"><td class="memItemLeft" align="right" valign="top"><a id="a44fc161ee9028f91234a39d5df8e096c" name="a44fc161ee9028f91234a39d5df8e096c"></a>
-virtual std::vector&lt; <a class="el" href="unionlevel_data__u.html">LevelData_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>readData</b> (const std::string &amp;filePath)=0</td></tr>
+<tr class="memitem:a44fc161ee9028f91234a39d5df8e096c"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="unionlevel_data__u.html">LevelData_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_abstract_level_data_reader.html#a44fc161ee9028f91234a39d5df8e096c">readData</a> (const std::string &amp;filePath)=0</td></tr>
+<tr class="memdesc:a44fc161ee9028f91234a39d5df8e096c"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns vector of levelData first element is the modelPath, secend element is the maze image Path third element is a player gameObject all other elements are diffrent gameObject types  <a href="class_abstract_level_data_reader.html#a44fc161ee9028f91234a39d5df8e096c">More...</a><br /></td></tr>
 <tr class="separator:a44fc161ee9028f91234a39d5df8e096c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >abstract class to read files from diffrent types </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a44fc161ee9028f91234a39d5df8e096c" name="a44fc161ee9028f91234a39d5df8e096c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44fc161ee9028f91234a39d5df8e096c">&#9670;&nbsp;</a></span>readData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::vector&lt; <a class="el" href="unionlevel_data__u.html">LevelData_t</a> &gt; AbstractLevelDataReader::readData </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filePath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>returns vector of levelData first element is the modelPath, secend element is the maze image Path third element is a player gameObject all other elements are diffrent gameObject types </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_abstract_level_data_reader_8hpp_source.html">AbstractLevelDataReader.hpp</a></li>
 </ul>

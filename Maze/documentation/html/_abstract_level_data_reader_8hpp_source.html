@@ -65,15 +65,16 @@ $(function() {
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_struct" href="structlevel_data__st.html">levelData_st</a> data;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>} <a class="code hl_union" href="unionlevel_data__u.html">LevelData_t</a>;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_abstract_level_data_reader.html">   23</a></span><span class="keyword">class </span><a class="code hl_class" href="class_abstract_level_data_reader.html">AbstractLevelDataReader</a></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">virtual</span> std::vector&lt;LevelData_t&gt; readData(<span class="keyword">const</span> std::string&amp; filePath) = 0;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><a class="code hl_class" href="class_abstract_level_data_reader.html">AbstractLevelDataReader</a>* AbstractLevelReader_getReader(<span class="keyword">const</span> std::string&amp; file);</div>
-<div class="ttc" id="aclass_abstract_level_data_reader_html"><div class="ttname"><a href="class_abstract_level_data_reader.html">AbstractLevelDataReader</a></div><div class="ttdef"><b>Definition:</b> AbstractLevelDataReader.hpp:24</div></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="class_abstract_level_data_reader.html">   26</a></span><span class="keyword">class </span><a class="code hl_class" href="class_abstract_level_data_reader.html">AbstractLevelDataReader</a></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_abstract_level_data_reader.html#a44fc161ee9028f91234a39d5df8e096c">   37</a></span>    <span class="keyword">virtual</span> std::vector&lt;LevelData_t&gt; <a class="code hl_function" href="class_abstract_level_data_reader.html#a44fc161ee9028f91234a39d5df8e096c">readData</a>(<span class="keyword">const</span> std::string&amp; filePath) = 0;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><a class="code hl_class" href="class_abstract_level_data_reader.html">AbstractLevelDataReader</a>* AbstractLevelReader_getReader(<span class="keyword">const</span> std::string&amp; file);</div>
+<div class="ttc" id="aclass_abstract_level_data_reader_html"><div class="ttname"><a href="class_abstract_level_data_reader.html">AbstractLevelDataReader</a></div><div class="ttdoc">abstract class to read files from diffrent types</div><div class="ttdef"><b>Definition:</b> AbstractLevelDataReader.hpp:27</div></div>
+<div class="ttc" id="aclass_abstract_level_data_reader_html_a44fc161ee9028f91234a39d5df8e096c"><div class="ttname"><a href="class_abstract_level_data_reader.html#a44fc161ee9028f91234a39d5df8e096c">AbstractLevelDataReader::readData</a></div><div class="ttdeci">virtual std::vector&lt; LevelData_t &gt; readData(const std::string &amp;filePath)=0</div><div class="ttdoc">returns vector of levelData first element is the modelPath, secend element is the maze image Path thi...</div></div>
 <div class="ttc" id="astructlevel_data__st_html"><div class="ttname"><a href="structlevel_data__st.html">levelData_st</a></div><div class="ttdef"><b>Definition:</b> AbstractLevelDataReader.hpp:10</div></div>
 <div class="ttc" id="aunionlevel_data__u_html"><div class="ttname"><a href="unionlevel_data__u.html">levelData_u</a></div><div class="ttdef"><b>Definition:</b> AbstractLevelDataReader.hpp:18</div></div>
 </div><!-- fragment --></div><!-- contents -->

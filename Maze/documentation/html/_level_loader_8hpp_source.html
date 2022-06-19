@@ -53,17 +53,20 @@ $(function() {
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="class_level_loader.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="class_level_loader.html">LevelLoader</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_interactable_game_object.html">InteractableGameObject</a> {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_class" href="class_scene.html">Scene</a>* _scene;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_class" href="class_level_loader.html">LevelLoader</a>(std::string levelDataPath, <a class="code hl_class" href="class_scene.html">Scene</a>* scene);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    std::string _levelDataPath;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    std::string _levelDataPath;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="class_level_loader.html">LevelLoader</a>(std::string levelDataPath, <a class="code hl_class" href="class_scene.html">Scene</a>* scene);</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">static</span> std::shared_ptr&lt;LevelLoader&gt; createLevelLoader(std::string levelDataPath, <a class="code hl_class" href="class_scene.html">Scene</a>* scene);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="comment">// Inherited via InteractableGameObject</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> interact(<span class="keywordtype">bool</span> interacted) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>};</div>
-<div class="ttc" id="aclass_interactable_game_object_html"><div class="ttname"><a href="class_interactable_game_object.html">InteractableGameObject</a></div><div class="ttdef"><b>Definition:</b> InteractableGameObject.hpp:5</div></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">static</span> std::shared_ptr&lt;LevelLoader&gt; <a class="code hl_function" href="class_level_loader.html#aee096c4d1af7878ab66dfcc039b5d577">createLevelLoader</a>(std::string levelDataPath, <a class="code hl_class" href="class_scene.html">Scene</a>* scene);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="comment">// Inherited via InteractableGameObject</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_level_loader.html#aabf0397ad7457e3eeb5c5ba61aabcd5e">interact</a>(<span class="keywordtype">bool</span> interacted) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
+<div class="ttc" id="aclass_interactable_game_object_html"><div class="ttname"><a href="class_interactable_game_object.html">InteractableGameObject</a></div><div class="ttdoc">abstract interface class</div><div class="ttdef"><b>Definition:</b> InteractableGameObject.hpp:8</div></div>
 <div class="ttc" id="aclass_level_loader_html"><div class="ttname"><a href="class_level_loader.html">LevelLoader</a></div><div class="ttdef"><b>Definition:</b> LevelLoader.hpp:8</div></div>
+<div class="ttc" id="aclass_level_loader_html_aabf0397ad7457e3eeb5c5ba61aabcd5e"><div class="ttname"><a href="class_level_loader.html#aabf0397ad7457e3eeb5c5ba61aabcd5e">LevelLoader::interact</a></div><div class="ttdeci">virtual void interact(bool interacted) override</div><div class="ttdoc">function called when this object is interacted with</div><div class="ttdef"><b>Definition:</b> LevelLoader.cpp:24</div></div>
+<div class="ttc" id="aclass_level_loader_html_aee096c4d1af7878ab66dfcc039b5d577"><div class="ttname"><a href="class_level_loader.html#aee096c4d1af7878ab66dfcc039b5d577">LevelLoader::createLevelLoader</a></div><div class="ttdeci">static std::shared_ptr&lt; LevelLoader &gt; createLevelLoader(std::string levelDataPath, Scene *scene)</div><div class="ttdoc">public static function that returns the levelLoader object if the levelDataPath points to a file</div><div class="ttdef"><b>Definition:</b> LevelLoader.cpp:13</div></div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition:</b> Scene.hpp:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
